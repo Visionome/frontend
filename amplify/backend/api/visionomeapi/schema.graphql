@@ -1,0 +1,19 @@
+type GFFRef @model {
+  dbxref: String,
+  description: String
+  end: String,
+  gbkey: String,
+  gene: String,
+  gene_biotype: String,
+  id: String,
+  parent: String,
+  name: String,
+  phase: String,
+  pseudo: String,
+  score: String,
+  seqid: String,
+  source: String,
+  start: String,
+  strand: String,
+  type: String
+}
