@@ -77,3 +77,114 @@ export const onDeleteGffRef = /* GraphQL */ `
     }
   }
 `;
+export const onCreateVcfRef = /* GraphQL */ `
+  subscription OnCreateVcfRef {
+    onCreateVCFRef {
+      chrom
+      pos
+      id
+      ref
+      alt
+      qual
+      filter
+      ALLELEID
+      CLNDISDB
+      CLNDN
+      CLNHGVS
+      CLNREVSTAT
+      CLNSIG
+      CLNVC
+      CLNVCSO
+      GENEINFO
+      MC
+      ORIGIN
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateVcfRef = /* GraphQL */ `
+  subscription OnUpdateVcfRef {
+    onUpdateVCFRef {
+      chrom
+      pos
+      id
+      ref
+      alt
+      qual
+      filter
+      ALLELEID
+      CLNDISDB
+      CLNDN
+      CLNHGVS
+      CLNREVSTAT
+      CLNSIG
+      CLNVC
+      CLNVCSO
+      GENEINFO
+      MC
+      ORIGIN
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteVcfRef = /* GraphQL */ `
+  subscription OnDeleteVcfRef {
+    onDeleteVCFRef {
+      chrom
+      pos
+      id
+      ref
+      alt
+      qual
+      filter
+      ALLELEID
+      CLNDISDB
+      CLNDN
+      CLNHGVS
+      CLNREVSTAT
+      CLNSIG
+      CLNVC
+      CLNVCSO
+      GENEINFO
+      MC
+      ORIGIN
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreateFastaRef = /* GraphQL */ `
+  subscription OnCreateFastaRef {
+    onCreateFASTARef {
+      id
+      name
+      sequence
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateFastaRef = /* GraphQL */ `
+  subscription OnUpdateFastaRef {
+    onUpdateFASTARef {
+      id
+      name
+      sequence
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteFastaRef = /* GraphQL */ `
+  subscription OnDeleteFastaRef {
+    onDeleteFASTARef {
+      id
+      name
+      sequence
+      createdAt
+      updatedAt
+    }
+  }
+`;
