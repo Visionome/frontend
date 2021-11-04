@@ -1,9 +1,29 @@
-import React from 'react';
+// @ts-nocheck
+import React, { useEffect, useState } from 'react';
 import { Layout, Menu, Breadcrumb } from 'antd';
+import { API } from 'aws-amplify';
+import * as queries from '../graphql/queries';
 
 const { Header, Content, Footer } = Layout;
 
 const Dashboard = (): JSX.Element => {
+  const [genome, setGenome] = useState([]);
+
+  const searchForGene = async () => {
+    const searchResults = await API.graphql({
+      query: queries.searchGffRefs,
+      variables: { filter: { name: { eq: 'SAMD11' } } },
+    });
+    console.log(searchResults);
+    const { data } = searchResults;
+    setGenome({ data });
+    console.log(genome);
+  };
+
+  useEffect(() => {
+    searchForGene();
+  }, []);
+
   return (
     <Layout className="layout">
       <Header>
@@ -22,6 +42,9 @@ const Dashboard = (): JSX.Element => {
           <Breadcrumb.Item>App</Breadcrumb.Item>
         </Breadcrumb>
         <div className="site-layout-content">Content</div>
+        {genome.map((genomeStuff: any, index: any) => {
+          return <div key={index}>{`${genomeStuff}`}</div>;
+        })}
       </Content>
       <Footer style={{ textAlign: 'center' }}>
         Ant Design ©2018 Created by Ant UED

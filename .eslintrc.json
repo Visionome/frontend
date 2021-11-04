@@ -19,6 +19,8 @@
   },
   "plugins": ["react", "@typescript-eslint", "prettier"],
   "rules": {
+    "@typescript-eslint/ban-ts-ignore": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
     "react/jsx-filename-extension": [2, { "extensions": [".tsx", ".ts"] }],
     "react/destructuring-assignment": [2, "always"],
     "react/jsx-wrap-multilines": [
