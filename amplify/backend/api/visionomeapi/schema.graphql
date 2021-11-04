@@ -1,41 +1,41 @@
 type GFFRef @model @searchable {
-  dbxref: String,
-  description: String,
-  end: String,
-  gbkey: String,
-  gene: String,
-  gene_biotype: String,
-  id: String,
-  parent: String,
-  name: String,
-  phase: String,
-  pseudo: String,
-  score: String,
-  seqid: String,
-  source: String,
-  start: String,
-  strand: String,
-  type: String,
+  dbxref: String
+  description: String
+  end: String
+  gbkey: String
+  gene: String
+  gene_biotype: String
+  id: String
+  parent: String
+  name: String
+  phase: String
+  pseudo: String
+  score: String
+  seqid: String
+  source: String
+  start: String
+  strand: String
+  type: String
   sequence: String
 }
 
 type VCFRef @model @searchable {
-  chrom: String,# 1
-  pos: String, # 925952
-  id: String, # 1019397
-  ref: String, # G
-  alt: String, # A
-  qual: String,# .
-  filter: String,# .
-  alleleid: String, #1003021
-  clndisdb: String, #MedGen:CN517202
-  clndn: String, #not_provided
-  clnhgvs: String, #NC_000001.11:g.925952G>A
-  clnrevstat: String, #criteria_provided,_single_submitter
-  clnsig: String, #Uncertain_significance
-  clnvc: String, #single_nucleotide_variant
-  clnvcso: String, #SO:0001483
-  geneinfo: String, #SAMD11:148398
-  mc: String, #SO:0001583|missense_variant
-  origin: String, #1
+  chrom: String # 1
+  pos: String # 925952
+  id: String # 1019397
+  ref: String # G
+  alt: String # A
+  qual: String # .
+  filter: String # .
+  alleleid: String #1003021
+  clndisdb: String #MedGen:CN517202
+  clndn: String #not_provided
+  clnhgvs: String #NC_000001.11:g.925952G>A
+  clnrevstat: String #criteria_provided,_single_submitter
+  clnsig: String #Uncertain_significance
+  clnvc: String #single_nucleotide_variant
+  clnvcso: String #SO:0001483
+  geneinfo: String #SAMD11:148398
+  mc: String #SO:0001583|missense_variant
+  origin: String #1
 }

@@ -1,14 +1,12 @@
 import React from 'react';
+import Dashboard from './components/Dashboard';
 import './App.scss';
+import './style/App.css';
 
 function App(): JSX.Element {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-      </header>
+      <Dashboard />
     </div>
   );
 }
