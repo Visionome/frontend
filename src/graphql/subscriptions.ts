@@ -22,6 +22,7 @@ export const onCreateGffRef = /* GraphQL */ `
       start
       strand
       type
+      sequence
       createdAt
       updatedAt
     }
@@ -47,6 +48,7 @@ export const onUpdateGffRef = /* GraphQL */ `
       start
       strand
       type
+      sequence
       createdAt
       updatedAt
     }
@@ -72,6 +74,7 @@ export const onDeleteGffRef = /* GraphQL */ `
       start
       strand
       type
+      sequence
       createdAt
       updatedAt
     }
@@ -87,17 +90,17 @@ export const onCreateVcfRef = /* GraphQL */ `
       alt
       qual
       filter
-      ALLELEID
-      CLNDISDB
-      CLNDN
-      CLNHGVS
-      CLNREVSTAT
-      CLNSIG
-      CLNVC
-      CLNVCSO
-      GENEINFO
-      MC
-      ORIGIN
+      alleleid
+      clndisdb
+      clndn
+      clnhgvs
+      clnrevstat
+      clnsig
+      clnvc
+      clnvcso
+      geneinfo
+      mc
+      origin
       createdAt
       updatedAt
     }
@@ -113,17 +116,17 @@ export const onUpdateVcfRef = /* GraphQL */ `
       alt
       qual
       filter
-      ALLELEID
-      CLNDISDB
-      CLNDN
-      CLNHGVS
-      CLNREVSTAT
-      CLNSIG
-      CLNVC
-      CLNVCSO
-      GENEINFO
-      MC
-      ORIGIN
+      alleleid
+      clndisdb
+      clndn
+      clnhgvs
+      clnrevstat
+      clnsig
+      clnvc
+      clnvcso
+      geneinfo
+      mc
+      origin
       createdAt
       updatedAt
     }
@@ -139,50 +142,17 @@ export const onDeleteVcfRef = /* GraphQL */ `
       alt
       qual
       filter
-      ALLELEID
-      CLNDISDB
-      CLNDN
-      CLNHGVS
-      CLNREVSTAT
-      CLNSIG
-      CLNVC
-      CLNVCSO
-      GENEINFO
-      MC
-      ORIGIN
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onCreateFastaRef = /* GraphQL */ `
-  subscription OnCreateFastaRef {
-    onCreateFASTARef {
-      id
-      name
-      sequence
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onUpdateFastaRef = /* GraphQL */ `
-  subscription OnUpdateFastaRef {
-    onUpdateFASTARef {
-      id
-      name
-      sequence
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const onDeleteFastaRef = /* GraphQL */ `
-  subscription OnDeleteFastaRef {
-    onDeleteFASTARef {
-      id
-      name
-      sequence
+      alleleid
+      clndisdb
+      clndn
+      clnhgvs
+      clnrevstat
+      clnsig
+      clnvc
+      clnvcso
+      geneinfo
+      mc
+      origin
       createdAt
       updatedAt
     }

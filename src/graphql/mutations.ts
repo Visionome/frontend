@@ -25,6 +25,7 @@ export const createGffRef = /* GraphQL */ `
       start
       strand
       type
+      sequence
       createdAt
       updatedAt
     }
@@ -53,6 +54,7 @@ export const updateGffRef = /* GraphQL */ `
       start
       strand
       type
+      sequence
       createdAt
       updatedAt
     }
@@ -81,6 +83,7 @@ export const deleteGffRef = /* GraphQL */ `
       start
       strand
       type
+      sequence
       createdAt
       updatedAt
     }
@@ -99,17 +102,17 @@ export const createVcfRef = /* GraphQL */ `
       alt
       qual
       filter
-      ALLELEID
-      CLNDISDB
-      CLNDN
-      CLNHGVS
-      CLNREVSTAT
-      CLNSIG
-      CLNVC
-      CLNVCSO
-      GENEINFO
-      MC
-      ORIGIN
+      alleleid
+      clndisdb
+      clndn
+      clnhgvs
+      clnrevstat
+      clnsig
+      clnvc
+      clnvcso
+      geneinfo
+      mc
+      origin
       createdAt
       updatedAt
     }
@@ -128,17 +131,17 @@ export const updateVcfRef = /* GraphQL */ `
       alt
       qual
       filter
-      ALLELEID
-      CLNDISDB
-      CLNDN
-      CLNHGVS
-      CLNREVSTAT
-      CLNSIG
-      CLNVC
-      CLNVCSO
-      GENEINFO
-      MC
-      ORIGIN
+      alleleid
+      clndisdb
+      clndn
+      clnhgvs
+      clnrevstat
+      clnsig
+      clnvc
+      clnvcso
+      geneinfo
+      mc
+      origin
       createdAt
       updatedAt
     }
@@ -157,59 +160,17 @@ export const deleteVcfRef = /* GraphQL */ `
       alt
       qual
       filter
-      ALLELEID
-      CLNDISDB
-      CLNDN
-      CLNHGVS
-      CLNREVSTAT
-      CLNSIG
-      CLNVC
-      CLNVCSO
-      GENEINFO
-      MC
-      ORIGIN
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createFastaRef = /* GraphQL */ `
-  mutation CreateFastaRef(
-    $input: CreateFASTARefInput!
-    $condition: ModelFASTARefConditionInput
-  ) {
-    createFASTARef(input: $input, condition: $condition) {
-      id
-      name
-      sequence
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateFastaRef = /* GraphQL */ `
-  mutation UpdateFastaRef(
-    $input: UpdateFASTARefInput!
-    $condition: ModelFASTARefConditionInput
-  ) {
-    updateFASTARef(input: $input, condition: $condition) {
-      id
-      name
-      sequence
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteFastaRef = /* GraphQL */ `
-  mutation DeleteFastaRef(
-    $input: DeleteFASTARefInput!
-    $condition: ModelFASTARefConditionInput
-  ) {
-    deleteFASTARef(input: $input, condition: $condition) {
-      id
-      name
-      sequence
+      alleleid
+      clndisdb
+      clndn
+      clnhgvs
+      clnrevstat
+      clnsig
+      clnvc
+      clnvcso
+      geneinfo
+      mc
+      origin
       createdAt
       updatedAt
     }

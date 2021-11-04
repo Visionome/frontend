@@ -1,6 +1,6 @@
-type GFFRef @model {
+type GFFRef @model @searchable {
   dbxref: String,
-  description: String
+  description: String,
   end: String,
   gbkey: String,
   gene: String,
@@ -19,7 +19,7 @@ type GFFRef @model {
   sequence: String
 }
 
-type VCFRef @model {
+type VCFRef @model @searchable {
   chrom: String,# 1
   pos: String, # 925952
   id: String, # 1019397
@@ -38,9 +38,4 @@ type VCFRef @model {
   geneinfo: String, #SAMD11:148398
   mc: String, #SO:0001583|missense_variant
   origin: String, #1
-}
-
-type FASTARef @model {
-  name: String,
-  sequence: String
 }

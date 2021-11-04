@@ -22,6 +22,7 @@ export const getGffRef = /* GraphQL */ `
       start
       strand
       type
+      sequence
       createdAt
       updatedAt
     }
@@ -52,6 +53,7 @@ export const listGffRefs = /* GraphQL */ `
         start
         strand
         type
+        sequence
         createdAt
         updatedAt
       }
@@ -69,17 +71,17 @@ export const getVcfRef = /* GraphQL */ `
       alt
       qual
       filter
-      ALLELEID
-      CLNDISDB
-      CLNDN
-      CLNHGVS
-      CLNREVSTAT
-      CLNSIG
-      CLNVC
-      CLNVCSO
-      GENEINFO
-      MC
-      ORIGIN
+      alleleid
+      clndisdb
+      clndn
+      clnhgvs
+      clnrevstat
+      clnsig
+      clnvc
+      clnvcso
+      geneinfo
+      mc
+      origin
       createdAt
       updatedAt
     }
@@ -100,17 +102,17 @@ export const listVcfRefs = /* GraphQL */ `
         alt
         qual
         filter
-        ALLELEID
-        CLNDISDB
-        CLNDN
-        CLNHGVS
-        CLNREVSTAT
-        CLNSIG
-        CLNVC
-        CLNVCSO
-        GENEINFO
-        MC
-        ORIGIN
+        alleleid
+        clndisdb
+        clndn
+        clnhgvs
+        clnrevstat
+        clnsig
+        clnvc
+        clnvcso
+        geneinfo
+        mc
+        origin
         createdAt
         updatedAt
       }
@@ -118,32 +120,87 @@ export const listVcfRefs = /* GraphQL */ `
     }
   }
 `;
-export const getFastaRef = /* GraphQL */ `
-  query GetFastaRef($id: ID!) {
-    getFASTARef(id: $id) {
-      id
-      name
-      sequence
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const listFastaRefs = /* GraphQL */ `
-  query ListFastaRefs(
-    $filter: ModelFASTARefFilterInput
+export const searchGffRefs = /* GraphQL */ `
+  query SearchGffRefs(
+    $filter: SearchableGFFRefFilterInput
+    $sort: SearchableGFFRefSortInput
     $limit: Int
     $nextToken: String
+    $from: Int
   ) {
-    listFASTARefs(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    searchGFFRefs(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+    ) {
       items {
+        dbxref
+        description
+        end
+        gbkey
+        gene
+        gene_biotype
         id
+        parent
         name
+        phase
+        pseudo
+        score
+        seqid
+        source
+        start
+        strand
+        type
         sequence
         createdAt
         updatedAt
       }
       nextToken
+      total
+    }
+  }
+`;
+export const searchVcfRefs = /* GraphQL */ `
+  query SearchVcfRefs(
+    $filter: SearchableVCFRefFilterInput
+    $sort: SearchableVCFRefSortInput
+    $limit: Int
+    $nextToken: String
+    $from: Int
+  ) {
+    searchVCFRefs(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+    ) {
+      items {
+        chrom
+        pos
+        id
+        ref
+        alt
+        qual
+        filter
+        alleleid
+        clndisdb
+        clndn
+        clnhgvs
+        clnrevstat
+        clnsig
+        clnvc
+        clnvcso
+        geneinfo
+        mc
+        origin
+        createdAt
+        updatedAt
+      }
+      nextToken
+      total
     }
   }
 `;
