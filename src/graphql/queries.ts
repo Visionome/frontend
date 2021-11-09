@@ -154,8 +154,6 @@ export const searchGffRefs = /* GraphQL */ `
         strand
         type
         sequence
-        createdAt
-        updatedAt
       }
       nextToken
       total
@@ -196,8 +194,6 @@ export const searchVcfRefs = /* GraphQL */ `
         geneinfo
         mc
         origin
-        createdAt
-        updatedAt
       }
       nextToken
       total
