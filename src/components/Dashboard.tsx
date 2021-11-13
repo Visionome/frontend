@@ -9,10 +9,11 @@ const { Header, Content, Footer } = Layout;
 
 const Dashboard = (): JSX.Element => {
   const [genome, setGenome] = useState([]);
+  const [vcf, setVcf] = useState([]);
 
   const searchForGene = async (searchValue) => {
     try {
-      const searchResults = await API.graphql({
+      const geneSearchResults = await API.graphql({
         query: queries.searchGffRefs,
         variables: { filter: { name: { eq: searchValue } } },
       });
@@ -20,7 +21,17 @@ const Dashboard = (): JSX.Element => {
       // const { data } = searchResults;
       // console.log(searchResults);
       // console.log(searchResults.data.searchGFFRefs.items);
-      setGenome(searchResults.data.searchGFFRefs.items);
+
+      setGenome(geneSearchResults.data.searchGFFRefs.items);
+
+      const vcfSearchResults = await API.graphql({
+        query: queries.searchVcfRefs,
+        variables: {
+          filter: { geneinfo: { wildcard: `${searchValue.toLowerCase()}*` } },
+        },
+      });
+
+      setVcf(vcfSearchResults.data.searchVCFRefs.items);
       // console.log(data.data.searchGffRefs.items);
     } catch (err) {
       console.log('there was an error');
@@ -54,6 +65,7 @@ const Dashboard = (): JSX.Element => {
         <div className="site-layout-content">
           Test Request
           <Search placeholder="input gene name" onSearch={onSearch} />
+          <h5>Genome Info</h5>
           {genome.map((genomeStuff: any) => {
             return Object.keys(genomeStuff).map((key, index: any) => {
               return (
@@ -62,6 +74,19 @@ const Dashboard = (): JSX.Element => {
                   <div
                     style={{ overflowWrap: 'break-word' }}
                   >{`${genomeStuff[key]}`}</div>
+                </div>
+              );
+            });
+          })}
+          <h5>VCF Info</h5>
+          {vcf.map((vcfStuff: any) => {
+            return Object.keys(vcfStuff).map((key, index: any) => {
+              return (
+                <div key={index} style={{ textAlign: 'left' }}>
+                  <div style={{ textDecoration: 'underline' }}>{`${key}`}</div>
+                  <div
+                    style={{ overflowWrap: 'break-word' }}
+                  >{`${vcfStuff[key]}`}</div>
                 </div>
               );
             });
