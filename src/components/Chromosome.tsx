@@ -6,7 +6,11 @@ import { OrbitControls } from '@react-three/drei';
 import Cytoband from './Cytoband';
 extend({ OrbitControls });
 
-function Chromosome(): JSX.Element {
+function Chromosome({
+  selectedLocation,
+}: {
+  selectedLocation: string;
+}): JSX.Element {
   // Read data.json
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   //const jsonData = require('./data.json');
@@ -14,10 +18,12 @@ function Chromosome(): JSX.Element {
   // Create list of cytobands
   //console.log(obj);
   // Render bands within the chromosome
+  console.log(selectedLocation);
   return (
     //position={new THREE.Vector3(0, 0, 0)}
     <mesh position={[0, 0, -100]}>
       {Data.map((chrom) => {
+        console.log(selectedLocation === chrom.location);
         return (
           <Cytoband
             key={chrom.id}
@@ -25,7 +31,7 @@ function Chromosome(): JSX.Element {
             assembly_start={chrom.assembly_start}
             assembly_end={chrom.assembly_end}
             location={chrom.location}
-            hue={chrom.hue}
+            hue={selectedLocation === chrom.location ? '#90EE90' : chrom.hue}
           />
         );
       })}

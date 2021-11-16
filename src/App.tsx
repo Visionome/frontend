@@ -21,7 +21,7 @@ function App(): JSX.Element {
   return (
     <div className="App">
       <Dashboard />
-      <Canvas>
+      {/* <Canvas>
         <OrbitControls
           addEventListener={undefined}
           hasEventListener={undefined}
@@ -30,7 +30,7 @@ function App(): JSX.Element {
         />
         <Chromosome />
         <ambientLight intensity={0.5} />
-      </Canvas>
+      </Canvas> */}
     </div>
   );
 }

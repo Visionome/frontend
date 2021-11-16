@@ -4,12 +4,16 @@ import { Layout, Menu, Breadcrumb, Input } from 'antd';
 import { API } from 'aws-amplify';
 const { Search } = Input;
 import * as queries from '../graphql/queries';
+import { Canvas } from '@react-three/fiber';
+import Chromosome from './Chromosome';
+import { OrbitControls } from '@react-three/drei';
 
 const { Header, Content, Footer } = Layout;
 
 const Dashboard = (): JSX.Element => {
   const [genome, setGenome] = useState([]);
   const [vcf, setVcf] = useState([]);
+  const [selectedLocation, setSelectedLocation] = useState('');
 
   const searchForGene = async (searchValue) => {
     try {
@@ -22,6 +26,7 @@ const Dashboard = (): JSX.Element => {
       // console.log(searchResults);
       // console.log(searchResults.data.searchGFFRefs.items);
 
+      setSelectedLocation('7p13');
       setGenome(geneSearchResults.data.searchGFFRefs.items);
 
       const vcfSearchResults = await API.graphql({
@@ -64,7 +69,17 @@ const Dashboard = (): JSX.Element => {
         </Breadcrumb>
         <div className="site-layout-content">
           Test Request
-          <Search placeholder="input gene name" onSearch={onSearch} />
+          <Search placeholder="Input gene name" onSearch={onSearch} />
+          <Canvas>
+            <OrbitControls
+              addEventListener={undefined}
+              hasEventListener={undefined}
+              removeEventListener={undefined}
+              dispatchEvent={undefined}
+            />
+            <Chromosome selectedLocation={selectedLocation} />
+            <ambientLight intensity={0.5} />
+          </Canvas>
           <h5>Genome Info</h5>
           {genome.map((genomeStuff: any) => {
             return Object.keys(genomeStuff).map((key, index: any) => {
