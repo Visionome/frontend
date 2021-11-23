@@ -19,5 +19,12 @@
     "assembly_end": 50,
     "location": "7p13",
     "hue": "#710829"
+  },
+  {
+    "id": 3,
+    "assembly_start": 51,
+    "assembly_end": 70,
+    "location": "7p14",
+    "hue": "#490829"
   }
 ]
