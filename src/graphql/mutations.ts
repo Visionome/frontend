@@ -2,43 +2,175 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createTodo = /* GraphQL */ `
-  mutation CreateTodo(
-    $input: CreateTodoInput!
-    $condition: ModelTodoConditionInput
+export const createGFFRef = /* GraphQL */ `
+  mutation CreateGFFRef(
+    $input: CreateGFFRefInput!
+    $condition: ModelGFFRefConditionInput
   ) {
-    createTodo(input: $input, condition: $condition) {
-      id
-      name
+    createGFFRef(input: $input, condition: $condition) {
+      dbxref
       description
+      end
+      gbkey
+      gene
+      gene_biotype
+      id
+      parent
+      name
+      phase
+      pseudo
+      score
+      seqid
+      source
+      start
+      strand
+      type
+      sequence
       createdAt
       updatedAt
     }
   }
 `;
-export const updateTodo = /* GraphQL */ `
-  mutation UpdateTodo(
-    $input: UpdateTodoInput!
-    $condition: ModelTodoConditionInput
+export const updateGFFRef = /* GraphQL */ `
+  mutation UpdateGFFRef(
+    $input: UpdateGFFRefInput!
+    $condition: ModelGFFRefConditionInput
   ) {
-    updateTodo(input: $input, condition: $condition) {
-      id
-      name
+    updateGFFRef(input: $input, condition: $condition) {
+      dbxref
       description
+      end
+      gbkey
+      gene
+      gene_biotype
+      id
+      parent
+      name
+      phase
+      pseudo
+      score
+      seqid
+      source
+      start
+      strand
+      type
+      sequence
       createdAt
       updatedAt
     }
   }
 `;
-export const deleteTodo = /* GraphQL */ `
-  mutation DeleteTodo(
-    $input: DeleteTodoInput!
-    $condition: ModelTodoConditionInput
+export const deleteGFFRef = /* GraphQL */ `
+  mutation DeleteGFFRef(
+    $input: DeleteGFFRefInput!
+    $condition: ModelGFFRefConditionInput
   ) {
-    deleteTodo(input: $input, condition: $condition) {
-      id
-      name
+    deleteGFFRef(input: $input, condition: $condition) {
+      dbxref
       description
+      end
+      gbkey
+      gene
+      gene_biotype
+      id
+      parent
+      name
+      phase
+      pseudo
+      score
+      seqid
+      source
+      start
+      strand
+      type
+      sequence
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createVCFRef = /* GraphQL */ `
+  mutation CreateVCFRef(
+    $input: CreateVCFRefInput!
+    $condition: ModelVCFRefConditionInput
+  ) {
+    createVCFRef(input: $input, condition: $condition) {
+      chrom
+      pos
+      id
+      ref
+      alt
+      qual
+      filter
+      alleleid
+      clndisdb
+      clndn
+      clnhgvs
+      clnrevstat
+      clnsig
+      clnvc
+      clnvcso
+      geneinfo
+      mc
+      origin
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateVCFRef = /* GraphQL */ `
+  mutation UpdateVCFRef(
+    $input: UpdateVCFRefInput!
+    $condition: ModelVCFRefConditionInput
+  ) {
+    updateVCFRef(input: $input, condition: $condition) {
+      chrom
+      pos
+      id
+      ref
+      alt
+      qual
+      filter
+      alleleid
+      clndisdb
+      clndn
+      clnhgvs
+      clnrevstat
+      clnsig
+      clnvc
+      clnvcso
+      geneinfo
+      mc
+      origin
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteVCFRef = /* GraphQL */ `
+  mutation DeleteVCFRef(
+    $input: DeleteVCFRefInput!
+    $condition: ModelVCFRefConditionInput
+  ) {
+    deleteVCFRef(input: $input, condition: $condition) {
+      chrom
+      pos
+      id
+      ref
+      alt
+      qual
+      filter
+      alleleid
+      clndisdb
+      clndn
+      clnhgvs
+      clnrevstat
+      clnsig
+      clnvc
+      clnvcso
+      geneinfo
+      mc
+      origin
       createdAt
       updatedAt
     }
