@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-visionome-dev-224121-authRole",
+      "UnauthRoleArn": "arn:aws:iam::533478517536:role/amplify-visionome-dev-224121-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::533478517536:role/amplify-visionome-dev-224121-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-visionome-dev-224121-deployment",
+      "UnauthRoleName": "amplify-visionome-dev-224121-unauthRole",
+      "StackName": "amplify-visionome-dev-224121",
+      "StackId": "arn:aws:cloudformation:us-east-1:533478517536:stack/amplify-visionome-dev-224121/e4eb1220-4f33-11ec-9074-0a734e33c30b",
+      "AmplifyAppId": "d3fe59nyljhvou"
+    }
+  }
+}
