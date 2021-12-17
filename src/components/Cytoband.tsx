@@ -1,24 +1,19 @@
 import React from 'react';
 //import { Canvas, Vector3 } from '@react-three/fiber';
 import * as THREE from 'three';
+import { CytoBandData } from '../scripts/genomeTransformer';
 //import { Position } from '@react-three/drei/helpers/Position';
 
-interface BandData {
+export interface CytobandProps
+  extends Omit<CytoBandData, 'giemsaStains' | 'chromosome'> {
   id: number;
-  assembly_start: number;
-  assembly_end: number;
-  location: string;
   hue: string;
+  location: string;
 }
 
 // Render a cytoband, given the JSON description
-function Cytoband({
-  assembly_start,
-  assembly_end,
-  ...props
-}: BandData): JSX.Element {
-  const start = assembly_start;
-  const assemblyLen = assembly_end - assembly_start;
+function Cytoband({ start, end, hue }: CytobandProps): JSX.Element {
+  const assemblyLen = end - start;
   //const size = 10;
   //const size = new THREE.Vector3(10, assemblyLen, 10);
   //const size = 10;
@@ -29,7 +24,7 @@ function Cytoband({
   return (
     <mesh position={pos} scale={size}>
       <cylinderBufferGeometry attach="geometry" />
-      <meshLambertMaterial attach="material" color={props.hue} />
+      <meshLambertMaterial attach="material" color={hue} />
     </mesh>
   );
 }

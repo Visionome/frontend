@@ -21,8 +21,8 @@ function Chromosome({
           <Cytoband
             key={chrom.id}
             id={chrom.id}
-            assembly_start={chrom.assembly_start}
-            assembly_end={chrom.assembly_end}
+            start={chrom.assembly_start}
+            end={chrom.assembly_end}
             location={chrom.location}
             hue={
               selectedLocations.includes(chrom.location) ? '#90EE90' : chrom.hue
