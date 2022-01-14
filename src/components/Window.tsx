@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
-import { Canvas } from '@react-three/fiber';
 import Ideogram from './Ideogram';
 import Chromosome from './Chromosome';
-import { OrbitControls } from '@react-three/drei';
 import { Button } from 'antd';
-import * as THREE from 'three';
 
 function Window({
   selectedLocations,
@@ -20,7 +17,7 @@ function Window({
   //const [selectedChrom, setSelectedChrom] = useState(0);
   console.log('current view: ' + viewMode);
 
-  function handlePress() {
+  function handleReset() {
     setSelectedChrom(-1);
     setViewMode(0);
   }
@@ -43,8 +40,11 @@ function Window({
   ) : (
     // Chromosome view
     <>
-      <p>You are in chromosome view, chrom = {selectedChrom}.</p>
-      <Button onClick={() => handlePress} />
+      <Chromosome
+        selectedLocations={selectedLocations}
+        selectedChrom={selectedChrom}
+      />
+      <button onClick={() => handleReset()}>Go Back</button>
     </>
   );
 }

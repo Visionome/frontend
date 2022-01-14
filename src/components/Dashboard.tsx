@@ -27,6 +27,9 @@ const Dashboard = (): JSX.Element => {
       // console.log(searchResults);
       // console.log(searchResults.data.searchGFFRefs.items);
 
+      // TODO: set all selected locations programatically
+      // by listing all of the responses for each gene
+      // location in search results.
       setSelectedLocations(['7p13'], ['7p15']);
       setGenome(geneSearchResults.data.searchGFFRefs.items);
 
