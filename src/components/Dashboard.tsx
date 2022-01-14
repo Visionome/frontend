@@ -4,7 +4,7 @@ import { Layout, Menu, Breadcrumb, Input } from 'antd';
 import { API } from 'aws-amplify';
 const { Search } = Input;
 import * as queries from '../graphql/queries';
-import GenomeMap from './GenomeMap';
+import Window from './Window';
 
 const { Header, Content, Footer } = Layout;
 
@@ -27,6 +27,9 @@ const Dashboard = (): JSX.Element => {
       // console.log(searchResults);
       // console.log(searchResults.data.searchGFFRefs.items);
 
+      // TODO: set all selected locations programatically
+      // by listing all of the responses for each gene
+      // location in search results.
       setSelectedLocations(['7p13'], ['7p15']);
       setGenome(geneSearchResults.data.searchGFFRefs.items);
 
@@ -71,7 +74,7 @@ const Dashboard = (): JSX.Element => {
         <div className="site-layout-content">
           Test Request
           <Search placeholder="Input gene name" onSearch={onSearch} />
-          <GenomeMap selectedLocations={selectedLocations} />
+          <Window selectedLocations={selectedLocations} />
           <h5>Genome Info</h5>
           {genome.map((genomeStuff: any) => {
             return Object.keys(genomeStuff).map((key, index: any) => {
