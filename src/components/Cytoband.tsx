@@ -1,8 +1,5 @@
-import { BADNAME } from 'dns';
 import React, { useState, useRef } from 'react';
-//import { Canvas, Vector3 } from '@react-three/fiber';
 import * as THREE from 'three';
-//import { Position } from '@react-three/drei/helpers/Position';
 
 interface BandData {
   id: number;
@@ -22,8 +19,6 @@ function Cytoband({
   const start = assembly_start;
   //const assemblyLen = assembly_end - assembly_start;
   const pos = new THREE.Vector3(0, start, -10);
-
-  //const scalingFactor = 1;
   const size = new THREE.Vector3(10, 10, 10);
 
   const ref = useRef<THREE.Mesh>(null!);

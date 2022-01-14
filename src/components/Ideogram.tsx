@@ -1,5 +1,5 @@
 import { Canvas } from '@react-three/fiber';
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import * as THREE from 'three';
 import Data from '../ideogram.json';
 import Cylinder from './Cylinder';
