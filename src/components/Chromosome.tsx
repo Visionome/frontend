@@ -4,7 +4,6 @@ import { Canvas, extend } from '@react-three/fiber';
 import Data from '../chromosomes.json';
 import { OrbitControls } from '@react-three/drei';
 import Cytoband from './Cytoband';
-import { BADNAME } from 'dns';
 extend({ OrbitControls });
 
 interface ChromProps {
