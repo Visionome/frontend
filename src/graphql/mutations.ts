@@ -2,8 +2,8 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createGffRef = /* GraphQL */ `
-  mutation CreateGffRef(
+export const createGFFRef = /* GraphQL */ `
+  mutation CreateGFFRef(
     $input: CreateGFFRefInput!
     $condition: ModelGFFRefConditionInput
   ) {
@@ -31,8 +31,8 @@ export const createGffRef = /* GraphQL */ `
     }
   }
 `;
-export const updateGffRef = /* GraphQL */ `
-  mutation UpdateGffRef(
+export const updateGFFRef = /* GraphQL */ `
+  mutation UpdateGFFRef(
     $input: UpdateGFFRefInput!
     $condition: ModelGFFRefConditionInput
   ) {
@@ -60,8 +60,8 @@ export const updateGffRef = /* GraphQL */ `
     }
   }
 `;
-export const deleteGffRef = /* GraphQL */ `
-  mutation DeleteGffRef(
+export const deleteGFFRef = /* GraphQL */ `
+  mutation DeleteGFFRef(
     $input: DeleteGFFRefInput!
     $condition: ModelGFFRefConditionInput
   ) {
@@ -89,8 +89,8 @@ export const deleteGffRef = /* GraphQL */ `
     }
   }
 `;
-export const createVcfRef = /* GraphQL */ `
-  mutation CreateVcfRef(
+export const createVCFRef = /* GraphQL */ `
+  mutation CreateVCFRef(
     $input: CreateVCFRefInput!
     $condition: ModelVCFRefConditionInput
   ) {
@@ -118,8 +118,8 @@ export const createVcfRef = /* GraphQL */ `
     }
   }
 `;
-export const updateVcfRef = /* GraphQL */ `
-  mutation UpdateVcfRef(
+export const updateVCFRef = /* GraphQL */ `
+  mutation UpdateVCFRef(
     $input: UpdateVCFRefInput!
     $condition: ModelVCFRefConditionInput
   ) {
@@ -147,8 +147,8 @@ export const updateVcfRef = /* GraphQL */ `
     }
   }
 `;
-export const deleteVcfRef = /* GraphQL */ `
-  mutation DeleteVcfRef(
+export const deleteVCFRef = /* GraphQL */ `
+  mutation DeleteVCFRef(
     $input: DeleteVCFRefInput!
     $condition: ModelVCFRefConditionInput
   ) {

@@ -2,8 +2,8 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getGffRef = /* GraphQL */ `
-  query GetGffRef($id: ID!) {
+export const getGFFRef = /* GraphQL */ `
+  query GetGFFRef($id: ID!) {
     getGFFRef(id: $id) {
       dbxref
       description
@@ -28,8 +28,8 @@ export const getGffRef = /* GraphQL */ `
     }
   }
 `;
-export const listGffRefs = /* GraphQL */ `
-  query ListGffRefs(
+export const listGFFRefs = /* GraphQL */ `
+  query ListGFFRefs(
     $filter: ModelGFFRefFilterInput
     $limit: Int
     $nextToken: String
@@ -61,8 +61,8 @@ export const listGffRefs = /* GraphQL */ `
     }
   }
 `;
-export const getVcfRef = /* GraphQL */ `
-  query GetVcfRef($id: ID!) {
+export const getVCFRef = /* GraphQL */ `
+  query GetVCFRef($id: ID!) {
     getVCFRef(id: $id) {
       chrom
       pos
@@ -87,8 +87,8 @@ export const getVcfRef = /* GraphQL */ `
     }
   }
 `;
-export const listVcfRefs = /* GraphQL */ `
-  query ListVcfRefs(
+export const listVCFRefs = /* GraphQL */ `
+  query ListVCFRefs(
     $filter: ModelVCFRefFilterInput
     $limit: Int
     $nextToken: String
@@ -120,8 +120,8 @@ export const listVcfRefs = /* GraphQL */ `
     }
   }
 `;
-export const searchGffRefs = /* GraphQL */ `
-  query SearchGffRefs(
+export const searchGFFRefs = /* GraphQL */ `
+  query SearchGFFRefs(
     $filter: SearchableGFFRefFilterInput
     $sort: SearchableGFFRefSortInput
     $limit: Int
@@ -160,8 +160,8 @@ export const searchGffRefs = /* GraphQL */ `
     }
   }
 `;
-export const searchVcfRefs = /* GraphQL */ `
-  query SearchVcfRefs(
+export const searchVCFRefs = /* GraphQL */ `
+  query SearchVCFRefs(
     $filter: SearchableVCFRefFilterInput
     $sort: SearchableVCFRefSortInput
     $limit: Int

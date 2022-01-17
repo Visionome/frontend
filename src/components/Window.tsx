@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
-import { Canvas } from '@react-three/fiber';
 import Ideogram from './Ideogram';
 import Chromosome from './Chromosome';
-import { OrbitControls } from '@react-three/drei';
-import { Button } from 'antd';
 
-function GenomeMap({
+function Window({
   selectedLocations,
 }: {
   selectedLocations: string[];
@@ -15,34 +12,40 @@ function GenomeMap({
   //const mouse = new THREE.Vector2()
   // Ability to switch views and select a chromosome.
   const [viewMode, setViewMode] = useState(0);
+  const [selectedChrom, setSelectedChrom] = useState(-1);
   //const [selectedChrom, setSelectedChrom] = useState(0);
   console.log('current view: ' + viewMode);
+
+  function handleReset() {
+    setSelectedChrom(-1);
+    setViewMode(0);
+  }
 
   // Translate selected locations into chromosome list
   //const chromlist = selectedLocations
   //console.log('Highlighted chromosomes: ' + chromlist);
+
   // Ideogram view
   return viewMode === 0 ? (
     <>
-      <Canvas>
-        <OrbitControls />
-        <Ideogram selectedLocations={selectedLocations} />
-        <ambientLight intensity={0.5} />
-      </Canvas>
-      <Button onClick={() => setViewMode(1)}>View Chromosome 1</Button>
-      {/*<Button onClick={() => setViewMode(1)}>View Chromosome 2</Button>*/}
+      <Ideogram
+        selectedLocations={selectedLocations}
+        viewMode={viewMode}
+        setViewMode={setViewMode}
+        selectedChrom={selectedChrom}
+        setSelectedChrom={setSelectedChrom}
+      />
     </>
   ) : (
     // Chromosome view
     <>
-      <Canvas>
-        <OrbitControls />
-        <Chromosome selectedLocations={selectedLocations} />
-        <ambientLight intensity={0.5} />
-      </Canvas>
-      <Button onClick={() => setViewMode(0)}>View Ideogram</Button>
+      <Chromosome
+        selectedLocations={selectedLocations}
+        selectedChrom={selectedChrom}
+      />
+      <button onClick={() => handleReset()}>Go Back</button>
     </>
   );
 }
 
-export default GenomeMap;
+export default Window;

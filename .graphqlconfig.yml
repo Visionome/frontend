@@ -1,6 +1,6 @@
 projects:
-  visionomeapi:
-    schemaPath: amplify/backend/api/visionomeapi/build/schema.graphql
+  visionome:
+    schemaPath: src/graphql/schema.json
     includes:
       - src/graphql/**/*.ts
     excludes:

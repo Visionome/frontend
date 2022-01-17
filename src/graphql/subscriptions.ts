@@ -2,8 +2,8 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateGffRef = /* GraphQL */ `
-  subscription OnCreateGffRef {
+export const onCreateGFFRef = /* GraphQL */ `
+  subscription OnCreateGFFRef {
     onCreateGFFRef {
       dbxref
       description
@@ -28,8 +28,8 @@ export const onCreateGffRef = /* GraphQL */ `
     }
   }
 `;
-export const onUpdateGffRef = /* GraphQL */ `
-  subscription OnUpdateGffRef {
+export const onUpdateGFFRef = /* GraphQL */ `
+  subscription OnUpdateGFFRef {
     onUpdateGFFRef {
       dbxref
       description
@@ -54,8 +54,8 @@ export const onUpdateGffRef = /* GraphQL */ `
     }
   }
 `;
-export const onDeleteGffRef = /* GraphQL */ `
-  subscription OnDeleteGffRef {
+export const onDeleteGFFRef = /* GraphQL */ `
+  subscription OnDeleteGFFRef {
     onDeleteGFFRef {
       dbxref
       description
@@ -80,8 +80,8 @@ export const onDeleteGffRef = /* GraphQL */ `
     }
   }
 `;
-export const onCreateVcfRef = /* GraphQL */ `
-  subscription OnCreateVcfRef {
+export const onCreateVCFRef = /* GraphQL */ `
+  subscription OnCreateVCFRef {
     onCreateVCFRef {
       chrom
       pos
@@ -106,8 +106,8 @@ export const onCreateVcfRef = /* GraphQL */ `
     }
   }
 `;
-export const onUpdateVcfRef = /* GraphQL */ `
-  subscription OnUpdateVcfRef {
+export const onUpdateVCFRef = /* GraphQL */ `
+  subscription OnUpdateVCFRef {
     onUpdateVCFRef {
       chrom
       pos
@@ -132,8 +132,8 @@ export const onUpdateVcfRef = /* GraphQL */ `
     }
   }
 `;
-export const onDeleteVcfRef = /* GraphQL */ `
-  subscription OnDeleteVcfRef {
+export const onDeleteVCFRef = /* GraphQL */ `
+  subscription OnDeleteVCFRef {
     onDeleteVCFRef {
       chrom
       pos

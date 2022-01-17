@@ -105,8 +105,8 @@ export type GFFRef = {
   strand?: string | null;
   type?: string | null;
   sequence?: string | null;
-  createdAt?: string;
-  updatedAt?: string;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type UpdateGFFRefInput = {
@@ -198,8 +198,8 @@ export type VCFRef = {
   geneinfo?: string | null;
   mc?: string | null;
   origin?: string | null;
-  createdAt?: string;
-  updatedAt?: string;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type UpdateVCFRefInput = {
@@ -423,12 +423,12 @@ export type SearchableVCFRefConnection = {
   total?: number | null;
 };
 
-export type CreateGffRefMutationVariables = {
-  input?: CreateGFFRefInput;
+export type CreateGFFRefMutationVariables = {
+  input: CreateGFFRefInput;
   condition?: ModelGFFRefConditionInput | null;
 };
 
-export type CreateGffRefMutation = {
+export type CreateGFFRefMutation = {
   createGFFRef?: {
     __typename: 'GFFRef';
     dbxref?: string | null;
@@ -454,12 +454,12 @@ export type CreateGffRefMutation = {
   } | null;
 };
 
-export type UpdateGffRefMutationVariables = {
-  input?: UpdateGFFRefInput;
+export type UpdateGFFRefMutationVariables = {
+  input: UpdateGFFRefInput;
   condition?: ModelGFFRefConditionInput | null;
 };
 
-export type UpdateGffRefMutation = {
+export type UpdateGFFRefMutation = {
   updateGFFRef?: {
     __typename: 'GFFRef';
     dbxref?: string | null;
@@ -485,12 +485,12 @@ export type UpdateGffRefMutation = {
   } | null;
 };
 
-export type DeleteGffRefMutationVariables = {
-  input?: DeleteGFFRefInput;
+export type DeleteGFFRefMutationVariables = {
+  input: DeleteGFFRefInput;
   condition?: ModelGFFRefConditionInput | null;
 };
 
-export type DeleteGffRefMutation = {
+export type DeleteGFFRefMutation = {
   deleteGFFRef?: {
     __typename: 'GFFRef';
     dbxref?: string | null;
@@ -516,12 +516,12 @@ export type DeleteGffRefMutation = {
   } | null;
 };
 
-export type CreateVcfRefMutationVariables = {
-  input?: CreateVCFRefInput;
+export type CreateVCFRefMutationVariables = {
+  input: CreateVCFRefInput;
   condition?: ModelVCFRefConditionInput | null;
 };
 
-export type CreateVcfRefMutation = {
+export type CreateVCFRefMutation = {
   createVCFRef?: {
     __typename: 'VCFRef';
     chrom?: string | null;
@@ -547,12 +547,12 @@ export type CreateVcfRefMutation = {
   } | null;
 };
 
-export type UpdateVcfRefMutationVariables = {
-  input?: UpdateVCFRefInput;
+export type UpdateVCFRefMutationVariables = {
+  input: UpdateVCFRefInput;
   condition?: ModelVCFRefConditionInput | null;
 };
 
-export type UpdateVcfRefMutation = {
+export type UpdateVCFRefMutation = {
   updateVCFRef?: {
     __typename: 'VCFRef';
     chrom?: string | null;
@@ -578,12 +578,12 @@ export type UpdateVcfRefMutation = {
   } | null;
 };
 
-export type DeleteVcfRefMutationVariables = {
-  input?: DeleteVCFRefInput;
+export type DeleteVCFRefMutationVariables = {
+  input: DeleteVCFRefInput;
   condition?: ModelVCFRefConditionInput | null;
 };
 
-export type DeleteVcfRefMutation = {
+export type DeleteVCFRefMutation = {
   deleteVCFRef?: {
     __typename: 'VCFRef';
     chrom?: string | null;
@@ -609,11 +609,11 @@ export type DeleteVcfRefMutation = {
   } | null;
 };
 
-export type GetGffRefQueryVariables = {
-  id?: string;
+export type GetGFFRefQueryVariables = {
+  id: string;
 };
 
-export type GetGffRefQuery = {
+export type GetGFFRefQuery = {
   getGFFRef?: {
     __typename: 'GFFRef';
     dbxref?: string | null;
@@ -639,13 +639,13 @@ export type GetGffRefQuery = {
   } | null;
 };
 
-export type ListGffRefsQueryVariables = {
+export type ListGFFRefsQueryVariables = {
   filter?: ModelGFFRefFilterInput | null;
   limit?: number | null;
   nextToken?: string | null;
 };
 
-export type ListGffRefsQuery = {
+export type ListGFFRefsQuery = {
   listGFFRefs?: {
     __typename: 'ModelGFFRefConnection';
     items?: Array<{
@@ -675,11 +675,11 @@ export type ListGffRefsQuery = {
   } | null;
 };
 
-export type GetVcfRefQueryVariables = {
-  id?: string;
+export type GetVCFRefQueryVariables = {
+  id: string;
 };
 
-export type GetVcfRefQuery = {
+export type GetVCFRefQuery = {
   getVCFRef?: {
     __typename: 'VCFRef';
     chrom?: string | null;
@@ -705,13 +705,13 @@ export type GetVcfRefQuery = {
   } | null;
 };
 
-export type ListVcfRefsQueryVariables = {
+export type ListVCFRefsQueryVariables = {
   filter?: ModelVCFRefFilterInput | null;
   limit?: number | null;
   nextToken?: string | null;
 };
 
-export type ListVcfRefsQuery = {
+export type ListVCFRefsQuery = {
   listVCFRefs?: {
     __typename: 'ModelVCFRefConnection';
     items?: Array<{
@@ -741,7 +741,7 @@ export type ListVcfRefsQuery = {
   } | null;
 };
 
-export type SearchGffRefsQueryVariables = {
+export type SearchGFFRefsQueryVariables = {
   filter?: SearchableGFFRefFilterInput | null;
   sort?: SearchableGFFRefSortInput | null;
   limit?: number | null;
@@ -749,7 +749,7 @@ export type SearchGffRefsQueryVariables = {
   from?: number | null;
 };
 
-export type SearchGffRefsQuery = {
+export type SearchGFFRefsQuery = {
   searchGFFRefs?: {
     __typename: 'SearchableGFFRefConnection';
     items?: Array<{
@@ -780,7 +780,7 @@ export type SearchGffRefsQuery = {
   } | null;
 };
 
-export type SearchVcfRefsQueryVariables = {
+export type SearchVCFRefsQueryVariables = {
   filter?: SearchableVCFRefFilterInput | null;
   sort?: SearchableVCFRefSortInput | null;
   limit?: number | null;
@@ -788,7 +788,7 @@ export type SearchVcfRefsQueryVariables = {
   from?: number | null;
 };
 
-export type SearchVcfRefsQuery = {
+export type SearchVCFRefsQuery = {
   searchVCFRefs?: {
     __typename: 'SearchableVCFRefConnection';
     items?: Array<{
@@ -819,7 +819,7 @@ export type SearchVcfRefsQuery = {
   } | null;
 };
 
-export type OnCreateGffRefSubscription = {
+export type OnCreateGFFRefSubscription = {
   onCreateGFFRef?: {
     __typename: 'GFFRef';
     dbxref?: string | null;
@@ -845,7 +845,7 @@ export type OnCreateGffRefSubscription = {
   } | null;
 };
 
-export type OnUpdateGffRefSubscription = {
+export type OnUpdateGFFRefSubscription = {
   onUpdateGFFRef?: {
     __typename: 'GFFRef';
     dbxref?: string | null;
@@ -871,7 +871,7 @@ export type OnUpdateGffRefSubscription = {
   } | null;
 };
 
-export type OnDeleteGffRefSubscription = {
+export type OnDeleteGFFRefSubscription = {
   onDeleteGFFRef?: {
     __typename: 'GFFRef';
     dbxref?: string | null;
@@ -897,7 +897,7 @@ export type OnDeleteGffRefSubscription = {
   } | null;
 };
 
-export type OnCreateVcfRefSubscription = {
+export type OnCreateVCFRefSubscription = {
   onCreateVCFRef?: {
     __typename: 'VCFRef';
     chrom?: string | null;
@@ -923,7 +923,7 @@ export type OnCreateVcfRefSubscription = {
   } | null;
 };
 
-export type OnUpdateVcfRefSubscription = {
+export type OnUpdateVCFRefSubscription = {
   onUpdateVCFRef?: {
     __typename: 'VCFRef';
     chrom?: string | null;
@@ -949,7 +949,7 @@ export type OnUpdateVcfRefSubscription = {
   } | null;
 };
 
-export type OnDeleteVcfRefSubscription = {
+export type OnDeleteVCFRefSubscription = {
   onDeleteVCFRef?: {
     __typename: 'VCFRef';
     chrom?: string | null;

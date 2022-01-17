@@ -1,6 +1,6 @@
 {
   "api": {
-    "visionomeapi": {
+    "visionome": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
       "output": {
@@ -8,8 +8,8 @@
           "defaultAuthentication": {
             "authenticationType": "API_KEY",
             "apiKeyConfig": {
-              "apiKeyExpirationDays": 365,
-              "description": "GraphQL API for Visionome"
+              "apiKeyExpirationDays": 7,
+              "description": "API key for visionome api"
             }
           },
           "additionalAuthenticationProviders": []
