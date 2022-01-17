@@ -6,31 +6,20 @@ import { OrbitControls } from '@react-three/drei';
 import Cytoband from './Cytoband';
 extend({ OrbitControls });
 
-interface ChromProps {
+interface bandProps {
   selectedLocations: string[];
-  selectedChrom: number;
+  selectedband: number;
 }
 
 function Chromosome({
-  selectedChrom,
+  selectedband,
   selectedLocations,
   ...props
-}: ChromProps): JSX.Element {
-  // Render bands within the chromosome
+}: bandProps): JSX.Element {
+  // Render band within the bandosome
   //console.log(props.selectedLocations);
   return (
     <>
-      <p> You selected chromosome {selectedChrom}</p>
-      {Data.map((band) => {
-        console.log(selectedLocations.includes(band.location));
-        return (
-          <p key={band.id}>
-            cytoband {band.location} assembly start {band.assembly_start}{' '}
-            assembly end {band.assembly_end}
-          </p>
-        );
-      })}
-
       <Canvas>
         <ambientLight />
         <pointLight position={[10, 10, 10]} />
@@ -40,8 +29,8 @@ function Chromosome({
             <Cytoband
               key={band.id}
               id={band.id}
-              assembly_start={band.assembly_start}
-              assembly_end={band.assembly_end}
+              start={band.start}
+              end={band.end}
               location={band.location}
               hue={
                 selectedLocations.includes(band.location) ? '#90EE90' : band.hue

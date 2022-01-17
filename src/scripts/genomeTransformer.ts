@@ -5,7 +5,7 @@ import { exit } from 'process';
 
 type EntryTuple = [string, string, string, string, string];
 
-interface GenomeData {
+export interface CytoBandData {
   chromosome: string;
   start: number;
   end: number;
@@ -19,7 +19,7 @@ function serialize([
   end,
   name,
   giemsaStains,
-]: EntryTuple): GenomeData {
+]: EntryTuple): CytoBandData {
   return {
     chromosome,
     start: parseInt(start),
@@ -45,7 +45,7 @@ function serialize([
     crlfDelay: Infinity,
   });
 
-  const res: GenomeData[] = [];
+  const res: CytoBandData[] = [];
   for await (const line of rl) {
     const row = line.split('\t') as EntryTuple;
     res.push(serialize(row));
