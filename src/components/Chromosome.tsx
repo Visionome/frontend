@@ -4,41 +4,44 @@ import { Canvas, extend } from '@react-three/fiber';
 import Data from '../chromosomes.json';
 import { OrbitControls } from '@react-three/drei';
 import Cytoband from './Cytoband';
+import { BADNAME } from 'dns';
 extend({ OrbitControls });
 
-interface bandProps {
+interface ChromProps {
   selectedLocations: string[];
-  selectedband: number;
+  selectedChrom: number;
 }
 
 function Chromosome({
-  selectedband,
+  selectedChrom,
   selectedLocations,
   ...props
-}: bandProps): JSX.Element {
+}: ChromProps): JSX.Element {
   // Render band within the bandosome
   //console.log(props.selectedLocations);
   return (
     <>
-      <Canvas>
+      {/* <Canvas>
         <ambientLight />
-        <pointLight position={[10, 10, 10]} />
-        {Data.map((band) => {
-          console.log(selectedLocations.includes(band.location));
-          return (
-            <Cytoband
-              key={band.id}
-              id={band.id}
-              start={band.start}
-              end={band.end}
-              location={band.location}
-              hue={
-                selectedLocations.includes(band.location) ? '#90EE90' : band.hue
-              }
-            />
-          );
-        })}
-      </Canvas>
+        <pointLight position={[10, 10, 10]} /> */}
+      {Data.map((band) => {
+        console.log(selectedLocations.includes(band.location));
+        console.log(band);
+        return (
+          <div key={band.id}>hi</div>
+          // <Cytoband
+          //   key={band.id}
+          //   id={band.id}
+          //   start={band.start}
+          //   end={band.end}
+          //   location={band.location}
+          //   hue={
+          //     selectedLocations.includes(band.location) ? '#90EE90' : band.hue
+          //   }
+          // />
+        );
+      })}
+      {/* </Canvas> */}
     </>
   );
 }
