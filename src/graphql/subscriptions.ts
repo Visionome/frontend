@@ -23,6 +23,10 @@ export const onCreateGFFRef = /* GraphQL */ `
       strand
       type
       sequence
+      ensembleid
+      cytobandlocation
+      approximatecytoband
+      diseaseinfo
       createdAt
       updatedAt
     }
@@ -49,6 +53,10 @@ export const onUpdateGFFRef = /* GraphQL */ `
       strand
       type
       sequence
+      ensembleid
+      cytobandlocation
+      approximatecytoband
+      diseaseinfo
       createdAt
       updatedAt
     }
@@ -75,6 +83,10 @@ export const onDeleteGFFRef = /* GraphQL */ `
       strand
       type
       sequence
+      ensembleid
+      cytobandlocation
+      approximatecytoband
+      diseaseinfo
       createdAt
       updatedAt
     }

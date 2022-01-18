@@ -19,7 +19,6 @@ type GFFRef @model @searchable {
   sequence: String
   ensembleid: String
   cytobandlocation: String
-  approximatecytoband: String
   diseaseinfo: String
 }
 

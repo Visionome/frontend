@@ -1,6 +1,7 @@
 // @ts-nocheck
 import React, { useEffect, useState } from 'react';
-import { Layout, Menu, Breadcrumb, Input } from 'antd';
+import { Layout, Menu, Breadcrumb, Input, Select } from 'antd';
+const { Option } = Select;
 import { API } from 'aws-amplify';
 const { Search } = Input;
 import * as queries from '../graphql/queries';
@@ -12,16 +13,26 @@ const Dashboard = (): JSX.Element => {
   const [genome, setGenome] = useState([]);
   const [vcf, setVcf] = useState([]);
   const [selectedLocations, setSelectedLocations] = useState([]);
+  const [typeOfSearch, setTypeOfSearch] = useState('name');
 
   const searchForGene = async (searchValue) => {
+    let geneSearchResults;
     try {
-      const geneSearchResults = await API.graphql({
-        query: queries.searchGFFRefs,
-        variables: {
-          filter: { name: { eq: searchValue } },
-          filter: { description: { eq: searchValue } },
-        },
-      });
+      if (typeOfSearch === 'name') {
+        geneSearchResults = await API.graphql({
+          query: queries.searchGFFRefs,
+          variables: {
+            filter: { gene: { eq: searchValue } },
+          },
+        });
+      } else {
+        geneSearchResults = await API.graphql({
+          query: queries.searchGFFRefs,
+          variables: {
+            filter: { diseaseinfo: { exists: searchValue } },
+          },
+        });
+      }
       // console.log(searchResults);
       // const { data } = searchResults;
       // console.log(searchResults);
@@ -51,6 +62,11 @@ const Dashboard = (): JSX.Element => {
     // searchForGene();
   }, []);
 
+  function handleTypeChange(value) {
+    console.log(`selected ${value}`);
+    setTypeOfSearch(value);
+  }
+
   return (
     <Layout className="layout">
       <Header>
@@ -71,6 +87,14 @@ const Dashboard = (): JSX.Element => {
         <div className="site-layout-content">
           Test Request
           <Search placeholder="Input gene name" onSearch={onSearch} />
+          <Select
+            defaultValue="name"
+            style={{ width: 120 }}
+            onChange={handleTypeChange}
+          >
+            <Option value="name">Name</Option>
+            <Option value="disease">Disease</Option>
+          </Select>
           <GenomeMap selectedLocations={selectedLocations} />
           <h5>Genome Info</h5>
           {genome.map((genomeStuff: any) => {
