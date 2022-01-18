@@ -24,7 +24,7 @@ function serialize([
     chromosome,
     start: parseInt(start),
     end: parseInt(end),
-    name: name === '' ? undefined : name,
+    name: name === '' ? undefined : chromosome.substring(3) + '.' + name,
     giemsaStains,
   };
 }
