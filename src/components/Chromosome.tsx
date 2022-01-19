@@ -18,30 +18,35 @@ function Chromosome({
 }: ChromProps): JSX.Element {
   // Render band within the bandosome
   //console.log(props.selectedLocations);
+  let counter = 0;
+  const scalar = 2000000;
   return (
     <>
-      {/* <Canvas>
+      <Canvas>
         <ambientLight />
-        <pointLight position={[10, 10, 10]} /> */}
-      {Data.filter(
-        (band) => band.chromosome.substring(3) === selectedChrom.toString(),
-      ).map((band) => {
-        // console.log(band.name);
-        return (
-          <div key={band.name}>{band.name}</div>
-          // <Cytoband
-          //   key={band.id}
-          //   id={band.id}
-          //   start={band.start}
-          //   end={band.end}
-          //   location={band.location}
-          //   hue={
-          //     selectedLocations.includes(band.location) ? '#90EE90' : band.hue
-          //   }
-          // />
-        );
-      })}
-      {/* </Canvas> */}
+        <pointLight position={[10, 10, 10]} />
+        {Data.filter(
+          (band) => band.chromosome.substring(3) === selectedChrom.toString(),
+        ).map((band) => {
+          // Counter for spacing cytobands.
+          counter -= (band.end - band.start) / scalar;
+          // Create cytoband location from substring of chromosome name.
+          const bandLocation = band.name.substring(2);
+          const hue = 'yellow';
+          return (
+            <Cytoband
+              key={band.id}
+              id={band.id}
+              ypos={counter}
+              start={band.start}
+              end={band.end}
+              scalar={scalar}
+              location={bandLocation}
+              hue={selectedLocations.includes(bandLocation) ? '#90EE90' : hue}
+            />
+          );
+        })}
+      </Canvas>
     </>
   );
 }

@@ -8,13 +8,22 @@ export interface CytobandProps
   id: number;
   hue: string;
   location: string;
+  scalar: number;
+  ypos: number;
 }
 
 // Render a cytoband, given the JSON description
-function Cytoband({ start, end, id, ...props }: CytobandProps): JSX.Element {
-  //const assemblyLen = assembly_end - assembly_start;
-  const pos = new THREE.Vector3(0, start, -10);
-  const size = new THREE.Vector3(10, 10, 10);
+function Cytoband({
+  start,
+  end,
+  id,
+  scalar,
+  ypos,
+  ...props
+}: CytobandProps): JSX.Element {
+  const assemblyLen = end - start;
+  const pos = new THREE.Vector3(0, ypos, -10);
+  const size = new THREE.Vector3(5, assemblyLen / scalar, 10);
 
   const ref = useRef<THREE.Mesh>(null!);
   const [hovered, hover] = useState(false);
@@ -26,6 +35,8 @@ function Cytoband({ start, end, id, ...props }: CytobandProps): JSX.Element {
   return (
     <mesh
       {...props}
+      position={pos}
+      scale={size}
       key={id}
       ref={ref}
       onClick={(event) => handleClick()}
