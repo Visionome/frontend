@@ -1,9 +1,9 @@
 import React from 'react';
 import { Canvas, extend } from '@react-three/fiber';
 //import { Position } from '@react-three/drei/helpers/Position';
-import Data from '../chromosomes.json';
 import { OrbitControls } from '@react-three/drei';
 import Cytoband from './Cytoband';
+import Data from '../scripts/cytoBand.json';
 extend({ OrbitControls });
 
 interface ChromProps {
@@ -24,10 +24,9 @@ function Chromosome({
         <ambientLight />
         <pointLight position={[10, 10, 10]} /> */}
       {Data.map((band) => {
-        console.log(selectedLocations.includes(band.location));
-        console.log(band);
+        // console.log(band.name);
         return (
-          <div key={band.id}>hi</div>
+          <div key={band.name}>{band.name}</div>
           // <Cytoband
           //   key={band.id}
           //   id={band.id}

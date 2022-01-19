@@ -5,7 +5,10 @@ import { exit } from 'process';
 
 type EntryTuple = [string, string, string, string, string];
 
+let count = 0;
+
 export interface CytoBandData {
+  id: number;
   chromosome: string;
   start: number;
   end: number;
@@ -21,10 +24,11 @@ function serialize([
   giemsaStains,
 ]: EntryTuple): CytoBandData {
   return {
+    id: count++,
     chromosome,
     start: parseInt(start),
     end: parseInt(end),
-    name: name === '' ? undefined : name,
+    name: name === '' ? undefined : chromosome.substring(3) + '.' + name,
     giemsaStains,
   };
 }
