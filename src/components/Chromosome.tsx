@@ -23,7 +23,9 @@ function Chromosome({
       {/* <Canvas>
         <ambientLight />
         <pointLight position={[10, 10, 10]} /> */}
-      {Data.map((band) => {
+      {Data.filter(
+        (band) => band.chromosome.substring(3) === selectedChrom.toString(),
+      ).map((band) => {
         // console.log(band.name);
         return (
           <div key={band.name}>{band.name}</div>
