@@ -1,6 +1,5 @@
 import React from 'react';
 import { Canvas, extend } from '@react-three/fiber';
-//import { Position } from '@react-three/drei/helpers/Position';
 import { OrbitControls } from '@react-three/drei';
 import Cytoband from './Cytoband';
 import Data from '../scripts/cytoBand.json';

@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import * as THREE from 'three';
 import { CytoBandData } from '../scripts/genomeTransformer';
-//import { Position } from '@react-three/drei/helpers/Position';
 
 export interface CytobandProps
   extends Omit<CytoBandData, 'giemsaStains' | 'chromosome' | 'start' | 'end'> {
