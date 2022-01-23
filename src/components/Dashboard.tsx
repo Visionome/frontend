@@ -30,7 +30,7 @@ const Dashboard = (): JSX.Element => {
       // TODO: set all selected locations programatically
       // by listing all of the responses for each gene
       // location in search results.
-      setSelectedLocations(['7p13'], ['7p15']);
+      setSelectedLocations(['p21.1'], ['q11']);
       setGenome(geneSearchResults.data.searchGFFRefs.items);
 
       const vcfSearchResults = await API.graphql({
