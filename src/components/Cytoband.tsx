@@ -1,39 +1,48 @@
 import React, { useState, useRef } from 'react';
 import * as THREE from 'three';
 import { CytoBandData } from '../scripts/genomeTransformer';
-//import { Position } from '@react-three/drei/helpers/Position';
 
 export interface CytobandProps
-  extends Omit<CytoBandData, 'giemsaStains' | 'chromosome'> {
+  extends Omit<CytoBandData, 'giemsaStains' | 'chromosome' | 'start' | 'end'> {
   id: number;
   hue: string;
+  len: number;
   location: string;
+  ypos: number;
 }
 
 // Render a cytoband, given the JSON description
-function Cytoband({ start, end, id, ...props }: CytobandProps): JSX.Element {
-  //const assemblyLen = assembly_end - assembly_start;
-  const pos = new THREE.Vector3(0, start, -10);
-  const size = new THREE.Vector3(10, 10, 10);
+function Cytoband({
+  len,
+  id,
+  ypos,
+  hue,
+  location,
+  ...props
+}: CytobandProps): JSX.Element {
+  const pos = new THREE.Vector3(0, ypos, -30);
+  const size = new THREE.Vector3(5, len, 10);
 
   const ref = useRef<THREE.Mesh>(null!);
   const [hovered, hover] = useState(false);
 
   function handleClick() {
-    console.log(props.location);
+    console.log(location + ' length ' + len + 'start ' + ypos);
   }
 
   return (
     <mesh
       {...props}
+      position={pos}
+      scale={size}
       key={id}
       ref={ref}
       onClick={(event) => handleClick()}
       onPointerOver={(event) => hover(true)}
       onPointerOut={(event) => hover(false)}
     >
-      <cylinderGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+      <cylinderGeometry args={[1, 1, 5, 64]} />
+      <meshStandardMaterial color={hovered ? 'hotpink' : hue} />
     </mesh>
   );
 }
