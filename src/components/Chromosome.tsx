@@ -13,7 +13,6 @@ interface ChromProps {
 function Chromosome({
   selectedChrom,
   selectedLocations,
-  ...props
 }: ChromProps): JSX.Element {
   // Render band within the bandosome
   //console.log(props.selectedLocations);
