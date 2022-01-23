@@ -27,7 +27,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
-      - run: touch src/aws-exports.js
+      - run: curl --location --request GET 'https://shell-was-exports-file-cicd.s3.us-east-2.amazonaws.com/aws-exports.js?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEDYaCXVzLWVhc3QtMSJGMEQCIAIyHcJDJu23ASlw7Ecej1m6DG2jn96suA1X20NCuhkvAiABuJRz3UZG2SpPtJCWCOpc4JsBXit2FmMBDhRNLlTynirkAgheEAAaDDUzMzQ3ODUxNzUzNiIMhXrV%2Bh%2F%2BRUm14FBLKsECoetwJJqIca7lET6NVcy5q08eW%2Fjz%2B7VJo59xhFZb9U4Dd5Y9f6Ek1jKcbQ7T0uNBzzRAkQX0%2FMLo4WkA0eLyFTO8p4nyQA4LN%2BQiY056%2FZQM3vujfVawsacFZG8yR%2B6WROk5WVhbPbqh4RzcMqPiyJOqnZyTCZBAsgG%2BiK%2FgRdkV5fBFyGPmEEDcyeFQJmLl0FEtr8dIXhsBSoMm2rmaXU%2FlkmAaKMJC6KYgGR6nRuXhuLp%2BAipLfi8nzn3Sf7U%2BT8KsM0uN9rhvLQZZsjUWZOJ15ttUIivBtwAtq5KQeN89geu3%2BE6WRiOPZ3F9C4LbBVEMwDEHXELAhgnwwohQauavXbl%2B%2Fxdd6cajSt1f91BfonSJ5NMF%2Fa7HqAkk430l%2FahlRtCwmUIcziw9aS22LTdYWZhzHTCr%2B7EAGArtI9svMMSptY8GOrQCxBXItXwm9WBJuepello9A4p1rU8UjmwiUncqY2gKPhuJ3cIe520V3hRFJIhPBgA8J92efh3%2BHoZWNNlWZvCQ8CIruv%2BUH9ta4z2KByQwAdv5EEe274YoMtTTq%2FkKWG0%2FZFdeUn173Ga29Kk67CqXUUrFzj6h7IV6XYkhvvUGB81Fx1CRcrjxnnT%2F5b76xNXC8C9uOE6RpQMenAvMi3LrxRQgnwN3EqK1URsxNAo1b8pjSI%2FFdzmPN2B1unDFnL6u6q3gMGSofjFluFAhxTtNxWP0F%2BS64sPVF5wEM%2FJ%2BngHiRpPuyCUSagXSNLFyZKDN700wZ1gc40x1mbzBZN%2BtYQ3NJEDPKnsifrunpnK0rXvU%2BUW%2FPNoztMNQgTd2w1lttXMW%2FDbsoDre7vClz8eIgxBMSeU%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220123T133438Z&X-Amz-SignedHeaders=host&X-Amz-Expires=604800&X-Amz-Credential=ASIAXYNOMFMQKZP4GLMP%2F20220123%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Signature=df2eca2d5114f2c2be419935750687a28ff7c9cc38ca6dd54c2d7ab46935266e' > src/aws-exports.js
       - run: npm ci
       - run: npm run build
   Test:
