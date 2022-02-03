@@ -11,7 +11,7 @@ interface CProps {
   setSelectedChrom: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export default function Cylinder(props: CProps): JSX.Element {
+export default function Cylinder({ scale, ...props }: CProps): JSX.Element {
   // This reference will give us direct access to the THREE.Mesh object
   const ref = useRef<THREE.Mesh>(null!);
   // Hold state for hovered and clicked events
@@ -28,7 +28,7 @@ export default function Cylinder(props: CProps): JSX.Element {
     <mesh
       {...props}
       ref={ref}
-      scale={hovered ? 1.2 : 1}
+      scale={scale}
       onClick={(event) => handleClick()}
       onPointerOver={(event) => hover(true)}
       onPointerOut={(event) => hover(false)}

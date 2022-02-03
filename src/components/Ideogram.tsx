@@ -23,7 +23,8 @@ function Ideogram(props: IProps): JSX.Element {
       <ambientLight />
       <pointLight position={[10, 10, 10]} />
       {Data.map((chrom) => {
-        size = new THREE.Vector3(3, chrom.len, 10);
+        //Edit for the size here, Michael
+        size = new THREE.Vector3(0.3, chrom.len / 15, 0.3);
         pos = new THREE.Vector3(chrom.x, chrom.y, 0);
         return (
           <Cylinder
