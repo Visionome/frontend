@@ -1,122 +1,122 @@
 [
-    {
-        "id": 0,
-        "chrom": "chr1",
-        "assembly_len": 249698942
-    },
-    {
-        "id": 1,
-        "chrom": "chr2",
-        "assembly_len": 242508799
-    },
-    {
-        "id": 2,
-        "chrom": "chr3",
-        "assembly_len": 198450956
-    },
-    {
-        "id": 3,
-        "chrom": "chr4",
-        "assembly_len": 190424264
-    },
-    {
-        "id": 4,
-        "chrom": "chr5",
-        "assembly_len": 181630948
-    },
-    {
-        "id": 5,
-        "chrom": "chr6",
-        "assembly_len": 170805979
-    },
-    {
-        "id": 6,
-        "chrom": "chr7",
-        "assembly_len": 1593345973
-    },
-    {
-        "id": 7,
-        "chrom": "chr8",
-        "assembly_len": 145138636
-    },
-    {
-        "id": 8,
-        "chrom": "chr9",
-        "assembly_len": 138688728
-    },
-    {
-        "id": 9,
-        "chrom": "chr10",
-        "assembly_len": 133797422
-    },
-    {
-        "id": 10,
-        "chrom": "chr11",
-        "assembly_len": 135186938
-    },
-    {
-        "id": 11,
-        "chrom": "chr12",
-        "assembly_len": 133275309
-    },
-    {
-        "id": 12,
-        "chrom": "chr13",
-        "assembly_len": 114364328
-    },
-    {
-        "id": 13,
-        "chrom": "chr14",
-        "assembly_len": 108136338
-    },
-    {
-        "id": 14,
-        "chrom": "chr15",
-        "assembly_len": 102439437
-    },
-    {
-        "id": 15,
-        "chrom": "chr16",
-        "assembly_len": 92211104
-    },
-    {
-        "id": 16,
-        "chrom": "chr17",
-        "assembly_len": 83836422
-    },
-    {
-        "id": 17,
-        "chrom": "chr18",
-        "assembly_len": 80373285
-    },
-    {
-        "id": 18,
-        "chrom": "chr19",
-        "assembly_len": 58617616
-    },
-    {
-        "id": 19,
-        "chrom": "chr20",
-        "assembly_len": 64444167
-    },
-    {
-        "id": 20,
-        "chrom": "chr21",
-        "assembly_len": 46709983
-    },
-    {
-        "id": 21,
-        "chrom": "chr22",
-        "assembly_len": 51857516
-    },
-    {
-        "id": 22,
-        "chrom": "chrX",
-        "assembly_len": 156040895
-    },
-    {
-        "id": 23,
-        "chrom": "chrY",
-        "assembly_len": 57264655
-    }
+  {
+    "id": 0,
+    "chrom": "chr1",
+    "assembly_len": 249698942
+  },
+  {
+    "id": 1,
+    "chrom": "chr2",
+    "assembly_len": 242508799
+  },
+  {
+    "id": 2,
+    "chrom": "chr3",
+    "assembly_len": 198450956
+  },
+  {
+    "id": 3,
+    "chrom": "chr4",
+    "assembly_len": 190424264
+  },
+  {
+    "id": 4,
+    "chrom": "chr5",
+    "assembly_len": 181630948
+  },
+  {
+    "id": 5,
+    "chrom": "chr6",
+    "assembly_len": 170805979
+  },
+  {
+    "id": 6,
+    "chrom": "chr7",
+    "assembly_len": 1593345973
+  },
+  {
+    "id": 7,
+    "chrom": "chr8",
+    "assembly_len": 145138636
+  },
+  {
+    "id": 8,
+    "chrom": "chr9",
+    "assembly_len": 138688728
+  },
+  {
+    "id": 9,
+    "chrom": "chr10",
+    "assembly_len": 133797422
+  },
+  {
+    "id": 10,
+    "chrom": "chr11",
+    "assembly_len": 135186938
+  },
+  {
+    "id": 11,
+    "chrom": "chr12",
+    "assembly_len": 133275309
+  },
+  {
+    "id": 12,
+    "chrom": "chr13",
+    "assembly_len": 114364328
+  },
+  {
+    "id": 13,
+    "chrom": "chr14",
+    "assembly_len": 108136338
+  },
+  {
+    "id": 14,
+    "chrom": "chr15",
+    "assembly_len": 102439437
+  },
+  {
+    "id": 15,
+    "chrom": "chr16",
+    "assembly_len": 92211104
+  },
+  {
+    "id": 16,
+    "chrom": "chr17",
+    "assembly_len": 83836422
+  },
+  {
+    "id": 17,
+    "chrom": "chr18",
+    "assembly_len": 80373285
+  },
+  {
+    "id": 18,
+    "chrom": "chr19",
+    "assembly_len": 58617616
+  },
+  {
+    "id": 19,
+    "chrom": "chr20",
+    "assembly_len": 64444167
+  },
+  {
+    "id": 20,
+    "chrom": "chr21",
+    "assembly_len": 46709983
+  },
+  {
+    "id": 21,
+    "chrom": "chr22",
+    "assembly_len": 51857516
+  },
+  {
+    "id": 22,
+    "chrom": "chrX",
+    "assembly_len": 156040895
+  },
+  {
+    "id": 23,
+    "chrom": "chrY",
+    "assembly_len": 57264655
+  }
 ]

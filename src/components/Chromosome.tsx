@@ -29,6 +29,7 @@ function Chromosome({
     <>
       <p>chromosome: {selectedChrom}</p>
       <p>selected locations: {selectedLocations}</p>
+      <p>assembly length: {scalar}</p>
       <Canvas>
         <ambientLight />
         <pointLight position={[10, 10, 10]} />
@@ -43,6 +44,40 @@ function Chromosome({
           //const hue = 'yellow';
           //const bandLocation = band.name;
           console.log('bandlocation ' + bandLocation);
+          // generating hue for a band
+          let hue = 'orange';
+
+          // switch (band.giemsaStains) {
+          //   case 'gneg':
+          //     hue = '#121413';
+          //   case 'gpos25':
+          //     hue = '#272b29';
+          //   case 'gpos50':
+          //     hue = '#383d3a';
+          //   case 'gpos75':
+          //     hue = '#545c57';
+          //   case 'gpos100':
+          //     hue = '#8c9690';
+          // }
+          // TODO: fix fallthrough bug.
+          // Used color picker and chrom reference
+          // from wikipedia for each stain value.
+          if (band.giemsaStains == 'gneg') {
+            hue = '#ffffff';
+          } else if (band.giemsaStains == 'gpos25') {
+            hue = '#d2d2d2';
+          } else if (band.giemsaStains == 'gpos50') {
+            hue = '#939393';
+          } else if (band.giemsaStains == 'gpos75') {
+            hue = '#555555';
+          } else if (band.giemsaStains == 'gpos100') {
+            hue = '#1b1b1b';
+          } else if (band.giemsaStains == 'acen') {
+            hue = '#ffbebe';
+          } else {
+            hue = '#ffbebe';
+          }
+
           return (
             <Cytoband
               key={band.id}
@@ -50,7 +85,7 @@ function Chromosome({
               ypos={y}
               len={length}
               location={bandLocation}
-              hue={selectedLocations.includes(bandLocation) ? 'blue' : 'orange'}
+              hue={selectedLocations.includes(bandLocation) ? 'blue' : hue}
             />
           );
         })}
