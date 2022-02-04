@@ -21,7 +21,7 @@ function Cytoband({
   ...props
 }: CytobandProps): JSX.Element {
   const pos = new THREE.Vector3(0, ypos, -30);
-  const size = new THREE.Vector3(5, len, 10);
+  const size = new THREE.Vector3(2, len, 10);
 
   const ref = useRef<THREE.Mesh>(null!);
   const [hovered, hover] = useState(false);
