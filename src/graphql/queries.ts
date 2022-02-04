@@ -138,8 +138,11 @@ export const searchGFFRefs = /* GraphQL */ `
       items {
         dbxref
         description
+        cytobandlocation
+        ensembleid
         end
         gbkey
+        diseaseinfo
         gene
         gene_biotype
         id

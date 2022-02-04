@@ -3,9 +3,11 @@ import Ideogram from './Ideogram';
 import Chromosome from './Chromosome';
 
 function Window({
-  selectedLocations,
+  selectedChromLocations,
+  selectedCytobandLocations,
 }: {
-  selectedLocations: string[];
+  selectedChromLocations: string[];
+  selectedCytobandLocations: string[];
 }): JSX.Element {
   // Raycaster for selecting chromosomes in the canvas.
   //const raycaster = new THREE.Raycaster();
@@ -29,7 +31,7 @@ function Window({
   return viewMode === 0 ? (
     <>
       <Ideogram
-        selectedLocations={selectedLocations}
+        selectedChromLocations={selectedChromLocations}
         viewMode={viewMode}
         setViewMode={setViewMode}
         selectedChrom={selectedChrom}
@@ -40,7 +42,7 @@ function Window({
     // Chromosome view
     <>
       <Chromosome
-        selectedLocations={selectedLocations}
+        selectedCytobandLocations={selectedCytobandLocations}
         selectedChrom={selectedChrom}
       />
       <button onClick={() => handleReset()}>Go Back</button>
