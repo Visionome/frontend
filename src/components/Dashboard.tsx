@@ -11,7 +11,10 @@ const { Header, Content, Footer } = Layout;
 const Dashboard = (): JSX.Element => {
   const [genome, setGenome] = useState([]);
   const [vcf, setVcf] = useState([]);
-  const [selectedLocations, setSelectedLocations] = useState([]);
+  const [selectedChromLocations, setSelectedChromLocations] = useState([]);
+  const [selectedCytobandLocations, setSelectedCytobandLocations] = useState(
+    [],
+  );
 
   const searchForGene = async (searchValue) => {
     try {
@@ -19,7 +22,9 @@ const Dashboard = (): JSX.Element => {
         query: queries.searchGFFRefs,
         variables: {
           filter: { name: { eq: searchValue } },
-          filter: { description: { eq: searchValue } },
+          // filter: {
+          //   diseaseinfo: { wildcard: `${searchValue.toLowerCase()}*` },
+          // },
         },
       });
       // console.log(searchResults);
@@ -30,7 +35,19 @@ const Dashboard = (): JSX.Element => {
       // TODO: set all selected locations programatically
       // by listing all of the responses for each gene
       // location in search results.
-      setSelectedLocations(['p21.1'], ['q11']);
+      const results = geneSearchResults.data.searchGFFRefs.items;
+      console.log(results);
+
+      const cytoArr = results.map((item) => item.cytobandlocation);
+      console.log(cytoArr);
+
+      const chromArr = cytoArr.map((item) => item.substring(0, 1));
+      console.log(chromArr);
+
+      // Set locations.
+      setSelectedChromLocations(chromArr);
+      setSelectedCytobandLocations(cytoArr);
+
       setGenome(geneSearchResults.data.searchGFFRefs.items);
 
       const vcfSearchResults = await API.graphql({
@@ -74,7 +91,10 @@ const Dashboard = (): JSX.Element => {
         <div className="site-layout-content">
           Test Request
           <Search placeholder="Input gene name" onSearch={onSearch} />
-          <Window selectedLocations={selectedLocations} />
+          <Window
+            selectedChromLocations={selectedChromLocations}
+            selectedCytobandLocations={selectedCytobandLocations}
+          />
           <h5>Genome Info</h5>
           {genome.map((genomeStuff: any) => {
             return Object.keys(genomeStuff).map((key, index: any) => {

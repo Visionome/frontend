@@ -5,7 +5,7 @@ import Data from '../ideogram.json';
 import Cylinder from './Cylinder';
 
 interface IProps {
-  selectedLocations: string[];
+  selectedChromLocations: string[];
   viewMode: number;
   setViewMode: React.Dispatch<React.SetStateAction<number>>;
   selectedChrom: number;
@@ -32,6 +32,11 @@ function Ideogram(props: IProps): JSX.Element {
             info={chrom.id}
             position={pos}
             scale={size}
+            hue={
+              props.selectedChromLocations.includes(chrom.id.toString())
+                ? 'blue'
+                : 'orange'
+            }
             viewMode={props.viewMode}
             setViewMode={props.setViewMode}
             selectedChrom={props.selectedChrom}
