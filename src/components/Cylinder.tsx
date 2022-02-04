@@ -6,6 +6,7 @@ interface CProps {
   scale: THREE.Vector3;
   info: number;
   viewMode: number;
+  hue: string;
   setViewMode: React.Dispatch<React.SetStateAction<number>>;
   selectedChrom: number;
   setSelectedChrom: React.Dispatch<React.SetStateAction<number>>;
@@ -24,6 +25,8 @@ export default function Cylinder(props: CProps): JSX.Element {
     console.log(props.info);
   }
 
+  // eslint-disable-next-line react/destructuring-assignment
+  const color = props.hue;
   return (
     <mesh
       {...props}
@@ -34,7 +37,7 @@ export default function Cylinder(props: CProps): JSX.Element {
       onPointerOut={(event) => hover(false)}
     >
       <cylinderGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+      <meshStandardMaterial color={hovered ? 'hotpink' : color} />
     </mesh>
   );
 }

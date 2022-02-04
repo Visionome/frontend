@@ -6,13 +6,13 @@ import Data from '../scripts/cytoBand.json';
 extend({ OrbitControls });
 
 interface ChromProps {
-  selectedLocations: string[];
+  selectedCytobandLocations: string[];
   selectedChrom: number;
 }
 
 function Chromosome({
   selectedChrom,
-  selectedLocations,
+  selectedCytobandLocations,
 }: ChromProps): JSX.Element {
   // Render band within the bandosome
   //console.log(props.selectedLocations);
@@ -22,7 +22,7 @@ function Chromosome({
   return (
     <>
       <p>chromosome: {selectedChrom}</p>
-      <p>selected locations: {selectedLocations}</p>
+      <p>selected locations: {selectedCytobandLocations}</p>
       <Canvas>
         <ambientLight />
         <pointLight position={[10, 10, 10]} />
@@ -33,7 +33,9 @@ function Chromosome({
           y -= length;
           length = (band.end - band.start) / (scalar / 32);
           // Create cytoband location from substring of chromosome name.
-          const bandLocation = band.name.substring(2);
+          const bandLocation = band.name.slice(0, 1) + band.name.slice(2);
+          //str = str.slice(0, 3) + str.slice(4);
+
           //const hue = 'yellow';
           //const bandLocation = band.name;
           console.log('bandlocation ' + bandLocation);
@@ -44,7 +46,11 @@ function Chromosome({
               ypos={y}
               len={length}
               location={bandLocation}
-              hue={selectedLocations.includes(bandLocation) ? 'blue' : 'orange'}
+              hue={
+                selectedCytobandLocations.includes(bandLocation.toString())
+                  ? 'blue'
+                  : 'orange'
+              }
             />
           );
         })}
