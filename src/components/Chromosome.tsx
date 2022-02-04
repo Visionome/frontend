@@ -3,6 +3,7 @@ import { Canvas, extend } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import Cytoband from './Cytoband';
 import Data from '../scripts/cytoBand.json';
+import Sizes from '../scripts/chrom.json';
 extend({ OrbitControls });
 
 interface ChromProps {
@@ -18,7 +19,12 @@ function Chromosome({
   //console.log(props.selectedLocations);
   let y = 16;
   let length = 0;
-  const scalar = 243500000;
+  //console.log(selectedChrom - 1);
+  let scalar = 10000000;
+  if (selectedChrom > 0) {
+    scalar = Sizes[selectedChrom - 1].assembly_len;
+  }
+  //Sizes[selectedChrom - 1].assembly_len;
   return (
     <>
       <p>chromosome: {selectedChrom}</p>
