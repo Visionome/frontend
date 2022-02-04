@@ -17,11 +17,6 @@ type GFFRef @model @searchable {
   strand: String
   type: String
   sequence: String
-  ensembleid: String
-  cytobandlocation: String
-  approximatecytoband: String
-  diseaseinfo: String
-  geneid: String
 }
 
 type VCFRef @model @searchable {
@@ -43,4 +38,7 @@ type VCFRef @model @searchable {
   geneinfo: String #SAMD11:148398
   mc: String #SO:0001583|missense_variant
   origin: String #1
+  ensembleid: String
+  cytobandlocation: String
+  diseaseinfo: String
 }
