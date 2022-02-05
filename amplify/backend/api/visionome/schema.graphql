@@ -17,6 +17,11 @@ type GFFRef @model @searchable {
   strand: String
   type: String
   sequence: String
+  ensembleid: String
+  cytobandlocation: String
+  approximatecytoband: String
+  diseaseinfo: String
+  geneid: String
 }
 
 type VCFRef @model @searchable {
