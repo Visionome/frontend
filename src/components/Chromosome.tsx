@@ -1,36 +1,90 @@
 import React from 'react';
-import { extend } from '@react-three/fiber';
-//import { Position } from '@react-three/drei/helpers/Position';
-import Data from '../chromosomes.json';
+import { Canvas, extend } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import Cytoband from './Cytoband';
+import Data from '../scripts/cytoBand.json';
+import Sizes from '../scripts/chrom.json';
 extend({ OrbitControls });
 
+interface ChromProps {
+  selectedCytobandLocations: string[];
+  selectedChrom: number;
+}
+
 function Chromosome({
-  selectedLocations,
-}: {
-  selectedLocations: string[];
-}): JSX.Element {
-  // Render bands within the chromosome
-  console.log(selectedLocations);
+  selectedChrom,
+  selectedCytobandLocations,
+}: ChromProps): JSX.Element {
+  // Render band within the bandosome
+  //console.log(props.selectedLocations);
+  let y = 16;
+  let length = 0;
+  //console.log(selectedChrom - 1);
+  let scalar = 10000000;
+  if (selectedChrom > 0) {
+    scalar = Sizes[selectedChrom - 1].assembly_len;
+  }
+  //Sizes[selectedChrom - 1].assembly_len;
   return (
-    <mesh position={[0, 0, -100]}>
-      {Data.map((chrom) => {
-        console.log(selectedLocations.includes(chrom.location));
-        return (
-          <Cytoband
-            key={chrom.id}
-            id={chrom.id}
-            assembly_start={chrom.assembly_start}
-            assembly_end={chrom.assembly_end}
-            location={chrom.location}
-            hue={
-              selectedLocations.includes(chrom.location) ? '#90EE90' : chrom.hue
-            }
-          />
-        );
-      })}
-    </mesh>
+    <>
+      <p>chromosome: {selectedChrom}</p>
+      <p>selected locations: {selectedCytobandLocations}</p>
+      <Canvas>
+        <ambientLight />
+        <pointLight position={[10, 10, 10]} />
+        {Data.filter(
+          (band) => band.chromosome.substring(3) === selectedChrom.toString(),
+        ).map((band) => {
+          // Counter for spacing cytobands.
+          y -= length;
+          length = (band.end - band.start) / (scalar / 32);
+          // Create cytoband location from substring of chromosome name.
+          const bandLocation = band.name.slice(0, 1) + band.name.slice(2);
+          //str = str.slice(0, 3) + str.slice(4);
+
+          //const hue = 'yellow';
+          //const bandLocation = band.name;
+          console.log('bandlocation ' + bandLocation);
+          // generating hue for a band
+          let hue = 'orange';
+
+          switch (band.giemsaStains) {
+            case 'gneg':
+              hue = '#121413';
+              break;
+            case 'gpos25':
+              hue = '#272b29';
+              break;
+            case 'gpos50':
+              hue = '#383d3a';
+              break;
+            case 'gpos75':
+              hue = '#545c57';
+              break;
+            case 'gpos100':
+              hue = '#8c9690';
+              break;
+            default:
+              hue = '#ffbebe';
+              break;
+          }
+          return (
+            <Cytoband
+              key={band.id}
+              id={band.id}
+              ypos={y}
+              len={length}
+              location={bandLocation}
+              hue={
+                selectedCytobandLocations.includes(bandLocation.toString())
+                  ? 'blue'
+                  : hue
+              }
+            />
+          );
+        })}
+      </Canvas>
+    </>
   );
 }
 

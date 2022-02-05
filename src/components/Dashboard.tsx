@@ -5,40 +5,51 @@ const { Option } = Select;
 import { API } from 'aws-amplify';
 const { Search } = Input;
 import * as queries from '../graphql/queries';
-import GenomeMap from './GenomeMap';
+import Window from './Window';
 
 const { Header, Content, Footer } = Layout;
 
 const Dashboard = (): JSX.Element => {
   const [genome, setGenome] = useState([]);
   const [vcf, setVcf] = useState([]);
-  const [selectedLocations, setSelectedLocations] = useState([]);
-  const [typeOfSearch, setTypeOfSearch] = useState('name');
+  const [selectedChromLocations, setSelectedChromLocations] = useState([]);
+  const [selectedCytobandLocations, setSelectedCytobandLocations] = useState(
+    [],
+  );
 
   const searchForGene = async (searchValue) => {
     let geneSearchResults;
     try {
-      if (typeOfSearch === 'name') {
-        geneSearchResults = await API.graphql({
-          query: queries.searchGFFRefs,
-          variables: {
-            filter: { gene: { eq: searchValue } },
-          },
-        });
-      } else {
-        geneSearchResults = await API.graphql({
-          query: queries.searchGFFRefs,
-          variables: {
-            filter: { diseaseinfo: { exists: searchValue } },
-          },
-        });
-      }
+      const geneSearchResults = await API.graphql({
+        query: queries.searchGFFRefs,
+        variables: {
+          filter: { name: { eq: searchValue } },
+          // filter: {
+          //   diseaseinfo: { wildcard: `${searchValue.toLowerCase()}*` },
+          // },
+        },
+      });
       // console.log(searchResults);
       // const { data } = searchResults;
       // console.log(searchResults);
       // console.log(searchResults.data.searchGFFRefs.items);
 
-      setSelectedLocations(['7p13'], ['7p15']);
+      // TODO: set all selected locations programatically
+      // by listing all of the responses for each gene
+      // location in search results.
+      const results = geneSearchResults.data.searchGFFRefs.items;
+      console.log(results);
+
+      const cytoArr = results.map((item) => item.cytobandlocation);
+      console.log(cytoArr);
+
+      const chromArr = cytoArr.map((item) => item.substring(0, 1));
+      console.log(chromArr);
+
+      // Set locations.
+      setSelectedChromLocations(chromArr);
+      setSelectedCytobandLocations(cytoArr);
+
       setGenome(geneSearchResults.data.searchGFFRefs.items);
 
       const vcfSearchResults = await API.graphql({
@@ -87,17 +98,14 @@ const Dashboard = (): JSX.Element => {
         <div className="site-layout-content">
           Test Request
           <Search placeholder="Input gene name" onSearch={onSearch} />
-          <Select
-            defaultValue="name"
-            style={{ width: 120 }}
-            onChange={handleTypeChange}
-          >
-            <Option value="name">Name</Option>
-            <Option value="disease">Disease</Option>
-          </Select>
-          <GenomeMap selectedLocations={selectedLocations} />
+          <Window
+            selectedChromLocations={selectedChromLocations}
+            selectedCytobandLocations={selectedCytobandLocations}
+          />
           <h5>Genome Info</h5>
+          {/* eslint-disable-next-line*/}
           {genome.map((genomeStuff: any) => {
+            // eslint-disable-next-line
             return Object.keys(genomeStuff).map((key, index: any) => {
               return (
                 <div key={index} style={{ textAlign: 'left' }}>

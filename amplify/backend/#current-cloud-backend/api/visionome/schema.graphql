@@ -41,4 +41,7 @@ type VCFRef @model @searchable {
   geneinfo: String #SAMD11:148398
   mc: String #SO:0001583|missense_variant
   origin: String #1
+  ensembleid: String
+  cytobandlocation: String
+  diseaseinfo: String
 }

@@ -21,6 +21,7 @@ type GFFRef @model @searchable {
   cytobandlocation: String
   approximatecytoband: String
   diseaseinfo: String
+  geneid: String
 }
 
 type VCFRef @model @searchable {
