@@ -96,7 +96,9 @@ const Dashboard = (): JSX.Element => {
             selectedCytobandLocations={selectedCytobandLocations}
           />
           <h5>Genome Info</h5>
+          {/* eslint-disable-next-line*/}
           {genome.map((genomeStuff: any) => {
+            // eslint-disable-next-line
             return Object.keys(genomeStuff).map((key, index: any) => {
               return (
                 <div key={index} style={{ textAlign: 'left' }}>
