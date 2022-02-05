@@ -1,6 +1,16 @@
 tasks:
-  - init: curl --location --request GET 'https://gyodormovies.blob.core.windows.net/visionome/aws-exports.js?sp=r&st=2022-02-05T20:20:07Z&se=2022-05-03T03:20:07Z&spr=https&sv=2020-08-04&sr=b&sig=fgoC1GVMZ3kxkg30IyKzljVnd%2FueKyFkJ0alwrXQonI%3D' > src/aws-exports.js && npm install && npm run build
+  - name: Dependencies & Database
+    init: |
+      curl --location --request GET 'https://gyodormovies.blob.core.windows.net/visionome/aws-exports.js?sp=r&st=2022-02-05T20:20:07Z&se=2022-05-03T03:20:07Z&spr=https&sv=2020-08-04&sr=b&sig=fgoC1GVMZ3kxkg30IyKzljVnd%2FueKyFkJ0alwrXQonI%3D' > src/aws-exports.js
+      npm install
+      npm run build
     command: npm run start
+
+# List the ports to expose. Learn more https://www.gitpod.io/docs/config-ports/
+ports:
+  - port: 3000
+    onOpen: open-preview
+
 vscode:
   extensions:
     - dbaeumer.vscode-eslint
