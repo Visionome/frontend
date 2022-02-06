@@ -1,7 +1,6 @@
 tasks:
   - name: Dependencies & Database
     init: |
-      bash src/scripts/generateAwsExports.sh $ENDPOINT $API_KEY > src/aws-exports.js
       npm install
       npm run build
     command: |
@@ -16,3 +15,4 @@ ports:
 vscode:
   extensions:
     - dbaeumer.vscode-eslint
+    - esbenp.prettier-vscode
