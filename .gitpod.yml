@@ -1,7 +1,7 @@
 tasks:
   - name: Dependencies & Database
     init: |
-      curl --location --request GET 'https://gyodormovies.blob.core.windows.net/visionome/aws-exports.js?sp=r&st=2022-02-05T20:20:07Z&se=2022-05-03T03:20:07Z&spr=https&sv=2020-08-04&sr=b&sig=fgoC1GVMZ3kxkg30IyKzljVnd%2FueKyFkJ0alwrXQonI%3D' > src/aws-exports.js
+      bash src/scripts/generateAwsExports.sh $ENDPOINT $API_KEY > src/aws_exports.js
       npm install
       npm run build
     command: npm run start

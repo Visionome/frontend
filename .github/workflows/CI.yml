@@ -27,7 +27,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14'
-      - run: curl --location --request GET 'https://gyodormovies.blob.core.windows.net/visionome/aws-exports.js?sp=r&st=2022-02-05T20:20:07Z&se=2022-05-03T03:20:07Z&spr=https&sv=2020-08-04&sr=b&sig=fgoC1GVMZ3kxkg30IyKzljVnd%2FueKyFkJ0alwrXQonI%3D' > src/aws-exports.js
+      - run: bash ../src/scripts/generateAwsExports.sh ${{ ENDPOINT }} ${{ API_KEY }} > ../src/aws-exports.js
       - run: npm ci
       - run: npm run build
   Test:
