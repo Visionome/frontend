@@ -1,7 +1,6 @@
 // @ts-nocheck
 import React, { useEffect, useState } from 'react';
-import { Layout, Menu, Breadcrumb, Input, Select } from 'antd';
-const { Option } = Select;
+import { Layout, Menu, Breadcrumb, Input } from 'antd';
 import { API } from 'aws-amplify';
 const { Search } = Input;
 import * as queries from '../graphql/queries';
@@ -18,7 +17,6 @@ const Dashboard = (): JSX.Element => {
   );
 
   const searchForGene = async (searchValue) => {
-    let geneSearchResults;
     try {
       const geneSearchResults = await API.graphql({
         query: queries.searchGFFRefs,
@@ -72,11 +70,6 @@ const Dashboard = (): JSX.Element => {
   useEffect(() => {
     // searchForGene();
   }, []);
-
-  function handleTypeChange(value) {
-    console.log(`selected ${value}`);
-    setTypeOfSearch(value);
-  }
 
   return (
     <Layout className="layout">
