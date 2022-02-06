@@ -4,7 +4,9 @@ tasks:
       bash src/scripts/generateAwsExports.sh $ENDPOINT $API_KEY > src/aws-exports.js
       npm install
       npm run build
-    command: npm run start
+    command: |
+      bash src/scripts/generateAwsExports.sh $ENDPOINT $API_KEY > src/aws-exports.js
+      npm run start
 
 # List the ports to expose. Learn more https://www.gitpod.io/docs/config-ports/
 ports:
