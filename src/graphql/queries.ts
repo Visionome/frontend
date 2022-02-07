@@ -23,6 +23,10 @@ export const getGFFRef = /* GraphQL */ `
       strand
       type
       sequence
+      ensembleid
+      cytobandlocation
+      approximatecytoband
+      diseaseinfo
       createdAt
       updatedAt
     }
@@ -54,8 +58,10 @@ export const listGFFRefs = /* GraphQL */ `
         strand
         type
         sequence
-        createdAt
-        updatedAt
+        ensembleid
+        cytobandlocation
+        approximatecytoband
+        diseaseinfo
       }
       nextToken
     }
@@ -113,8 +119,6 @@ export const listVCFRefs = /* GraphQL */ `
         geneinfo
         mc
         origin
-        createdAt
-        updatedAt
       }
       nextToken
     }
@@ -157,6 +161,10 @@ export const searchGFFRefs = /* GraphQL */ `
         strand
         type
         sequence
+        ensembleid
+        cytobandlocation
+        approximatecytoband
+        diseaseinfo
       }
       nextToken
       total

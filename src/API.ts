@@ -21,6 +21,10 @@ export type CreateGFFRefInput = {
   strand?: string | null;
   type?: string | null;
   sequence?: string | null;
+  ensembleid?: string | null;
+  cytobandlocation?: string | null;
+  approximatecytoband?: string | null;
+  diseaseinfo?: string | null;
 };
 
 export type ModelGFFRefConditionInput = {
@@ -41,6 +45,10 @@ export type ModelGFFRefConditionInput = {
   strand?: ModelStringInput | null;
   type?: ModelStringInput | null;
   sequence?: ModelStringInput | null;
+  ensembleid?: ModelStringInput | null;
+  cytobandlocation?: ModelStringInput | null;
+  approximatecytoband?: ModelStringInput | null;
+  diseaseinfo?: ModelStringInput | null;
   and?: Array<ModelGFFRefConditionInput | null> | null;
   or?: Array<ModelGFFRefConditionInput | null> | null;
   not?: ModelGFFRefConditionInput | null;
@@ -105,6 +113,10 @@ export type GFFRef = {
   strand?: string | null;
   type?: string | null;
   sequence?: string | null;
+  ensembleid?: string | null;
+  cytobandlocation?: string | null;
+  approximatecytoband?: string | null;
+  diseaseinfo?: string | null;
   createdAt: string;
   updatedAt: string;
 };
@@ -128,6 +140,10 @@ export type UpdateGFFRefInput = {
   strand?: string | null;
   type?: string | null;
   sequence?: string | null;
+  ensembleid?: string | null;
+  cytobandlocation?: string | null;
+  approximatecytoband?: string | null;
+  diseaseinfo?: string | null;
 };
 
 export type DeleteGFFRefInput = {
@@ -246,6 +262,10 @@ export type ModelGFFRefFilterInput = {
   strand?: ModelStringInput | null;
   type?: ModelStringInput | null;
   sequence?: ModelStringInput | null;
+  ensembleid?: ModelStringInput | null;
+  cytobandlocation?: ModelStringInput | null;
+  approximatecytoband?: ModelStringInput | null;
+  diseaseinfo?: ModelStringInput | null;
   and?: Array<ModelGFFRefFilterInput | null> | null;
   or?: Array<ModelGFFRefFilterInput | null> | null;
   not?: ModelGFFRefFilterInput | null;
@@ -306,6 +326,10 @@ export type SearchableGFFRefFilterInput = {
   strand?: SearchableStringFilterInput | null;
   type?: SearchableStringFilterInput | null;
   sequence?: SearchableStringFilterInput | null;
+  ensembleid?: SearchableStringFilterInput | null;
+  cytobandlocation?: SearchableStringFilterInput | null;
+  approximatecytoband?: SearchableStringFilterInput | null;
+  diseaseinfo?: SearchableStringFilterInput | null;
   and?: Array<SearchableGFFRefFilterInput | null> | null;
   or?: Array<SearchableGFFRefFilterInput | null> | null;
   not?: SearchableGFFRefFilterInput | null;
@@ -352,6 +376,10 @@ export enum SearchableGFFRefSortableFields {
   strand = 'strand',
   type = 'type',
   sequence = 'sequence',
+  ensembleid = 'ensembleid',
+  cytobandlocation = 'cytobandlocation',
+  approximatecytoband = 'approximatecytoband',
+  diseaseinfo = 'diseaseinfo',
 }
 
 export enum SearchableSortDirection {
@@ -449,6 +477,10 @@ export type CreateGFFRefMutation = {
     strand?: string | null;
     type?: string | null;
     sequence?: string | null;
+    ensembleid?: string | null;
+    cytobandlocation?: string | null;
+    approximatecytoband?: string | null;
+    diseaseinfo?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -480,6 +512,10 @@ export type UpdateGFFRefMutation = {
     strand?: string | null;
     type?: string | null;
     sequence?: string | null;
+    ensembleid?: string | null;
+    cytobandlocation?: string | null;
+    approximatecytoband?: string | null;
+    diseaseinfo?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -511,6 +547,10 @@ export type DeleteGFFRefMutation = {
     strand?: string | null;
     type?: string | null;
     sequence?: string | null;
+    ensembleid?: string | null;
+    cytobandlocation?: string | null;
+    approximatecytoband?: string | null;
+    diseaseinfo?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -634,6 +674,10 @@ export type GetGFFRefQuery = {
     strand?: string | null;
     type?: string | null;
     sequence?: string | null;
+    ensembleid?: string | null;
+    cytobandlocation?: string | null;
+    approximatecytoband?: string | null;
+    diseaseinfo?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -668,6 +712,10 @@ export type ListGFFRefsQuery = {
       strand?: string | null;
       type?: string | null;
       sequence?: string | null;
+      ensembleid?: string | null;
+      cytobandlocation?: string | null;
+      approximatecytoband?: string | null;
+      diseaseinfo?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -772,6 +820,10 @@ export type SearchGFFRefsQuery = {
       strand?: string | null;
       type?: string | null;
       sequence?: string | null;
+      ensembleid?: string | null;
+      cytobandlocation?: string | null;
+      approximatecytoband?: string | null;
+      diseaseinfo?: string | null;
       createdAt: string;
       updatedAt: string;
     } | null> | null;
@@ -840,6 +892,10 @@ export type OnCreateGFFRefSubscription = {
     strand?: string | null;
     type?: string | null;
     sequence?: string | null;
+    ensembleid?: string | null;
+    cytobandlocation?: string | null;
+    approximatecytoband?: string | null;
+    diseaseinfo?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -866,6 +922,10 @@ export type OnUpdateGFFRefSubscription = {
     strand?: string | null;
     type?: string | null;
     sequence?: string | null;
+    ensembleid?: string | null;
+    cytobandlocation?: string | null;
+    approximatecytoband?: string | null;
+    diseaseinfo?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
@@ -892,6 +952,10 @@ export type OnDeleteGFFRefSubscription = {
     strand?: string | null;
     type?: string | null;
     sequence?: string | null;
+    ensembleid?: string | null;
+    cytobandlocation?: string | null;
+    approximatecytoband?: string | null;
+    diseaseinfo?: string | null;
     createdAt: string;
     updatedAt: string;
   } | null;
