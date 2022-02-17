@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Canvas, extend } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import Cytoband from './Cytoband';
@@ -15,7 +15,7 @@ function Chromosome({
   selectedChrom,
   selectedCytobandLocations,
 }: ChromProps): JSX.Element {
-  // Render band within the bandosome
+  // Render band within the chromosome
   //console.log(props.selectedLocations);
   let y = 16;
   let length = 0;
@@ -24,6 +24,12 @@ function Chromosome({
   if (selectedChrom > 0) {
     scalar = Sizes[selectedChrom - 1].assembly_len;
   }
+
+  //const [cytoSelected, setCytoSelected] = useState(-1);
+
+  // eslint-disable-next-line prefer-const
+  //let cytoSelected = -1;
+
   //Sizes[selectedChrom - 1].assembly_len;
   return (
     <>
@@ -31,12 +37,12 @@ function Chromosome({
       <p>selected locations: {selectedCytobandLocations}</p>
       <Canvas>
         <ambientLight />
-        <pointLight position={[10, 10, 10]} />
+        <pointLight position={[10, 10, 20]} />
         {Data.filter(
           (band) => band.chromosome.substring(3) === selectedChrom.toString(),
         ).map((band) => {
           // Counter for spacing cytobands.
-          y -= length;
+          y -= length + 2;
           length = (band.end - band.start) / (scalar / 32);
           // Create cytoband location from substring of chromosome name.
           const bandLocation = band.name.slice(0, 1) + band.name.slice(2);
@@ -44,7 +50,7 @@ function Chromosome({
 
           //const hue = 'yellow';
           //const bandLocation = band.name;
-          console.log('bandlocation ' + bandLocation);
+          //console.log('bandlocation ' + bandLocation);
           // generating hue for a band
           let hue = 'orange';
 
