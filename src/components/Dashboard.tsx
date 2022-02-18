@@ -8,6 +8,18 @@ import Window from './Window';
 
 const { Header, Content, Footer } = Layout;
 
+// type CardData = {
+//   gene: string;
+//   description: string;
+//   ensembl_id: string;
+//   disease_info: string;
+//   cytoband_location: string;
+// };
+
+// type CardList = {
+//   cardList: CardData[];
+// };
+
 const Dashboard = (): JSX.Element => {
   const [genome, setGenome] = useState([]);
   const [vcf, setVcf] = useState([]);
@@ -27,27 +39,35 @@ const Dashboard = (): JSX.Element => {
           // },
         },
       });
-      // console.log(searchResults);
-      // const { data } = searchResults;
-      // console.log(searchResults);
-      // console.log(searchResults.data.searchGFFRefs.items);
 
-      // TODO: set all selected locations programatically
-      // by listing all of the responses for each gene
-      // location in search results.
       const results = geneSearchResults.data.searchGFFRefs.items;
-      console.log(results);
-
       const cytoArr = results.map((item) => item.cytobandlocation);
-      console.log(cytoArr);
-
       const chromArr = cytoArr.map((item) => item.substring(0, 1));
-      console.log(chromArr);
 
       // Set locations.
       setSelectedChromLocations(chromArr);
       setSelectedCytobandLocations(cytoArr);
 
+      // Clear storage
+      localStorage.clear();
+      const filteredData = results.map((x) => {
+        const obj = new Object();
+        obj.gene = x.gene;
+        obj.description = x.description;
+        obj.ensembl_id = x.ensembleid;
+        obj.disease_info = x.diseaseinfo;
+        obj.cytoband_location = x.cytobandlocation;
+        localStorage.setItem(
+          obj.cytoband_location,
+          JSON.stringify(obj, (/_/g, ' '), 2),
+        );
+        return obj;
+      });
+      console.log(filteredData);
+      console.log(localStorage.getItem('1p36.33'));
+      // Set gene info card objects.
+      // setGeneCards(filteredData);
+      // Set printable GFF data.
       setGenome(geneSearchResults.data.searchGFFRefs.items);
 
       const vcfSearchResults = await API.graphql({
