@@ -16,3 +16,20 @@
   float: right;
   margin: 16px 0 16px 24px;
 }
+
+.visualization {
+  background-color: grey;
+  text-align: center;
+  position: 'relative';
+  width: 300;
+  height: 600;
+}
+
+.panel {
+  display: inline-block;
+  padding: 1rem 1rem;
+  vertical-align: middle;
+  position: 'relative';
+  width: 200;
+  height: 600;
+}
