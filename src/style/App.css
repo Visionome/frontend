@@ -16,3 +16,30 @@
   float: right;
   margin: 16px 0 16px 24px;
 }
+
+.visualization {
+  background-color: grey;
+}
+
+.panel {
+  display: inline-block;
+}
+
+.flex-container {
+  display: flex;
+  height: 600px;
+  background-color: rgba(204, 200, 200, 0.3);
+  border: 2px;
+  stroke: rgba(160, 151, 151, 0.3);
+  padding: 5px;
+  margin: 5px;
+}
+
+.flex-vis {
+  flex: 1;
+}
+
+.flex-card {
+  vertical-align: middle;
+  flex: 1;
+}

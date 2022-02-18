@@ -59,6 +59,8 @@ const Dashboard = (): JSX.Element => {
 
       setVcf(vcfSearchResults.data.searchVCFRefs.items);
       // console.log(data.data.searchGffRefs.items);
+      console.log('genome ' + genome);
+      console.log('vcf' + vcf);
     } catch (err) {
       console.log('there was an error');
       console.log(err);
@@ -97,7 +99,7 @@ const Dashboard = (): JSX.Element => {
           />
           <h5>Genome Info</h5>
           {/* eslint-disable-next-line*/}
-          {genome.map((genomeStuff: any) => {
+          {/*genome.map((genomeStuff: any) => {
             // eslint-disable-next-line
             return Object.keys(genomeStuff).map((key, index: any) => {
               return (
@@ -109,9 +111,9 @@ const Dashboard = (): JSX.Element => {
                 </div>
               );
             });
-          })}
+          })*/}
           <h5>VCF Info</h5>
-          {vcf.map((vcfStuff: any) => {
+          {/*vcf.map((vcfStuff: any) => {
             return Object.keys(vcfStuff).map((key, index: any) => {
               return (
                 <div key={index} style={{ textAlign: 'left' }}>
@@ -122,7 +124,7 @@ const Dashboard = (): JSX.Element => {
                 </div>
               );
             });
-          })}
+          })*/}
         </div>
       </Content>
       <Footer style={{ textAlign: 'center' }}>
