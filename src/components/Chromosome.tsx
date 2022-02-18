@@ -37,8 +37,8 @@ function Chromosome({
       <p>chromosome: {selectedChrom}</p>
       <p>selected locations: {selectedCytobandLocations}</p>
       <>
-        <div className="visualization">
-          <div className="panel">
+        <div className="flex-container">
+          <div className="flex-vis">
             <Canvas>
               <ambientLight />
               <pointLight position={[10, 10, 20]} />
@@ -94,7 +94,7 @@ function Chromosome({
               })}
             </Canvas>
           </div>
-          <div className="panel">
+          <div className="flex-card">
             {bandSelected !== '' &&
             selectedCytobandLocations.includes(bandSelected) ? (
               <Card hoverable style={{ width: 250 }}>

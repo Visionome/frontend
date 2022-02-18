@@ -1,4 +1,3 @@
-import { useCamera } from '@react-three/drei';
 import React, { useState } from 'react';
 import * as THREE from 'three';
 //import { DataTexture2DArray } from 'three';
@@ -52,6 +51,7 @@ function Cytoband({
     console.log(
       'cytoband ' + id + ' position: [' + ypos + ', ' + (ypos - len) + ']',
     );
+    console.log('bandselected ' + bandSelected);
     showCardInfo();
   }
 

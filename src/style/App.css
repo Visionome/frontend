@@ -19,17 +19,27 @@
 
 .visualization {
   background-color: grey;
-  text-align: center;
-  position: 'relative';
-  width: 300;
-  height: 600;
 }
 
 .panel {
   display: inline-block;
-  padding: 1rem 1rem;
+}
+
+.flex-container {
+  display: flex;
+  height: 600px;
+  background-color: rgba(204, 200, 200, 0.3);
+  border: 2px;
+  stroke: rgba(160, 151, 151, 0.3);
+  padding: 5px;
+  margin: 5px;
+}
+
+.flex-vis {
+  flex: 1;
+}
+
+.flex-card {
   vertical-align: middle;
-  position: 'relative';
-  width: 200;
-  height: 600;
+  flex: 1;
 }
