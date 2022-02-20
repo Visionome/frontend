@@ -31,6 +31,19 @@ function Chromosome({
   }
   // State for selected cytoband, used for info cards.
   const [bandSelected, setBandSelected] = useState('');
+  const selectedItem = JSON.parse(localStorage.getItem(bandSelected));
+  // Note: finding URLs from disease info strings only works for
+  // a single url and breaks otherwise.
+  const re = 'https.*?(?=\\])';
+  let foundUrl = '';
+  let urlString = '';
+  if (bandSelected !== '' && selectedCytobandLocations.includes(bandSelected)) {
+    foundUrl = selectedItem.disease_info.match(re);
+    console.log('found url: ' + foundUrl);
+    if (foundUrl != null) {
+      urlString = foundUrl[0].toString();
+    }
+  }
 
   return (
     <>
@@ -97,8 +110,36 @@ function Chromosome({
           <div className="flex-card">
             {bandSelected !== '' &&
             selectedCytobandLocations.includes(bandSelected) ? (
-              <Card hoverable style={{ width: 250 }}>
-                Card Info Here
+              <Card
+                hoverable
+                className="info-card"
+                title={selectedItem.gene.toUpperCase()}
+                extra={
+                  <a href={urlString} target="_blank" rel="noreferrer">
+                    More
+                  </a>
+                }
+              >
+                <p className="info-line">
+                  Cytoband coord: {selectedItem.cytoband_location}
+                </p>
+                <p className="info-line">
+                  Description: {selectedItem.description}
+                </p>
+                <p className="info-line">
+                  Disease information:{' '}
+                  {
+                    selectedItem.disease_info
+                    /*.toString()
+                    .replace(
+                      '(\\[\\[MESH.*?(?=,))|(\\[MESH.*?(?=,))|https.*?(?=\\])|]|)',
+                      '',
+                    )*/
+                  }
+                </p>
+                <p className="info-line">
+                  EnsemblID: {selectedItem.ensembl_id}
+                </p>
               </Card>
             ) : (
               <></>

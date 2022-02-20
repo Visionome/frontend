@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Ideogram from './Ideogram';
 import Chromosome from './Chromosome';
+// CardList from './Dashboard';
 
 function Window({
   selectedChromLocations,
