@@ -1,12 +1,20 @@
 // @ts-nocheck
 import React, { useEffect, useState } from 'react';
 import { Layout, Menu, Breadcrumb, Input } from 'antd';
+import {
+  HomeFilled,
+  AppstoreFilled,
+  InfoCircleFilled,
+  DeploymentUnitOutlined,
+} from '@ant-design/icons';
 import { API } from 'aws-amplify';
 const { Search } = Input;
 import * as queries from '../graphql/queries';
 import Window from './Window';
+import logoImage from '../assets/logo.png';
 
-const { Header, Content, Footer } = Layout;
+const { Header, Content, Footer, Sider } = Layout;
+const { SubMenu } = Menu;
 
 const Dashboard = (): JSX.Element => {
   const [genome, setGenome] = useState([]);
@@ -72,25 +80,54 @@ const Dashboard = (): JSX.Element => {
   }, []);
 
   return (
-    <Layout className="layout">
-      <Header>
-        <div className="logo" />
-        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-          {new Array(15).fill(null).map((_, index) => {
-            const key = index + 1;
-            return <Menu.Item key={key}>{`nav ${key}`}</Menu.Item>;
-          })}
-        </Menu>
-      </Header>
+    <Layout>
       <Content style={{ padding: '0 50px', width: '' }}>
-        <Breadcrumb style={{ margin: '16px 0' }}>
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>List</Breadcrumb.Item>
-          <Breadcrumb.Item>App</Breadcrumb.Item>
-        </Breadcrumb>
+        <Header
+          style={{
+            backgroundColor: 'white',
+            display: 'flex',
+            alignItems: 'center',
+            alignContent: 'center',
+          }}
+        >
+          <img src={logoImage} />
+          <h1
+            style={{
+              flex: 1,
+              fontSize: 36,
+              fontWeight: 'bold',
+              color: '#009be3',
+            }}
+          >
+            VISIONome
+          </h1>
+        </Header>
         <div className="site-layout-content">
-          Test Request
-          <Search placeholder="Input gene name" onSearch={onSearch} />
+          <div
+            style={{
+              display: 'flex',
+              alignContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <h3
+              style={{
+                padding: 10,
+                width: '25%',
+                fontWeight: 'normal',
+                fontSize: 18,
+              }}
+            >
+              Genome Visualization
+            </h3>
+            <Search
+              placeholder="Input name, disease, function..."
+              allowClear
+              onSearch={onSearch}
+              style={{ width: '75%' }}
+              enterButton="Search"
+            />
+          </div>
           <Window
             selectedChromLocations={selectedChromLocations}
             selectedCytobandLocations={selectedCytobandLocations}
@@ -125,9 +162,37 @@ const Dashboard = (): JSX.Element => {
           })}
         </div>
       </Content>
-      <Footer style={{ textAlign: 'center' }}>
-        Ant Design ©2018 Created by Ant UED
-      </Footer>
+      <Sider theme="light" style={{ display: 'flex', flexDirection: 'column' }}>
+        <div className="logo" />
+        <div
+          style={{
+            display: 'flex',
+            paddingLeft: 10,
+            height: 50,
+            alignContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <DeploymentUnitOutlined style={{ color: '#0070e8' }} />
+          <div style={{ flex: 1, textAlign: 'left', marginLeft: 10 }}>
+            <h2 style={{ marginBottom: 0 }}>Menu</h2>
+          </div>
+        </div>
+        <Menu theme="light" defaultSelectedKeys={['1']} mode="inline">
+          <Menu.Item key="1" icon={<HomeFilled />}>
+            Home
+          </Menu.Item>
+          <Menu.Item key="2" icon={<AppstoreFilled />}>
+            Sequence Analyzer
+          </Menu.Item>
+          <SubMenu key="3" title="More Info" icon={<InfoCircleFilled />} />
+        </Menu>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <div style={{ backgroundColor: 'red', flexGrow: 1, height: '100%' }}>
+            test
+          </div>
+        </div>
+      </Sider>
     </Layout>
   );
 };
