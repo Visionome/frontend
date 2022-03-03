@@ -6,7 +6,7 @@ import { OrbitControls } from '@react-three/drei';
 import Cytoband from './Cytoband';
 import Data from '../scripts/cytoBand.json';
 import Sizes from '../scripts/chrom.json';
-import { Card } from 'antd';
+import GeneInfoCard from './GeneInfoCard';
 import '../App';
 
 extend({ OrbitControls });
@@ -111,48 +111,9 @@ function Chromosome({
             </Canvas>
           </div>
           <div className="flex-card">
-            <div style={{ display: 'flex' }}>
-              <div style={{ position: 'relative', height: 250, width: '75%' }}>
-                <pdbe-molstar
-                  custom-data-format="cif"
-                  custom-data-url="https://alphafold.ebi.ac.uk/files/AF-Q96NU1-F1-model_v2.cif"
-                  hide-controls
-                />
-              </div>
-            </div>
             {bandSelected !== '' &&
             selectedCytobandLocations.includes(bandSelected) ? (
-              <Card
-                hoverable
-                className="info-card"
-                title={selectedItem.gene.toUpperCase()}
-                extra={
-                  <a href={urlString} target="_blank" rel="noreferrer">
-                    More
-                  </a>
-                }
-              >
-                <p className="info-line">
-                  Cytoband coord: {selectedItem.cytoband_location}
-                </p>
-                <p className="info-line">
-                  Description: {selectedItem.description}
-                </p>
-                <p className="info-line">
-                  Disease information:{' '}
-                  {
-                    selectedItem.disease_info
-                    /*.toString()
-                    .replace(
-                      '(\\[\\[MESH.*?(?=,))|(\\[MESH.*?(?=,))|https.*?(?=\\])|]|)',
-                      '',
-                    )*/
-                  }
-                </p>
-                <p className="info-line">
-                  EnsemblID: {selectedItem.ensembl_id}
-                </p>
-              </Card>
+              GeneInfoCard(selectedItem, urlString)
             ) : (
               <></>
             )}
