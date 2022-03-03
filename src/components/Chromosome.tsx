@@ -6,6 +6,8 @@ import Data from '../scripts/cytoBand.json';
 import Sizes from '../scripts/chrom.json';
 import { Card } from 'antd';
 import '../App';
+import PdbViewer from './PdbViewer';
+
 extend({ OrbitControls });
 
 interface ChromProps {
@@ -140,6 +142,7 @@ function Chromosome({
                 <p className="info-line">
                   EnsemblID: {selectedItem.ensembl_id}
                 </p>
+                <PdbViewer />
               </Card>
             ) : (
               <></>
