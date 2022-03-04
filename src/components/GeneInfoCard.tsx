@@ -8,45 +8,74 @@ import axios from 'axios';
 //   urlString: string;
 // }
 
-function GeneInfoCard(selectedItem: any, urlString: string) {
-  const [proteinSelected, setProteinSelected] = useState('');
+// selectedItem: any, urlString: string
+function GeneInfoCard({
+  selectedItem,
+  urlString,
+}: {
+  selectedItem: any;
+  urlString: string;
+}) {
+  // const [proteinSelected, setProteinSelected] = useState('');
+  // let proteinCifUrl = '';
+  const [proteinCifUrl, setProteinCifUrl] = useState('');
   const selectedProtein = async () => {
     try {
+      let proteinSelected = '';
+
       const response = await axios({
         method: 'get',
         url: `https://www.uniprot.org/uniprot/?query=${selectedItem.gene.toUpperCase()}+AND+reviewed:yes+AND+organism:9606&sort=score&columns=id&format=tab&limit=1`,
       });
-      setProteinSelected(response.toString());
-      console.log(response);
+      proteinSelected = response.data.toString();
+      console.log(response.data);
+
+      console.log('Protein selected: ' + proteinSelected);
+      let proteinId = proteinSelected.split('\n')[1];
+      // let proteinCifUrl = `https://alphafold.ebi.ac.uk/files/AF-${proteinId}-F1-model_v2.cif`;
+      setProteinCifUrl(
+        `https://alphafold.ebi.ac.uk/files/AF-${proteinId}-F1-model_v2.cif`,
+      );
+      console.log('Selected item of type:' + proteinId);
+      console.log('Protein URL: ' + proteinCifUrl);
     } catch (err) {
       console.log('Error in fetching protein');
       console.log(err);
     }
   };
 
+  // const renderProtein = async () => {
+  //   selectedProtein();
+  //   return (
+  //     <>
+  //       <pdbe-molstar
+  //         custom-data-format="cif"
+  //         custom-data-url={proteinCifUrl}
+  //         hide-controls
+  //       />
+  //     </>
+  //   );
+  // };
+
   useEffect(() => {
     selectedProtein();
   }, []);
-
-  console.log(selectedProtein);
-
-  console.log('Selected item of type:' + selectedItem);
+  // selectedProtein();
 
   return (
     <>
       <div style={{ display: 'flex' }}>
         <div style={{ position: 'relative', height: 250, width: 300 }}>
-          {proteinSelected !== '' ? (
-            <pdbe-molstar
-              custom-data-format="cif"
-              custom-data-url={proteinSelected}
-              hide-controls
-            />
-          ) : (
-            <></>
-          )}
+          <>
+            {proteinCifUrl && (
+              <pdbe-molstar
+                custom-data-format="cif"
+                custom-data-url={proteinCifUrl}
+                hide-controls
+              />
+            )}
+          </>
         </div>
-        <p>proteinSelected</p>
       </div>
       <Card
         hoverable
