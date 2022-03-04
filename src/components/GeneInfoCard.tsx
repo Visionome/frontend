@@ -1,42 +1,80 @@
 /* eslint-disable */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card } from 'antd';
-// import axios from 'axios';
+import axios from 'axios';
 
 // export interface GeneInfoCardProps {
 //   selectedItem: any;
 //   urlString: string;
 // }
 
-function GeneInfoCard(selectedItem: any, urlString: string) {
-  //   const [proteinSelected, setProteinSelected] = useState('');
-  //   const selectedProtein = async () => {
-  //     try {
-  //       const response = await axios({
-  //         method: 'get',
-  //         url: `https://www.uniprot.org/uniprot/?query=${selectedItem.gene.toUpperCase()}+AND+reviewed:yes+AND+organism:9606&sort=score&columns=id,entry name,reviewed,protein names,genes,organism,length&format=tab&limit=1`,
-  //       });
+// selectedItem: any, urlString: string
+function GeneInfoCard({
+  selectedItem,
+  urlString,
+}: {
+  selectedItem: any;
+  urlString: string;
+}) {
+  // const [proteinSelected, setProteinSelected] = useState('');
+  // let proteinCifUrl = '';
+  const [proteinCifUrl, setProteinCifUrl] = useState('');
+  const selectedProtein = async () => {
+    try {
+      let proteinSelected = '';
 
-  //       console.log(response);
-  //     } catch (err) {
-  //       console.log('Error in fetching protein');
-  //       console.log(err);
-  //     }
-  //   };
+      const response = await axios({
+        method: 'get',
+        url: `https://www.uniprot.org/uniprot/?query=${selectedItem.gene.toUpperCase()}+AND+reviewed:yes+AND+organism:9606&sort=score&columns=id&format=tab&limit=1`,
+      });
+      proteinSelected = response.data.toString();
+      console.log(response.data);
 
-  //   console.log(selectProtein);
+      console.log('Protein selected: ' + proteinSelected);
+      let proteinId = proteinSelected.split('\n')[1];
+      // let proteinCifUrl = `https://alphafold.ebi.ac.uk/files/AF-${proteinId}-F1-model_v2.cif`;
+      setProteinCifUrl(
+        `https://alphafold.ebi.ac.uk/files/AF-${proteinId}-F1-model_v2.cif`,
+      );
+      console.log('Selected item of type:' + proteinId);
+      console.log('Protein URL: ' + proteinCifUrl);
+    } catch (err) {
+      console.log('Error in fetching protein');
+      console.log(err);
+    }
+  };
 
-  console.log('Selected item of type:' + selectedItem);
+  // const renderProtein = async () => {
+  //   selectedProtein();
+  //   return (
+  //     <>
+  //       <pdbe-molstar
+  //         custom-data-format="cif"
+  //         custom-data-url={proteinCifUrl}
+  //         hide-controls
+  //       />
+  //     </>
+  //   );
+  // };
+
+  useEffect(() => {
+    selectedProtein();
+  }, []);
+  // selectedProtein();
 
   return (
     <>
       <div style={{ display: 'flex' }}>
         <div style={{ position: 'relative', height: 250, width: 300 }}>
-          <pdbe-molstar
-            custom-data-format="cif"
-            custom-data-url="https://alphafold.ebi.ac.uk/files/AF-Q96NU1-F1-model_v2.cif"
-            hide-controls
-          />
+          <>
+            {proteinCifUrl && (
+              <pdbe-molstar
+                custom-data-format="cif"
+                custom-data-url={proteinCifUrl}
+                hide-controls
+              />
+            )}
+          </>
         </div>
       </div>
       <Card

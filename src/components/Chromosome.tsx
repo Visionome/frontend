@@ -113,7 +113,7 @@ function Chromosome({
           <div className="flex-card">
             {bandSelected !== '' &&
             selectedCytobandLocations.includes(bandSelected) ? (
-              GeneInfoCard(selectedItem, urlString)
+              <GeneInfoCard selectedItem={selectedItem} urlString={urlString} />
             ) : (
               <></>
             )}
