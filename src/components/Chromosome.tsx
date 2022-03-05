@@ -1,11 +1,14 @@
+/* eslint-disable prettier/prettier */
+
 import React, { useState } from 'react';
 import { Canvas, extend } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import Cytoband from './Cytoband';
 import Data from '../scripts/cytoBand.json';
 import Sizes from '../scripts/chrom.json';
-import { Card } from 'antd';
+import GeneInfoCard from './GeneInfoCard';
 import '../App';
+
 extend({ OrbitControls });
 
 interface ChromProps {
@@ -110,37 +113,7 @@ function Chromosome({
           <div className="flex-card">
             {bandSelected !== '' &&
             selectedCytobandLocations.includes(bandSelected) ? (
-              <Card
-                hoverable
-                className="info-card"
-                title={selectedItem.gene.toUpperCase()}
-                extra={
-                  <a href={urlString} target="_blank" rel="noreferrer">
-                    More
-                  </a>
-                }
-              >
-                <p className="info-line">
-                  Cytoband coord: {selectedItem.cytoband_location}
-                </p>
-                <p className="info-line">
-                  Description: {selectedItem.description}
-                </p>
-                <p className="info-line">
-                  Disease information:{' '}
-                  {
-                    selectedItem.disease_info
-                    /*.toString()
-                    .replace(
-                      '(\\[\\[MESH.*?(?=,))|(\\[MESH.*?(?=,))|https.*?(?=\\])|]|)',
-                      '',
-                    )*/
-                  }
-                </p>
-                <p className="info-line">
-                  EnsemblID: {selectedItem.ensembl_id}
-                </p>
-              </Card>
+              <GeneInfoCard selectedItem={selectedItem} urlString={urlString} />
             ) : (
               <></>
             )}
