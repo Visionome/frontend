@@ -21,17 +21,16 @@ function GeneInfoCard({
   const [proteinCifUrl, setProteinCifUrl] = useState('');
   const selectedProtein = async () => {
     try {
-      let proteinSelected = '';
-
-      const response = await axios({
+      const proteinSelected = await axios({
         method: 'get',
         url: `https://www.uniprot.org/uniprot/?query=${selectedItem.gene.toUpperCase()}+AND+reviewed:yes+AND+organism:9606&sort=score&columns=id&format=tab&limit=1`,
+      }).then((r) => {
+        console.log(r.data);
+        return r.data.toString();
       });
-      proteinSelected = response.data.toString();
-      console.log(response.data);
 
       console.log('Protein selected: ' + proteinSelected);
-      let proteinId = proteinSelected.split('\n')[1];
+      const [, proteinId] = proteinSelected.split('\n');
       // let proteinCifUrl = `https://alphafold.ebi.ac.uk/files/AF-${proteinId}-F1-model_v2.cif`;
       setProteinCifUrl(
         `https://alphafold.ebi.ac.uk/files/AF-${proteinId}-F1-model_v2.cif`,
