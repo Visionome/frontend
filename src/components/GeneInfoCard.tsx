@@ -21,20 +21,14 @@ function GeneInfoCard({ selectedItem, urlString }: GeneInfoCardProps) {
         return r.data.toString();
       });
 
-      console.log('Protein selected: ' + proteinSelected);
       const [, proteinId] = proteinSelected.split('\n');
       setProteinCifUrl(
         `https://alphafold.ebi.ac.uk/files/AF-${proteinId}-F1-model_v2.cif`,
       );
-      console.log('Selected item of type:' + proteinId);
-      console.log('Protein URL: ' + proteinCifUrl);
     } catch (err) {
-      console.log('Error in fetching protein');
       console.log(err);
     }
   };
-
-  console.log('selected item: ' + JSON.stringify(selectedItem));
 
   useEffect(() => {
     selectedProtein();
