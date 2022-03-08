@@ -34,6 +34,8 @@ function Chromosome({
   }
   // State for selected cytoband, used for info cards.
   const [bandSelected, setBandSelected] = useState('');
+
+  // TODO: export a type for selectedItem to be used in GeneInfoCard.ts.
   const selectedItem = JSON.parse(localStorage.getItem(bandSelected));
   // Note: finding URLs from disease info strings only works for
   // a single url and breaks otherwise.
