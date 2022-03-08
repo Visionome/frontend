@@ -1,5 +1,3 @@
-/* eslint-disable prettier/prettier */
-
 import React, { useState } from 'react';
 import { Canvas, extend } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
@@ -10,6 +8,14 @@ import GeneInfoCard from './GeneInfoCard';
 import '../App';
 
 extend({ OrbitControls });
+
+export interface GeneProps {
+  gene: string;
+  description: string;
+  ensembl_id: string;
+  disease_info: any;
+  cytoband_location: string;
+}
 
 interface ChromProps {
   selectedCytobandLocations: string[];
@@ -35,8 +41,9 @@ function Chromosome({
   // State for selected cytoband, used for info cards.
   const [bandSelected, setBandSelected] = useState('');
 
-  // TODO: export a type for selectedItem to be used in GeneInfoCard.ts.
-  const selectedItem = JSON.parse(localStorage.getItem(bandSelected));
+  const selectedItem: GeneProps = JSON.parse(
+    localStorage.getItem(bandSelected),
+  );
   // Note: finding URLs from disease info strings only works for
   // a single url and breaks otherwise.
   const re = 'https.*?(?=\\])';

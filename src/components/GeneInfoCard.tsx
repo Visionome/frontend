@@ -1,15 +1,17 @@
-/* eslint-disable */
 import React, { useState, useEffect } from 'react';
-import { Card, Pagination } from 'antd';
 import axios from 'axios';
 import TabsCard from './TabsCard';
+import { GeneProps } from './Chromosome';
 
 export interface GeneInfoCardProps {
-  selectedItem: any;
+  selectedItem: GeneProps;
   urlString: string;
 }
 
-function GeneInfoCard({ selectedItem, urlString }: GeneInfoCardProps) {
+function GeneInfoCard({
+  selectedItem,
+  urlString,
+}: GeneInfoCardProps): JSX.Element {
   const [proteinCifUrl, setProteinCifUrl] = useState('');
   const selectedProtein = async () => {
     try {
@@ -17,7 +19,6 @@ function GeneInfoCard({ selectedItem, urlString }: GeneInfoCardProps) {
         method: 'get',
         url: `https://www.uniprot.org/uniprot/?query=${selectedItem.gene.toUpperCase()}+AND+reviewed:yes+AND+organism:9606&sort=score&columns=id&format=tab&limit=1`,
       }).then((r) => {
-        console.log(r.data);
         return r.data.toString();
       });
 
