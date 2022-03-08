@@ -4,21 +4,12 @@ import { Card, Pagination } from 'antd';
 import axios from 'axios';
 import TabsCard from './TabsCard';
 
-// export interface GeneInfoCardProps {
-//   selectedItem: any;
-//   urlString: string;
-// }
-
-// selectedItem: any, urlString: string
-function GeneInfoCard({
-  selectedItem,
-  urlString,
-}: {
+export interface GeneInfoCardProps {
   selectedItem: any;
   urlString: string;
-}) {
-  // const [proteinSelected, setProteinSelected] = useState('');
-  // let proteinCifUrl = '';
+}
+
+function GeneInfoCard({ selectedItem, urlString }: GeneInfoCardProps) {
   const [proteinCifUrl, setProteinCifUrl] = useState('');
   const selectedProtein = async () => {
     try {
@@ -32,7 +23,6 @@ function GeneInfoCard({
 
       console.log('Protein selected: ' + proteinSelected);
       const [, proteinId] = proteinSelected.split('\n');
-      // let proteinCifUrl = `https://alphafold.ebi.ac.uk/files/AF-${proteinId}-F1-model_v2.cif`;
       setProteinCifUrl(
         `https://alphafold.ebi.ac.uk/files/AF-${proteinId}-F1-model_v2.cif`,
       );
@@ -44,25 +34,11 @@ function GeneInfoCard({
     }
   };
 
-  // const renderProtein = async () => {
-  //   selectedProtein();
-  //   return (
-  //     <>
-  //       <pdbe-molstar
-  //         custom-data-format="cif"
-  //         custom-data-url={proteinCifUrl}
-  //         hide-controls
-  //       />
-  //     </>
-  //   );
-  // };
-
   console.log('selected item: ' + JSON.stringify(selectedItem));
 
   useEffect(() => {
     selectedProtein();
   }, []);
-  // selectedProtein();
 
   return (
     <>
