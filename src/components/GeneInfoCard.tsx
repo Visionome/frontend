@@ -38,7 +38,9 @@ function GeneInfoCard({
   return (
     <>
       <div style={{ display: 'flex' }}>
-        <div style={{ position: 'relative', height: 250, width: 300, zIndex: 1 }}>
+        <div
+          style={{ position: 'relative', height: 250, width: 300, zIndex: 1 }}
+        >
           <>
             {proteinCifUrl && (
               <pdbe-molstar
