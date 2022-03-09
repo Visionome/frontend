@@ -1,7 +1,8 @@
 /* eslint-disable */
 import React, { useState, useEffect } from 'react';
-import { Card } from 'antd';
+import { Card, Pagination } from 'antd';
 import axios from 'axios';
+import TabsCard from './TabsCard';
 
 // export interface GeneInfoCardProps {
 //   selectedItem: any;
@@ -56,6 +57,8 @@ function GeneInfoCard({
   //   );
   // };
 
+  console.log('selected item: ' + JSON.stringify(selectedItem));
+
   useEffect(() => {
     selectedProtein();
   }, []);
@@ -76,33 +79,14 @@ function GeneInfoCard({
           </>
         </div>
       </div>
-      <Card
-        hoverable
-        className="info-card"
-        title={selectedItem.gene.toUpperCase()}
-        extra={
-          <a href={urlString} target="_blank" rel="noreferrer">
-            More
-          </a>
-        }
-      >
-        <p className="info-line">
-          Cytoband coord: {selectedItem.cytoband_location}
-        </p>
-        <p className="info-line">Description: {selectedItem.description}</p>
-        <p className="info-line">
-          Disease information:{' '}
-          {
-            selectedItem.disease_info
-            /*.toString()
-          .replace(
-            '(\\[\\[MESH.*?(?=,))|(\\[MESH.*?(?=,))|https.*?(?=\\])|]|)',
-            '',
-          )*/
-          }
-        </p>
-        <p className="info-line">EnsemblID: {selectedItem.ensembl_id}</p>
-      </Card>
+      <TabsCard
+        urlString={urlString}
+        name={selectedItem.gene.toUpperCase()}
+        ensemblid={selectedItem.ensembl_id}
+        description={selectedItem.description}
+        diseaseinfo={selectedItem.disease_info}
+        location={selectedItem.cytoband_location}
+      />
     </>
   );
 }
