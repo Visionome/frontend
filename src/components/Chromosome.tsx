@@ -33,14 +33,7 @@ function Chromosome({
 
   // Flex-vis container 600px tall.
   const yWindowSize = 70;
-  let multiplier = yWindowSize / chromSize;
-  // Band-aid for chrom 7, figure out
-  // what's causing scale problem.
-  if (selectedChrom === 7) {
-    multiplier = multiplier * 10;
-  }
-
-  console.log('multiplier ' + multiplier);
+  const multiplier = yWindowSize / chromSize;
 
   // State for selected cytoband, used for info cards.
   const [bandSelected, setBandSelected] = useState('');
