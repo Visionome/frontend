@@ -20,7 +20,17 @@ function Chromosome({
 }: ChromProps): JSX.Element {
   // Affine transformation variables
   //const bandSpacer = 0;
-  const windowStartPt = 135;
+  let windowStartPt = 135;
+
+  // Fixing minor cutoff issue
+  if (selectedChrom === 16 || selectedChrom === 19 || selectedChrom === 20) {
+    if (selectedChrom === 19) {
+      windowStartPt = 125;
+    } else {
+      windowStartPt = 130;
+    }
+  }
+
   let prevYLen = 0;
   let prevYPos = 0;
 
