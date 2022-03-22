@@ -1,27 +1,40 @@
-// @ts-nocheck
+/* eslint-disable */
 import React, { useEffect, useState } from 'react';
-import { Layout, Menu, Breadcrumb, Input, Table } from 'antd';
+import { Layout, Menu, Breadcrumb, Input, MenuItemProps } from 'antd';
+import type { SelectInfo } from 'rc-menu/lib/interface';
 import {
   HomeFilled,
   AppstoreFilled,
   InfoCircleFilled,
   DeploymentUnitOutlined,
+  SlidersOutlined,
 } from '@ant-design/icons';
 import { API } from 'aws-amplify';
 const { Search } = Input;
 import * as queries from '../graphql/queries';
 import Window from './Window';
 import logoImage from '../assets/logo.png';
+import { Visualizer } from './Visualizer';
+import { Analyzer } from './Analyzer';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
+// type CardData = {
+//   gene: string;
+//   description: string;
+//   ensembl_id: string;
+//   disease_info: string;
+//   cytoband_location: string;
+// };
+
+// type CardList = {
+//   cardList: CardData[];
+// };
+
 const Dashboard = (): JSX.Element => {
-  const [genome, setGenome] = useState([]);
-  const [vcf, setVcf] = useState([]);
-  const [selectedChromLocations, setSelectedChromLocations] = useState([]);
-  const [selectedCytobandLocations, setSelectedCytobandLocations] = useState(
-    [],
+  const [currentView, setCurrentView] = useState<'analyzer' | 'sequencer'>(
+    'analyzer',
   );
   const [page, setPage] = useState('home');
   const [blastResults, setBlastResults] = useState(null);
@@ -58,81 +71,9 @@ const Dashboard = (): JSX.Element => {
     },
   ];
 
-  const searchForGene = async (searchValue) => {
-    try {
-      const geneSearchResults = await API.graphql({
-        query: queries.searchGFFRefs,
-        variables: {
-          filter: { name: { eq: searchValue } },
-          // filter: {
-          //   diseaseinfo: { wildcard: `${searchValue.toLowerCase()}*` },
-          // },
-        },
-      });
-      // console.log(searchResults);
-      // const { data } = searchResults;
-      // console.log(searchResults);
-      // console.log(searchResults.data.searchGFFRefs.items);
-
-      // TODO: set all selected locations programatically
-      // by listing all of the responses for each gene
-      // location in search results.
-      const results = geneSearchResults.data.searchGFFRefs.items;
-      console.log(results);
-
-      const cytoArr = results.map((item) => item.cytobandlocation);
-      console.log(cytoArr);
-
-      const chromArr = cytoArr.map((item) => item.substring(0, 1));
-      console.log(chromArr);
-
-      // Set locations.
-      setSelectedChromLocations(chromArr);
-      setSelectedCytobandLocations(cytoArr);
-
-      setGenome(geneSearchResults.data.searchGFFRefs.items);
-
-      const vcfSearchResults = await API.graphql({
-        query: queries.searchVCFRefs,
-        variables: {
-          filter: { geneinfo: { wildcard: `${searchValue.toLowerCase()}*` } },
-        },
-      });
-
-      setVcf(vcfSearchResults.data.searchVCFRefs.items);
-      // console.log(data.data.searchGffRefs.items);
-    } catch (err) {
-      console.log('there was an error');
-      console.log(err);
-    }
+  const onSelectView = (info: SelectInfo) => {
+    setCurrentView(info.key as 'analyzer' | 'sequencer');
   };
-
-  const searchForSequence = async (searchValue) => {
-    const headers = [['Content-Type', 'application/json']];
-    try {
-      const res = await fetch('http://localhost:5000/blastsearch', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          sequence: `>SeqName\n${searchValue}`,
-        }),
-        mode: 'cors',
-      });
-      console.log(res);
-      const body = await res.json();
-      console.log(body);
-      setBlastResults(body);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const onSearch = (value) => searchForGene(value);
-
-  const onSearchSequence = (value) => searchForSequence(value);
 
   useEffect(() => {
     // searchForGene();
@@ -142,151 +83,31 @@ const Dashboard = (): JSX.Element => {
 
   return (
     <Layout>
-      {page === 'home' ? (
-        <Content style={{ padding: '0 50px', width: '' }}>
-          <Header
+      <Content style={{ padding: '0 50px', width: '' }}>
+        <Header
+          style={{
+            backgroundColor: 'white',
+            display: 'flex',
+            alignItems: 'center',
+            alignContent: 'center',
+          }}
+        >
+          <img src={logoImage} />
+          <h1
             style={{
-              backgroundColor: 'white',
-              display: 'flex',
-              alignItems: 'center',
-              alignContent: 'center',
+              flex: 1,
+              fontSize: 36,
+              fontWeight: 'bold',
+              color: '#009be3',
             }}
           >
-            <img src={logoImage} />
-            <h1
-              style={{
-                flex: 1,
-                fontSize: 36,
-                fontWeight: 'bold',
-                color: '#009be3',
-              }}
-            >
-              VISIONome
-            </h1>
-          </Header>
-          <div className="site-layout-content">
-            <div
-              style={{
-                display: 'flex',
-                alignContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <h3
-                style={{
-                  padding: 10,
-                  width: '25%',
-                  fontWeight: 'normal',
-                  fontSize: 18,
-                }}
-              >
-                Genome Visualization
-              </h3>
-              <Search
-                placeholder="Input name, disease, function..."
-                allowClear
-                onSearch={onSearch}
-                style={{ width: '75%' }}
-                enterButton="Search"
-              />
-            </div>
-            <Window
-              selectedChromLocations={selectedChromLocations}
-              selectedCytobandLocations={selectedCytobandLocations}
-            />
-            <h5>Genome Info</h5>
-            {/* eslint-disable-next-line*/}
-            {genome.map((genomeStuff: any) => {
-              // eslint-disable-next-line
-              return Object.keys(genomeStuff).map((key, index: any) => {
-                return (
-                  <div key={index} style={{ textAlign: 'left' }}>
-                    <div
-                      style={{ textDecoration: 'underline' }}
-                    >{`${key}`}</div>
-                    <div
-                      style={{ overflowWrap: 'break-word' }}
-                    >{`${genomeStuff[key]}`}</div>
-                  </div>
-                );
-              });
-            })}
-            <h5>VCF Info</h5>
-            {vcf.map((vcfStuff: any) => {
-              return Object.keys(vcfStuff).map((key, index: any) => {
-                return (
-                  <div key={index} style={{ textAlign: 'left' }}>
-                    <div
-                      style={{ textDecoration: 'underline' }}
-                    >{`${key}`}</div>
-                    <div
-                      style={{ overflowWrap: 'break-word' }}
-                    >{`${vcfStuff[key]}`}</div>
-                  </div>
-                );
-              });
-            })}
-          </div>
-        </Content>
-      ) : (
-        <Content style={{ padding: '0 50px', width: '' }}>
-          <Header
-            style={{
-              backgroundColor: 'white',
-              display: 'flex',
-              alignItems: 'center',
-              alignContent: 'center',
-            }}
-          >
-            <img src={logoImage} />
-            <h1
-              style={{
-                flex: 1,
-                fontSize: 36,
-                fontWeight: 'bold',
-                color: '#009be3',
-              }}
-            >
-              VISIONome
-            </h1>
-          </Header>
-          <div className="site-layout-content">
-            <div
-              style={{
-                display: 'flex',
-                alignContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <h3
-                style={{
-                  padding: 10,
-                  width: '25%',
-                  fontWeight: 'normal',
-                  fontSize: 18,
-                }}
-              >
-                Sequence Analyzer
-              </h3>
-              <Search
-                placeholder="Input name, disease, function..."
-                allowClear
-                onSearch={onSearchSequence}
-                style={{ width: '75%' }}
-                enterButton="Search"
-              />
-            </div>
-            {blastResults ? (
-              <Table
-                dataSource={blastResults.matches}
-                columns={blastResultsColumns}
-              />
-            ) : (
-              <div>Table</div>
-            )}
-          </div>
-        </Content>
-      )}
+            VISIONome
+          </h1>
+        </Header>
+        <div className="site-layout-content">
+          {currentView === 'analyzer' ? <Visualizer /> : <Analyzer />}
+        </div>
+      </Content>
       <Sider theme="light" style={{ display: 'flex', flexDirection: 'column' }}>
         <div className="logo" />
         <div
@@ -303,30 +124,21 @@ const Dashboard = (): JSX.Element => {
             <h2 style={{ marginBottom: 0 }}>Menu</h2>
           </div>
         </div>
-        <Menu theme="light" defaultSelectedKeys={['1']} mode="inline">
-          <Menu.Item
-            key="1"
-            icon={<HomeFilled />}
-            onClick={() => setPage('home')}
-          >
-            Home
+        <Menu
+          theme="light"
+          defaultSelectedKeys={[currentView]}
+          mode="inline"
+          onSelect={onSelectView}
+        >
+          <Menu.Item key="analyzer" icon={<SlidersOutlined />}>
+            Genome Visualizer
           </Menu.Item>
-          <Menu.Item
-            key="2"
-            icon={<AppstoreFilled />}
-            onClick={() => {
-              setPage('sequence');
-            }}
-          >
+          <Menu.Item key="visualizer" icon={<AppstoreFilled />}>
             Sequence Analyzer
           </Menu.Item>
           <SubMenu key="3" title="More Info" icon={<InfoCircleFilled />} />
         </Menu>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <div style={{ backgroundColor: 'red', flexGrow: 1, height: '100%' }}>
-            test
-          </div>
-        </div>
+        <div style={{ display: 'flex', flexDirection: 'column' }} />
       </Sider>
     </Layout>
   );
