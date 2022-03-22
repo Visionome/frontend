@@ -35,7 +35,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.2.2
         with:
           branch: gh-pages # The branch the action should deploy to.
-          folder: src # The folder the action should deploy.
+          folder: ./build # The folder the action should deploy.
   Test:
     runs-on: ubuntu-latest
     steps:
