@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { UploadOutlined } from '@ant-design/icons';
 import { Button, Table, Upload, Typography } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
