@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, { useEffect, useState } from 'react';
-import { Layout, Menu, Breadcrumb, Input } from 'antd';
+import { Layout, Menu, Breadcrumb, Input, Table } from 'antd';
 import {
   HomeFilled,
   AppstoreFilled,
@@ -23,6 +23,40 @@ const Dashboard = (): JSX.Element => {
   const [selectedCytobandLocations, setSelectedCytobandLocations] = useState(
     [],
   );
+  const [page, setPage] = useState('home');
+  const [blastResults, setBlastResults] = useState(null);
+  const blastResultsColumns = [
+    {
+      title: 'Gene Symbol',
+      dataIndex: 'gene_symbol',
+      key: 'gene_symbol',
+    },
+    {
+      title: 'Score',
+      dataIndex: 'score',
+      key: 'score',
+    },
+    {
+      title: 'Query Start',
+      dataIndex: 'query_start',
+      key: 'query_start',
+    },
+    {
+      title: 'Query End',
+      dataIndex: 'query_end',
+      key: 'query_end',
+    },
+    {
+      title: 'Subject Start',
+      dataIndex: 'sbjct_start',
+      key: 'sbjct_start',
+    },
+    {
+      title: 'Subject End',
+      dataIndex: 'sbjct_end',
+      key: 'sbjct_end',
+    },
+  ];
 
   const searchForGene = async (searchValue) => {
     try {
@@ -73,95 +107,186 @@ const Dashboard = (): JSX.Element => {
     }
   };
 
+  const searchForSequence = async (searchValue) => {
+    const headers = [['Content-Type', 'application/json']];
+    try {
+      const res = await fetch('http://localhost:5000/blastsearch', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          sequence: `>SeqName\n${searchValue}`,
+        }),
+        mode: 'cors',
+      });
+      console.log(res);
+      const body = await res.json();
+      console.log(body);
+      setBlastResults(body);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const onSearch = (value) => searchForGene(value);
+
+  const onSearchSequence = (value) => searchForSequence(value);
 
   useEffect(() => {
     // searchForGene();
   }, []);
 
+  console.log(page);
+
   return (
     <Layout>
-      <Content style={{ padding: '0 50px', width: '' }}>
-        <Header
-          style={{
-            backgroundColor: 'white',
-            display: 'flex',
-            alignItems: 'center',
-            alignContent: 'center',
-          }}
-        >
-          <img src={logoImage} />
-          <h1
+      {page === 'home' ? (
+        <Content style={{ padding: '0 50px', width: '' }}>
+          <Header
             style={{
-              flex: 1,
-              fontSize: 36,
-              fontWeight: 'bold',
-              color: '#009be3',
-            }}
-          >
-            VISIONome
-          </h1>
-        </Header>
-        <div className="site-layout-content">
-          <div
-            style={{
+              backgroundColor: 'white',
               display: 'flex',
-              alignContent: 'center',
               alignItems: 'center',
+              alignContent: 'center',
             }}
           >
-            <h3
+            <img src={logoImage} />
+            <h1
               style={{
-                padding: 10,
-                width: '25%',
-                fontWeight: 'normal',
-                fontSize: 18,
+                flex: 1,
+                fontSize: 36,
+                fontWeight: 'bold',
+                color: '#009be3',
               }}
             >
-              Genome Visualization
-            </h3>
-            <Search
-              placeholder="Input name, disease, function..."
-              allowClear
-              onSearch={onSearch}
-              style={{ width: '75%' }}
-              enterButton="Search"
+              VISIONome
+            </h1>
+          </Header>
+          <div className="site-layout-content">
+            <div
+              style={{
+                display: 'flex',
+                alignContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <h3
+                style={{
+                  padding: 10,
+                  width: '25%',
+                  fontWeight: 'normal',
+                  fontSize: 18,
+                }}
+              >
+                Genome Visualization
+              </h3>
+              <Search
+                placeholder="Input name, disease, function..."
+                allowClear
+                onSearch={onSearch}
+                style={{ width: '75%' }}
+                enterButton="Search"
+              />
+            </div>
+            <Window
+              selectedChromLocations={selectedChromLocations}
+              selectedCytobandLocations={selectedCytobandLocations}
             />
+            <h5>Genome Info</h5>
+            {/* eslint-disable-next-line*/}
+            {genome.map((genomeStuff: any) => {
+              // eslint-disable-next-line
+              return Object.keys(genomeStuff).map((key, index: any) => {
+                return (
+                  <div key={index} style={{ textAlign: 'left' }}>
+                    <div
+                      style={{ textDecoration: 'underline' }}
+                    >{`${key}`}</div>
+                    <div
+                      style={{ overflowWrap: 'break-word' }}
+                    >{`${genomeStuff[key]}`}</div>
+                  </div>
+                );
+              });
+            })}
+            <h5>VCF Info</h5>
+            {vcf.map((vcfStuff: any) => {
+              return Object.keys(vcfStuff).map((key, index: any) => {
+                return (
+                  <div key={index} style={{ textAlign: 'left' }}>
+                    <div
+                      style={{ textDecoration: 'underline' }}
+                    >{`${key}`}</div>
+                    <div
+                      style={{ overflowWrap: 'break-word' }}
+                    >{`${vcfStuff[key]}`}</div>
+                  </div>
+                );
+              });
+            })}
           </div>
-          <Window
-            selectedChromLocations={selectedChromLocations}
-            selectedCytobandLocations={selectedCytobandLocations}
-          />
-          <h5>Genome Info</h5>
-          {/* eslint-disable-next-line*/}
-          {genome.map((genomeStuff: any) => {
-            // eslint-disable-next-line
-            return Object.keys(genomeStuff).map((key, index: any) => {
-              return (
-                <div key={index} style={{ textAlign: 'left' }}>
-                  <div style={{ textDecoration: 'underline' }}>{`${key}`}</div>
-                  <div
-                    style={{ overflowWrap: 'break-word' }}
-                  >{`${genomeStuff[key]}`}</div>
-                </div>
-              );
-            });
-          })}
-          <h5>VCF Info</h5>
-          {vcf.map((vcfStuff: any) => {
-            return Object.keys(vcfStuff).map((key, index: any) => {
-              return (
-                <div key={index} style={{ textAlign: 'left' }}>
-                  <div style={{ textDecoration: 'underline' }}>{`${key}`}</div>
-                  <div
-                    style={{ overflowWrap: 'break-word' }}
-                  >{`${vcfStuff[key]}`}</div>
-                </div>
-              );
-            });
-          })}
-        </div>
-      </Content>
+        </Content>
+      ) : (
+        <Content style={{ padding: '0 50px', width: '' }}>
+          <Header
+            style={{
+              backgroundColor: 'white',
+              display: 'flex',
+              alignItems: 'center',
+              alignContent: 'center',
+            }}
+          >
+            <img src={logoImage} />
+            <h1
+              style={{
+                flex: 1,
+                fontSize: 36,
+                fontWeight: 'bold',
+                color: '#009be3',
+              }}
+            >
+              VISIONome
+            </h1>
+          </Header>
+          <div className="site-layout-content">
+            <div
+              style={{
+                display: 'flex',
+                alignContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <h3
+                style={{
+                  padding: 10,
+                  width: '25%',
+                  fontWeight: 'normal',
+                  fontSize: 18,
+                }}
+              >
+                Sequence Analyzer
+              </h3>
+              <Search
+                placeholder="Input name, disease, function..."
+                allowClear
+                onSearch={onSearchSequence}
+                style={{ width: '75%' }}
+                enterButton="Search"
+              />
+            </div>
+            {blastResults ? (
+              <Table
+                dataSource={blastResults.matches}
+                columns={blastResultsColumns}
+              />
+            ) : (
+              <div>Table</div>
+            )}
+          </div>
+        </Content>
+      )}
       <Sider theme="light" style={{ display: 'flex', flexDirection: 'column' }}>
         <div className="logo" />
         <div
@@ -179,10 +304,20 @@ const Dashboard = (): JSX.Element => {
           </div>
         </div>
         <Menu theme="light" defaultSelectedKeys={['1']} mode="inline">
-          <Menu.Item key="1" icon={<HomeFilled />}>
+          <Menu.Item
+            key="1"
+            icon={<HomeFilled />}
+            onClick={() => setPage('home')}
+          >
             Home
           </Menu.Item>
-          <Menu.Item key="2" icon={<AppstoreFilled />}>
+          <Menu.Item
+            key="2"
+            icon={<AppstoreFilled />}
+            onClick={() => {
+              setPage('sequence');
+            }}
+          >
             Sequence Analyzer
           </Menu.Item>
           <SubMenu key="3" title="More Info" icon={<InfoCircleFilled />} />
