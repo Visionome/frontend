@@ -1,12 +1,23 @@
-// @ts-nocheck
 import React, { useEffect, useState } from 'react';
-import { Layout, Menu, Breadcrumb, Input } from 'antd';
+import { Layout, Menu, Breadcrumb, Input, MenuItemProps } from 'antd';
+import type { SelectInfo } from 'rc-menu/lib/interface';
+import {
+  HomeFilled,
+  AppstoreFilled,
+  InfoCircleFilled,
+  DeploymentUnitOutlined,
+  SlidersOutlined,
+} from '@ant-design/icons';
 import { API } from 'aws-amplify';
 const { Search } = Input;
 import * as queries from '../graphql/queries';
 import Window from './Window';
+import logoImage from '../assets/logo.png';
+import { Visualizer } from './Visualizer';
+import { Analyzer } from './Analyzer';
 
-const { Header, Content, Footer } = Layout;
+const { Header, Content, Footer, Sider } = Layout;
+const { SubMenu } = Menu;
 
 // type CardData = {
 //   gene: string;
@@ -21,147 +32,77 @@ const { Header, Content, Footer } = Layout;
 // };
 
 const Dashboard = (): JSX.Element => {
-  const [genome, setGenome] = useState([]);
-  const [vcf, setVcf] = useState([]);
-  const [selectedChromLocations, setSelectedChromLocations] = useState([]);
-  const [selectedCytobandLocations, setSelectedCytobandLocations] = useState(
-    [],
+  const [currentView, setCurrentView] = useState<'analyzer' | 'sequencer'>(
+    'analyzer',
   );
 
-  const searchForGene = async (searchValue) => {
-    try {
-      const geneSearchResults = await API.graphql({
-        query: queries.searchGFFRefs,
-        variables: {
-          filter: {
-            name: { eq: searchValue },
-          },
-        },
-      });
-
-      const diseaseSearchResults = await API.graphql({
-        query: queries.searchGFFRefs,
-        variables: {
-          filter: {
-            diseaseinfo: { matchPhrase: `${searchValue.toLowerCase()}*` },
-          },
-        },
-      });
-
-      const results =
-        geneSearchResults.data.searchGFFRefs.items.length === 0
-          ? diseaseSearchResults.data.searchGFFRefs.items
-          : geneSearchResults.data.searchGFFRefs.items;
-
-      const cytoArr = results.map((item) => item.cytobandlocation);
-      const chromArr = cytoArr.map((item) => item.substring(0, 1));
-
-      // Set locations.
-      setSelectedChromLocations(chromArr);
-      setSelectedCytobandLocations(cytoArr);
-
-      // Clear storage
-      localStorage.clear();
-      const filteredData = results.map((x) => {
-        const obj = new Object();
-        obj.gene = x.gene;
-        obj.description = x.description;
-        obj.ensembl_id = x.ensembleid;
-        obj.disease_info = x.diseaseinfo;
-        obj.cytoband_location = x.cytobandlocation;
-        localStorage.setItem(
-          obj.cytoband_location,
-          JSON.stringify(obj, (/_/g, ' '), 2),
-        );
-        return obj;
-      });
-      console.log(filteredData);
-      console.log(localStorage.getItem('1p36.33'));
-      // Set gene info card objects.
-      // setGeneCards(filteredData);
-      // Set printable GFF data.
-      setGenome(geneSearchResults.data.searchGFFRefs.items);
-
-      const vcfSearchResults = await API.graphql({
-        query: queries.searchVCFRefs,
-        variables: {
-          filter: { geneinfo: { wildcard: `${searchValue.toLowerCase()}*` } },
-        },
-      });
-
-      setVcf(vcfSearchResults.data.searchVCFRefs.items);
-      // console.log(data.data.searchGffRefs.items);
-      console.log('genome ' + genome);
-      console.log('vcf' + vcf);
-    } catch (err) {
-      console.log('there was an error');
-      console.log(err);
-    }
+  const onSelectView = (info: SelectInfo) => {
+    setCurrentView(info.key as 'analyzer' | 'sequencer');
   };
-
-  const onSearch = (value) => searchForGene(value);
 
   useEffect(() => {
     // searchForGene();
   }, []);
 
   return (
-    <Layout className="layout">
-      <Header>
-        <div className="logo" />
-        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-          {new Array(15).fill(null).map((_, index) => {
-            const key = index + 1;
-            return <Menu.Item key={key}>{`nav ${key}`}</Menu.Item>;
-          })}
-        </Menu>
-      </Header>
+    <Layout>
       <Content style={{ padding: '0 50px', width: '' }}>
-        <Breadcrumb style={{ margin: '16px 0' }}>
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>List</Breadcrumb.Item>
-          <Breadcrumb.Item>App</Breadcrumb.Item>
-        </Breadcrumb>
+        <Header
+          style={{
+            backgroundColor: 'white',
+            display: 'flex',
+            alignItems: 'center',
+            alignContent: 'center',
+          }}
+        >
+          <img src={logoImage} />
+          <h1
+            style={{
+              flex: 1,
+              fontSize: 36,
+              fontWeight: 'bold',
+              color: '#009be3',
+            }}
+          >
+            VISIONome
+          </h1>
+        </Header>
         <div className="site-layout-content">
-          Test Request
-          <Search placeholder="Input gene name" onSearch={onSearch} />
-          <Window
-            selectedChromLocations={selectedChromLocations}
-            selectedCytobandLocations={selectedCytobandLocations}
-          />
-          <h5>Genome Info</h5>
-          {/* eslint-disable-next-line*/}
-          {/*genome.map((genomeStuff: any) => {
-            // eslint-disable-next-line
-            return Object.keys(genomeStuff).map((key, index: any) => {
-              return (
-                <div key={index} style={{ textAlign: 'left' }}>
-                  <div style={{ textDecoration: 'underline' }}>{`${key}`}</div>
-                  <div
-                    style={{ overflowWrap: 'break-word' }}
-                  >{`${genomeStuff[key]}`}</div>
-                </div>
-              );
-            });
-          })*/}
-          <h5>VCF Info</h5>
-          {/*vcf.map((vcfStuff: any) => {
-            return Object.keys(vcfStuff).map((key, index: any) => {
-              return (
-                <div key={index} style={{ textAlign: 'left' }}>
-                  <div style={{ textDecoration: 'underline' }}>{`${key}`}</div>
-                  <div
-                    style={{ overflowWrap: 'break-word' }}
-                  >{`${vcfStuff[key]}`}</div>
-                </div>
-              );
-            });
-          })*/}
+          {currentView === 'analyzer' ? <Visualizer /> : <Analyzer />}
         </div>
       </Content>
-      <Footer style={{ textAlign: 'center' }}>
-        Ant Design ©2018 Created by Ant UED
-      </Footer>
+      <Sider theme="light" style={{ display: 'flex', flexDirection: 'column' }}>
+        <div className="logo" />
+        <div
+          style={{
+            display: 'flex',
+            paddingLeft: 10,
+            height: 50,
+            alignContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <DeploymentUnitOutlined style={{ color: '#0070e8' }} />
+          <div style={{ flex: 1, textAlign: 'left', marginLeft: 10 }}>
+            <h2 style={{ marginBottom: 0 }}>Menu</h2>
+          </div>
+        </div>
+        <Menu
+          theme="light"
+          defaultSelectedKeys={[currentView]}
+          mode="inline"
+          onSelect={onSelectView}
+        >
+          <Menu.Item key="analyzer" icon={<SlidersOutlined />}>
+            Genome Visualizer
+          </Menu.Item>
+          <Menu.Item key="visualizer" icon={<AppstoreFilled />}>
+            Sequence Analyzer
+          </Menu.Item>
+          <SubMenu key="3" title="More Info" icon={<InfoCircleFilled />} />
+        </Menu>
+        <div style={{ display: 'flex', flexDirection: 'column' }} />
+      </Sider>
     </Layout>
   );
 };

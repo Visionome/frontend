@@ -1,5 +1,10 @@
 .App {
   text-align: center;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
 }
 
 canvas {
@@ -7,4 +12,9 @@ canvas {
   width: 100% !important;
   height: 100% !important;
   touch-action: none;
+}
+
+.ant-layout.ant-layout-has-sider {
+  flex-direction: row;
+  height: 100%;
 }
