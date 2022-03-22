@@ -24,20 +24,37 @@ export function Visualizer(): JSX.Element {
 
   const searchForGene = async (searchValue: string) => {
     try {
-      const geneSearchResults = await API.graphql({
+      // @ts-expect-error
+      const geneSearchQuery: Promise<any> = API.graphql({
         query: queries.searchGFFRefs,
         variables: {
-          filter: { name: { eq: searchValue } },
-          // filter: {
-          //   diseaseinfo: { wildcard: `${searchValue.toLowerCase()}*` },
-          // },
+          filter: {
+            name: { eq: searchValue },
+          },
         },
       });
 
       // @ts-expect-error
-      const results = geneSearchResults.data.searchGFFRefs.items as GeneData[];
-      const cytoArr = results.map((item) => item.cytobandlocation);
-      const chromArr = cytoArr.map((item) => item.substring(0, 1));
+      const diseaseSearchQuery: Promise<any> = API.graphql({
+        query: queries.searchGFFRefs,
+        variables: {
+          filter: {
+            diseaseinfo: { matchPhrase: `${searchValue.toLowerCase()}*` },
+          },
+        },
+      });
+
+      const [diseaseSearchResults, geneSearchResults] = await Promise.all([
+        geneSearchQuery,
+        diseaseSearchQuery,
+      ]);
+
+      const results =
+        geneSearchResults.data.searchGFFRefs.items.length === 0
+          ? diseaseSearchResults.data.searchGFFRefs.items
+          : geneSearchResults.data.searchGFFRefs.items;
+      const cytoArr = results.map((item: any) => item.cytobandlocation);
+      const chromArr = cytoArr.map((item: any) => item.substring(0, 1));
 
       // Set locations.
       setSelectedChromLocations(chromArr);
@@ -45,7 +62,7 @@ export function Visualizer(): JSX.Element {
 
       // Clear storage
       localStorage.clear();
-      const filteredData = results.map((x) => {
+      const filteredData = results.map((x: any) => {
         const obj = {
           gene: x.gene,
           descriptions: x.description,
@@ -64,7 +81,6 @@ export function Visualizer(): JSX.Element {
       // Set gene info card objects.
       // setGeneCards(filteredData);
       // Set printable GFF data.
-      // @ts-expect-error
       setGenome(geneSearchResults.data.searchGFFRefs.items);
 
       const vcfSearchResults = await API.graphql({

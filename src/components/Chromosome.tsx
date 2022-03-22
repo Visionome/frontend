@@ -59,7 +59,7 @@ function Chromosome({
   const selectedItem: GeneProps = JSON.parse(
     localStorage.getItem(bandSelected),
   );
-  
+
   // Note: finding URLs from disease info strings only works for
   // a single url and breaks otherwise.
   const re = 'https.*?(?=\\])';
