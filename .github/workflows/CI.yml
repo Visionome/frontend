@@ -34,8 +34,8 @@ jobs:
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.2.2
         with:
-          branch: main # The branch the action should deploy to.
-          folder: dist # The folder the action should deploy.
+          branch: gh-pages # The branch the action should deploy to.
+          folder: src # The folder the action should deploy.
   Test:
     runs-on: ubuntu-latest
     steps:
