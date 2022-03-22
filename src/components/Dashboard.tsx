@@ -33,14 +33,26 @@ const Dashboard = (): JSX.Element => {
       const geneSearchResults = await API.graphql({
         query: queries.searchGFFRefs,
         variables: {
-          filter: { name: { eq: searchValue } },
-          // filter: {
-          //   diseaseinfo: { wildcard: `${searchValue.toLowerCase()}*` },
-          // },
+          filter: {
+            name: { eq: searchValue },
+          },
         },
       });
 
-      const results = geneSearchResults.data.searchGFFRefs.items;
+      const diseaseSearchResults = await API.graphql({
+        query: queries.searchGFFRefs,
+        variables: {
+          filter: {
+            diseaseinfo: { matchPhrase: `${searchValue.toLowerCase()}*` },
+          },
+        },
+      });
+
+      const results =
+        geneSearchResults.data.searchGFFRefs.items.length === 0
+          ? diseaseSearchResults.data.searchGFFRefs.items
+          : geneSearchResults.data.searchGFFRefs.items;
+
       const cytoArr = results.map((item) => item.cytobandlocation);
       const chromArr = cytoArr.map((item) => item.substring(0, 1));
 
