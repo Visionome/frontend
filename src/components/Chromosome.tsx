@@ -12,9 +12,9 @@ extend({ OrbitControls });
 export interface GeneProps {
   gene: string;
   description: string;
-  ensembl_id: string;
-  disease_info: any;
-  cytoband_location: string;
+  ensemblId: string;
+  diseaseInfo: any;
+  cytobandLocation: string;
 }
 
 interface ChromProps {
@@ -65,9 +65,9 @@ function Chromosome({
   const re = 'https.*?(?=\\])';
   let foundUrl = '';
   let urlString = '';
+  console.log(selectedItem);
   if (bandSelected !== '' && selectedCytobandLocations.includes(bandSelected)) {
-    foundUrl = selectedItem.disease_info.match(re);
-    //console.log('found url: ' + foundUrl);
+    foundUrl = selectedItem.diseaseInfo.match(re);
     if (foundUrl != null) {
       urlString = foundUrl[0].toString();
     }

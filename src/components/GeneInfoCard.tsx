@@ -55,10 +55,10 @@ function GeneInfoCard({
       <TabsCard
         urlString={urlString}
         name={selectedItem.gene.toUpperCase()}
-        ensemblid={selectedItem.ensembl_id}
+        ensemblid={selectedItem.ensemblId}
         description={selectedItem.description}
-        diseaseinfo={selectedItem.disease_info}
-        location={selectedItem.cytoband_location}
+        diseaseinfo={selectedItem.diseaseInfo}
+        location={selectedItem.cytobandLocation}
       />
     </>
   );
