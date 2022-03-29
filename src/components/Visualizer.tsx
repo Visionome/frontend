@@ -15,15 +15,17 @@ export interface GeneData {
   cytobandlocation: string;
 }
 
-// @ts-ignore
-export function Visualizer(props): JSX.Element {
+export interface VisualizerProps {
+  initialSearch: string;
+}
+
+export function Visualizer({ initialSearch }: VisualizerProps): JSX.Element {
   const [genome, setGenome] = useState<GeneData[]>([]);
   const [vcf, setVcf] = useState([]);
   const [selectedChromLocations, setSelectedChromLocations] = useState([]);
   const [selectedCytobandLocations, setSelectedCytobandLocations] = useState(
     [],
   );
-  const { initialSearch } = props;
 
   useEffect(() => {
     console.log(initialSearch);

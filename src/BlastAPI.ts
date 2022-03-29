@@ -1,4 +1,3 @@
-const host = 'http://localhost:5000';
 import * as mockReponse from './mockBlast.json';
 
 export interface BlastMatch {

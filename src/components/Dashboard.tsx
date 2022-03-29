@@ -76,13 +76,10 @@ const Dashboard = (): JSX.Element => {
         </Header>
         <div className="site-layout-content">
           {currentView === 'analyzer' ? (
-            // @ts-ignore
             <Visualizer initialSearch={initialSearch} />
           ) : (
             <Analyzer
-              // @ts-ignore
               setCurrentView={setCurrentView}
-              // @ts-ignore
               setInitialSearch={setInitialSearch}
             />
           )}
