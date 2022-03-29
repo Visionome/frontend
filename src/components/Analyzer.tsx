@@ -7,9 +7,11 @@ import { BlastAPI, BlastMatch } from '../BlastAPI';
 
 const { Text } = Typography;
 
-export function Analyzer(): JSX.Element {
+// @ts-ignore
+export function Analyzer(props): JSX.Element {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState<BlastMatch[]>([]);
+  const { setCurrentView, setInitialSearch } = props;
 
   const onRunButtonClick = async () => {
     console.log(input);
@@ -25,11 +27,33 @@ export function Analyzer(): JSX.Element {
     setOutput(matches);
   };
 
+  console.log(props);
+  console.log(setInitialSearch);
+  console.log(setCurrentView);
+  // @ts-ignore
+  const moveToSearch = (text) => {
+    console.log('i hit it');
+    // @ts-ignore
+    setInitialSearch(text);
+    setCurrentView('analyzer');
+  };
+
   const tableColumns = [
     {
       title: 'Gene Symbol',
       dataIndex: 'gene_symbol',
       key: 'gene_symbol',
+      // @ts-ignore
+      render: (text) => (
+        <Button
+          onClick={() => {
+            // @ts-ignore
+            moveToSearch(text);
+          }}
+        >
+          {text}
+        </Button>
+      ),
     },
     {
       title: '# Hits',
