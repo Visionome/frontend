@@ -7,11 +7,19 @@ import { BlastAPI, BlastMatch } from '../BlastAPI';
 
 const { Text } = Typography;
 
-// @ts-ignore
-export function Analyzer(props): JSX.Element {
+export interface AnalyzerProps {
+  setInitialSearch: React.Dispatch<React.SetStateAction<string>>;
+  setCurrentView: React.Dispatch<
+    React.SetStateAction<'analyzer' | 'sequencer'>
+  >;
+}
+
+export function Analyzer({
+  setCurrentView,
+  setInitialSearch,
+}: AnalyzerProps): JSX.Element {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState<BlastMatch[]>([]);
-  const { setCurrentView, setInitialSearch } = props;
 
   const onRunButtonClick = async () => {
     console.log(input);
@@ -27,13 +35,10 @@ export function Analyzer(props): JSX.Element {
     setOutput(matches);
   };
 
-  console.log(props);
   console.log(setInitialSearch);
   console.log(setCurrentView);
-  // @ts-ignore
-  const moveToSearch = (text) => {
+  const moveToSearch = (text: string) => {
     console.log('i hit it');
-    // @ts-ignore
     setInitialSearch(text);
     setCurrentView('analyzer');
   };
@@ -43,11 +48,9 @@ export function Analyzer(props): JSX.Element {
       title: 'Gene Symbol',
       dataIndex: 'gene_symbol',
       key: 'gene_symbol',
-      // @ts-ignore
-      render: (text) => (
+      render: (text: string) => (
         <Button
           onClick={() => {
-            // @ts-ignore
             moveToSearch(text);
           }}
         >
