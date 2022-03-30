@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Input } from 'antd';
+import { Input, Card } from 'antd';
 import Window from './Window';
 import { API } from 'aws-amplify';
 import * as queries from '../graphql/queries';
@@ -34,25 +34,22 @@ export function Visualizer(): JSX.Element {
         },
       });
 
-      // @ts-expect-error
-      const diseaseSearchQuery: Promise<any> = API.graphql({
-        query: queries.searchGFFRefs,
-        variables: {
-          filter: {
-            diseaseinfo: { matchPhrase: `${searchValue.toLowerCase()}*` },
-          },
-        },
-      });
+      // const diseaseSearchQuery: Promise<any> = API.graphql({
+      //   query: queries.searchGFFRefs,
+      //   variables: {
+      //     filter: {
+      //       diseaseinfo: { matchPhrase: `${searchValue.toLowerCase()}*` },
+      //     },
+      //   },
+      // });
 
-      const [diseaseSearchResults, geneSearchResults] = await Promise.all([
-        geneSearchQuery,
-        diseaseSearchQuery,
-      ]);
+      const [geneSearchResults] = await Promise.all([geneSearchQuery]);
 
-      const results =
-        geneSearchResults.data.searchGFFRefs.items.length === 0
-          ? diseaseSearchResults.data.searchGFFRefs.items
-          : geneSearchResults.data.searchGFFRefs.items;
+      // const results =
+      //   geneSearchResults.data.searchGFFRefs.items.length === 0
+      //     ? diseaseSearchResults.data.searchGFFRefs.items
+      //     : geneSearchResults.data.searchGFFRefs.items;
+      const results = geneSearchResults.data.searchGFFRefs.items;
       const cytoArr = results.map((item: any) => item.cytobandlocation);
       const chromArr = cytoArr.map((item: any) => item.substring(0, 1));
 
@@ -103,36 +100,39 @@ export function Visualizer(): JSX.Element {
 
   return (
     <div>
-      <div
-        style={{
-          display: 'flex',
-          alignContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <h3
+      <Card>
+        <div
           style={{
-            padding: 10,
-            width: '25%',
-            fontWeight: 'normal',
-            fontSize: 18,
+            display: 'flex',
+            alignContent: 'center',
+            alignItems: 'center',
           }}
         >
-          Genome Visualization
-        </h3>
-        <Search
-          placeholder="Input name, disease, function..."
-          allowClear
-          onSearch={searchForGene}
-          style={{ width: '75%' }}
-          enterButton="Search"
+          <h3
+            style={{
+              padding: 10,
+              width: '40%',
+              fontWeight: 'normal',
+              fontSize: 18,
+            }}
+          >
+            Genome Visualization
+          </h3>
+          <Search
+            placeholder="Input name, disease, function..."
+            allowClear
+            onSearch={searchForGene}
+            style={{ width: '100%' }}
+            enterButton="Search"
+          />
+        </div>
+      </Card>
+      <Card>
+        <Window
+          selectedChromLocations={selectedChromLocations}
+          selectedCytobandLocations={selectedCytobandLocations}
         />
-      </div>
-      <Window
-        selectedChromLocations={selectedChromLocations}
-        selectedCytobandLocations={selectedCytobandLocations}
-      />
-      <h5>Genome Info</h5>
+      </Card>
       {/* eslint-disable-next-line*/}
       {/*genome.map((genomeStuff: any) => {
             // eslint-disable-next-line
@@ -147,7 +147,6 @@ export function Visualizer(): JSX.Element {
               );
             });
           })*/}
-      <h5>VCF Info</h5>
       {/*vcf.map((vcfStuff: any) => {
             return Object.keys(vcfStuff).map((key, index: any) => {
               return (

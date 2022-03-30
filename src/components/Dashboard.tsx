@@ -13,7 +13,8 @@ import { API } from 'aws-amplify';
 const { Search } = Input;
 import * as queries from '../graphql/queries';
 import Window from './Window';
-import logoImage from '../assets/logo.png';
+import logoImage from '../assets/visionome-logo-alt.png';
+import logoText from '../assets/visionome-logo.png';
 import { Visualizer } from './Visualizer';
 import { Analyzer } from './Analyzer';
 
@@ -47,7 +48,7 @@ const Dashboard = (): JSX.Element => {
 
   return (
     <Layout>
-      <Content style={{ padding: '0 50px', width: '' }}>
+      <Content style={{ padding: '0 50px' }}>
         <Header
           style={{
             backgroundColor: 'white',
@@ -56,17 +57,8 @@ const Dashboard = (): JSX.Element => {
             alignContent: 'center',
           }}
         >
-          <img src={logoImage} />
-          <h1
-            style={{
-              flex: 1,
-              fontSize: 36,
-              fontWeight: 'bold',
-              color: '#009be3',
-            }}
-          >
-            VISIONome
-          </h1>
+          <img src={logoImage} height={80} />
+          <img src={logoText} />
         </Header>
         <div className="site-layout-content">
           {currentView === 'analyzer' ? <Visualizer /> : <Analyzer />}
