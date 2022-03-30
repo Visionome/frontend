@@ -27,8 +27,8 @@
           },
           "additionalAuthenticationProviders": []
         },
-        "GraphQLAPIIdOutput": "6r62mv3k6nhsdh62leww6nw52i",
-        "GraphQLAPIEndpointOutput": "https://k24weas3gbayxnpbms3izcqjem.appsync-api.us-east-1.amazonaws.com/graphql"
+        "GraphQLAPIIdOutput": "z4nl2eu7prhcvlx7vq7i6zsod4",
+        "GraphQLAPIEndpointOutput": "https://nyl4bhqofrblfloxclguv4lvbm.appsync-api.us-east-1.amazonaws.com/graphql"
       },
       "lastPushTimeStamp": "2022-01-14T06:49:40.739Z",
       "providerMetadata": {

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable */
+import React, { useEffect, useState } from 'react';
 import { Input } from 'antd';
 import Window from './Window';
 import { API } from 'aws-amplify';
@@ -14,13 +15,24 @@ export interface GeneData {
   cytobandlocation: string;
 }
 
-export function Visualizer(): JSX.Element {
+export interface VisualizerProps {
+  initialSearch: string;
+}
+
+export function Visualizer({ initialSearch }: VisualizerProps): JSX.Element {
   const [genome, setGenome] = useState<GeneData[]>([]);
   const [vcf, setVcf] = useState([]);
   const [selectedChromLocations, setSelectedChromLocations] = useState([]);
   const [selectedCytobandLocations, setSelectedCytobandLocations] = useState(
     [],
   );
+
+  useEffect(() => {
+    console.log(initialSearch);
+    if (initialSearch.length != 0) {
+      searchForGene(initialSearch);
+    }
+  }, []);
 
   const searchForGene = async (searchValue: string) => {
     try {

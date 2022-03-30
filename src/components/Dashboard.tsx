@@ -33,6 +33,7 @@ const { SubMenu } = Menu;
 // };
 
 const Dashboard = (): JSX.Element => {
+  const [initialSearch, setInitialSearch] = useState('');
   const [currentView, setCurrentView] = useState<'analyzer' | 'sequencer'>(
     'analyzer',
   );
@@ -40,6 +41,11 @@ const Dashboard = (): JSX.Element => {
   const onSelectView = (info: SelectInfo) => {
     setCurrentView(info.key as 'analyzer' | 'sequencer');
   };
+
+  // const moveToSearch = (text: string) => {
+  //   setInitalSearch(text);
+  //   setCurrentView('analyzer');
+  // };
 
   useEffect(() => {
     // searchForGene();
@@ -69,7 +75,14 @@ const Dashboard = (): JSX.Element => {
           </h1>
         </Header>
         <div className="site-layout-content">
-          {currentView === 'analyzer' ? <Visualizer /> : <Analyzer />}
+          {currentView === 'analyzer' ? (
+            <Visualizer initialSearch={initialSearch} />
+          ) : (
+            <Analyzer
+              setCurrentView={setCurrentView}
+              setInitialSearch={setInitialSearch}
+            />
+          )}
         </div>
       </Content>
       <Sider theme="light" style={{ display: 'flex', flexDirection: 'column' }}>
