@@ -14,6 +14,8 @@ export interface CytobandProps
   ypos: number;
   bandSelected: string;
   setBandSelected: React.Dispatch<React.SetStateAction<string>>;
+  bandHovered: string;
+  setBandHovered: React.Dispatch<React.SetStateAction<string>>;
 }
 
 // Render a cytoband, given the JSON description
@@ -26,6 +28,8 @@ function Cytoband({
   location,
   bandSelected,
   setBandSelected,
+  bandHovered,
+  setBandHovered,
   ...props
 }: CytobandProps): JSX.Element {
   const pos = new THREE.Vector3(xpos, ypos, -200);
@@ -45,10 +49,13 @@ function Cytoband({
 
   function handlePointerOver() {
     hover(true);
+    console.log(location);
+    setBandHovered(location);
   }
 
   function handlePointerOut() {
     hover(false);
+    setBandHovered('None');
   }
 
   function handleClick() {

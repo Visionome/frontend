@@ -35,6 +35,10 @@ function GeneInfoCard({
     selectedProtein();
   }, []);
 
+  console.log('geneinfocard description ' + selectedItem.description);
+  console.log('geneinfocard name ' + selectedItem.gene);
+  console.log('geneinforcard diseaseinfo ' + selectedItem.diseaseInfo);
+
   return (
     <>
       <div style={{ display: 'flex' }}>

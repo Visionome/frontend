@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { useEffect, useState } from 'react';
-import { Input } from 'antd';
+import { Input, Card } from 'antd';
 import Window from './Window';
 import { API } from 'aws-amplify';
 import * as queries from '../graphql/queries';
@@ -45,8 +45,7 @@ export function Visualizer({ initialSearch }: VisualizerProps): JSX.Element {
           },
         },
       });
-
-      // @ts-expect-error
+      //@ts-expect-error
       const diseaseSearchQuery: Promise<any> = API.graphql({
         query: queries.searchGFFRefs,
         variables: {
@@ -56,7 +55,7 @@ export function Visualizer({ initialSearch }: VisualizerProps): JSX.Element {
         },
       });
 
-      const [diseaseSearchResults, geneSearchResults] = await Promise.all([
+      const [geneSearchResults, diseaseSearchResults] = await Promise.all([
         geneSearchQuery,
         diseaseSearchQuery,
       ]);
@@ -65,6 +64,8 @@ export function Visualizer({ initialSearch }: VisualizerProps): JSX.Element {
         geneSearchResults.data.searchGFFRefs.items.length === 0
           ? diseaseSearchResults.data.searchGFFRefs.items
           : geneSearchResults.data.searchGFFRefs.items;
+
+      // const results = geneSearchResults.data.searchGFFRefs.items;
       const cytoArr = results.map((item: any) => item.cytobandlocation);
       const chromArr = cytoArr.map((item: any) => item.substring(0, 1));
 
@@ -88,10 +89,9 @@ export function Visualizer({ initialSearch }: VisualizerProps): JSX.Element {
         );
         return obj;
       });
-      console.log(filteredData);
-      console.log(localStorage.getItem('1p36.33'));
+      // console.log('filtered data' + filteredData);
       // Set gene info card objects.
-      // setGeneCards(filteredData);
+      //setGeneCards(filteredData);
       // Set printable GFF data.
       setGenome(geneSearchResults.data.searchGFFRefs.items);
 
@@ -115,35 +115,39 @@ export function Visualizer({ initialSearch }: VisualizerProps): JSX.Element {
 
   return (
     <div>
-      <div
-        style={{
-          display: 'flex',
-          alignContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <h3
+      <Card>
+        <div
           style={{
-            padding: 10,
-            width: '25%',
-            fontWeight: 'normal',
-            fontSize: 18,
+            display: 'flex',
+            alignContent: 'center',
+            alignItems: 'center',
           }}
         >
-          Genome Visualization
-        </h3>
-        <Search
-          placeholder="Input name, disease, function..."
-          allowClear
-          onSearch={searchForGene}
-          style={{ width: '75%' }}
-          enterButton="Search"
+          <h3
+            style={{
+              padding: 10,
+              width: '40%',
+              fontWeight: 'normal',
+              fontSize: 18,
+            }}
+          >
+            Genome Visualization
+          </h3>
+          <Search
+            placeholder="Input name, disease, function..."
+            allowClear
+            onSearch={searchForGene}
+            style={{ width: '100%' }}
+            enterButton="Search"
+          />
+        </div>
+      </Card>
+      <Card>
+        <Window
+          selectedChromLocations={selectedChromLocations}
+          selectedCytobandLocations={selectedCytobandLocations}
         />
-      </div>
-      <Window
-        selectedChromLocations={selectedChromLocations}
-        selectedCytobandLocations={selectedCytobandLocations}
-      />
+      </Card>
       {/* eslint-disable-next-line*/}
       {/*genome.map((genomeStuff: any) => {
             // eslint-disable-next-line
