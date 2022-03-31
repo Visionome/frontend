@@ -29,6 +29,7 @@ export default function Cylinder({ scale, ...props }: CProps): JSX.Element {
   function handleClick() {
     props.setViewMode(1);
     props.setSelectedChrom(props.info);
+    console.log(props.info);
     //console.log(props.info);
   }
 

@@ -6486,5 +6486,415 @@
     "end": 50818468,
     "name": "22.q13.33",
     "giemsaStains": "gneg"
+  },
+  {
+    "id": 811,
+    "chromosome": "chr23",
+    "start": 0,
+    "end": 4400000,
+    "name": "Xp22.33",
+    "giemsaStains": "gneg"
+  },
+  {
+    "id": 812,
+    "chromosome": "chr23",
+    "start": 4400000,
+    "end": 6100000,
+    "name": "Xp22.32",
+    "giemsaStains": "gpos50"
+  },
+  {
+    "id": 813,
+    "chromosome": "chr23",
+    "start": 6100000,
+    "end": 9600000,
+    "name": "Xp22.31",
+    "giemsaStains": "gneg"
+  },
+  {
+    "id": 814,
+    "chromosome": "chr23",
+    "start": 9600000,
+    "end": 17400000,
+    "name": "Xp22.2",
+    "giemsaStains": "gpos50"
+  },
+  {
+    "id": 815,
+    "chromosome": "chr23",
+    "start": 17400000,
+    "end": 19200000,
+    "name": "Xp22.13",
+    "giemsaStains": "gneg"
+  },
+  {
+    "id": 816,
+    "chromosome": "chr23",
+    "start": 19200000,
+    "end": 21900000,
+    "name": "Xp22.12",
+    "giemsaStains": "gpos50"
+  },
+  {
+    "id": 817,
+    "chromosome": "chr23",
+    "start": 21900000,
+    "end": 24900000,
+    "name": "Xp22.11",
+    "giemsaStains": "gneg"
+  },
+  {
+    "id": 818,
+    "chromosome": "chr23",
+    "start": 24900000,
+    "end": 29300000,
+    "name": "Xp21.3",
+    "giemsaStains": "gpos100"
+  },
+  {
+    "id": 819,
+    "chromosome": "chr23",
+    "start": 29300000,
+    "end": 31500000,
+    "name": "Xp21.2",
+    "giemsaStains": "gneg"
+  },
+  {
+    "id": 820,
+    "chromosome": "chr23",
+    "start": 31500000,
+    "end": 37800000,
+    "name": "Xp21.1",
+    "giemsaStains": "gpos100"
+  },
+  {
+    "id": 821,
+    "chromosome": "chr23",
+    "start": 37800000,
+    "end": 42500000,
+    "name": "Xp11.4",
+    "giemsaStains": "gneg"
+  },
+  {
+    "id": 822,
+    "chromosome": "chr23",
+    "start": 42500000,
+    "end": 47600000,
+    "name": "Xp11.3",
+    "giemsaStains": "gpos75"
+  },
+
+  {
+    "id": 823,
+    "chromosome": "chr23",
+    "start": 47600000,
+    "end": 50100000,
+    "name": "Xp11.23",
+    "giemsaStains": "gneg"
+  },
+  {
+    "id": 824,
+    "chromosome": "chr23",
+    "start": 50100000,
+    "end": 54800000,
+    "name": "Xp11.22",
+    "giemsaStains": "gpos25"
+  },
+  {
+    "id": 825,
+    "chromosome": "chr23",
+    "start": 54800000,
+    "end": 58100000,
+    "name": "Xp11.21",
+    "giemsaStains": "gneg"
+  },
+  {
+    "id": 826,
+    "chromosome": "chr23",
+    "start": 58100000,
+    "end": 61000000,
+    "name": "Xp11.1",
+    "giemsaStains": "acen"
+  },
+  {
+    "id": 827,
+    "chromosome": "chr23",
+    "start": 61000000,
+    "end": 63800000,
+    "name": "Xq11.1",
+    "giemsaStains": "acen"
+  },
+  {
+    "id": 828,
+    "chromosome": "chr23",
+    "start": 63800000,
+    "end": 65400000,
+    "name": "Xq11.2",
+    "giemsaStains": "gneg"
+  },
+  {
+    "id": 829,
+    "chromosome": "chr23",
+    "start": 65400000,
+    "end": 68500000,
+    "name": "Xq12",
+    "giemsaStains": "gpos50"
+  },
+  {
+    "id": 830,
+    "chromosome": "chr23",
+    "start": 68500000,
+    "end": 73000000,
+    "name": "Xq13.1",
+    "giemsaStains": "gneg"
+  },
+  {
+    "id": 831,
+    "chromosome": "chr23",
+    "start": 73000000,
+    "end": 74700000,
+    "name": "Xq13.2",
+    "giemsaStains": "gpos50"
+  },
+
+  {
+    "id": 832,
+    "chromosome": "chr23",
+    "start": 74700000,
+    "end": 76800000,
+    "name": "Xq13.3",
+    "giemsaStains": "gneg"
+  },
+  {
+    "id": 833,
+    "chromosome": "chr23",
+    "start": 76800000,
+    "end": 85400000,
+    "name": "Xq21.1",
+    "giemsaStains": "gpos100"
+  },
+  {
+    "id": 834,
+    "chromosome": "chr23",
+    "start": 85400000,
+    "end": 87000000,
+    "name": "Xq21.2",
+    "giemsaStains": "gneg"
+  },
+  {
+    "id": 835,
+    "chromosome": "chr23",
+    "start": 87000000,
+    "end": 92700000,
+    "name": "Xq21.31",
+    "giemsaStains": "gpos100"
+  },
+  {
+    "id": 836,
+    "chromosome": "chr23",
+    "start": 92700000,
+    "end": 94300000,
+    "name": "Xq21.32",
+    "giemsaStains": "gneg"
+  },
+  {
+    "id": 837,
+    "chromosome": "chr23",
+    "start": 94300000,
+    "end": 99100000,
+    "name": "Xq21.33",
+    "giemsaStains": "gpos75"
+  },
+  {
+    "id": 838,
+    "chromosome": "chr23",
+    "start": 99100000,
+    "end": 103300000,
+    "name": "Xq22.1",
+    "giemsaStains": "gneg"
+  },
+  {
+    "id": 839,
+    "chromosome": "chr23",
+    "start": 103300000,
+    "end": 104500000,
+    "name": "Xq22.2",
+    "giemsaStains": "gpos50"
+  },
+  {
+    "id": 840,
+    "chromosome": "chr23",
+    "start": 104500000,
+    "end": 109400000,
+    "name": "Xq22.3",
+    "giemsaStains": "gneg"
+  },
+  {
+    "id": 841,
+    "chromosome": "chr23",
+    "start": 109400000,
+    "end": 117400000,
+    "name": "Xq23",
+    "giemsaStains": "gpos75"
+  },
+  {
+    "id": 842,
+    "chromosome": "chr23",
+    "start": 117400000,
+    "end": 121800000,
+    "name": "Xq24",
+    "giemsaStains": "gneg"
+  },
+  {
+    "id": 843,
+    "chromosome": "chr23",
+    "start": 121800000,
+    "end": 129500000,
+    "name": "Xq25",
+    "giemsaStains": "gpos100"
+  },
+  {
+    "id": 844,
+    "chromosome": "chr23",
+    "start": 129500000,
+    "end": 131300000,
+    "name": "Xq26.1",
+    "giemsaStains": "gneg"
+  },
+  {
+    "id": 845,
+    "chromosome": "chr23",
+    "start": 131300000,
+    "end": 134500000,
+    "name": "Xq26.2",
+    "giemsaStains": "gpos25"
+  },
+  {
+    "id": 846,
+    "chromosome": "chr23",
+    "start": 134500000,
+    "end": 138900000,
+    "name": "Xq26.3",
+    "giemsaStains": "gneg"
+  },
+  {
+    "id": 847,
+    "chromosome": "chr23",
+    "start": 138900000,
+    "end": 141200000,
+    "name": "Xq27.1",
+    "giemsaStains": "gpos75"
+  },
+  {
+    "id": 848,
+    "chromosome": "chr23",
+    "start": 141200000,
+    "end": 143000000,
+    "name": "Xq27.2",
+    "giemsaStains": "gneg"
+  },
+  {
+    "id": 849,
+    "chromosome": "chr23",
+    "start": 143000000,
+    "end": 148000000,
+    "name": "Xq27.3",
+    "giemsaStains": "gpos100"
+  },
+  {
+    "id": 850,
+    "chromosome": "chr23",
+    "start": 148000000,
+    "end": 156040895,
+    "name": "Xq28",
+    "giemsaStains": "gneg"
+  },
+  {
+    "id": 851,
+    "chromosome": "chr24",
+    "start": 0,
+    "end": 300000,
+    "name": "Yp11.32",
+    "giemsaStains": "gneg"
+  },
+  {
+    "id": 852,
+    "chromosome": "chr24",
+    "start": 300000,
+    "end": 600000,
+    "name": "Yp11.31",
+    "giemsaStains": "gpos50"
+  },
+  {
+    "id": 853,
+    "chromosome": "chr24",
+    "start": 600000,
+    "end": 10300000,
+    "name": "Yp11.2",
+    "giemsaStains": "gneg"
+  },
+  {
+    "id": 854,
+    "chromosome": "chr24",
+    "start": 10300000,
+    "end": 10400000,
+    "name": "Yp11.1",
+    "giemsaStains": "acen"
+  },
+  {
+    "id": 855,
+    "chromosome": "chr24",
+    "start": 10400000,
+    "end": 10600000,
+    "name": "Yq11.1",
+    "giemsaStains": "acen"
+  },
+  {
+    "id": 856,
+    "chromosome": "chr24",
+    "start": 10600000,
+    "end": 12400000,
+    "name": "Yq11.212",
+    "giemsaStains": "gneg"
+  },
+  {
+    "id": 857,
+    "chromosome": "chr24",
+    "start": 12400000,
+    "end": 17100000,
+    "name": "Yq11.221",
+    "giemsaStains": "gpos50"
+  },
+  {
+    "id": 858,
+    "chromosome": "chr24",
+    "start": 17100000,
+    "end": 19600000,
+    "name": "Yq11.222",
+    "giemsaStains": "gneg"
+  },
+  {
+    "id": 859,
+    "chromosome": "chr24",
+    "start": 19600000,
+    "end": 23800000,
+    "name": "Yq11.223",
+    "giemsaStains": "gpos50"
+  },
+  {
+    "id": 860,
+    "chromosome": "chr24",
+    "start": 23800000,
+    "end": 26600000,
+    "name": "Yq11.23",
+    "giemsaStains": "gneg"
+  },
+  {
+    "id": 861,
+    "chromosome": "chr24",
+    "start": 26600000,
+    "end": 57227415,
+    "name": "Yq12",
+    "giemsaStains": "gvar"
   }
 ]

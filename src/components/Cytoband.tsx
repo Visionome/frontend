@@ -36,7 +36,8 @@ function Cytoband({
   let size = new THREE.Vector3(10, len, 10);
 
   // Account for centromere width
-  if (hue === '#ffbebe') size = new THREE.Vector3(5, len, 5);
+  //if (hue === '#ffbebe') size = new THREE.Vector3(5, len, 5);
+  if (hue === '#febab8') size = new THREE.Vector3(5, len, 5);
 
   // TODO: removed ref prop from mesh, figure out if this
   // is required for selecting meshes in the future.
