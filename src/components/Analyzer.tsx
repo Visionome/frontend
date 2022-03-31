@@ -21,6 +21,21 @@ export function Analyzer({
   const [input, setInput] = useState('');
   const [output, setOutput] = useState<BlastSearchResponse>(null);
 
+  //@ts-ignore
+  const beforeFileUpload = (file) => {
+    if (file) {
+      var reader = new FileReader();
+      reader.readAsText(file, 'UTF-8');
+      reader.onload = function (evt) {
+        //@ts-ignore
+        setInput(`${evt.target.result}`);
+      };
+      reader.onerror = function (evt) {
+        console.log(evt);
+      };
+    }
+  };
+
   const onRunButtonClick = async () => {
     console.log(input);
 
@@ -115,7 +130,10 @@ export function Analyzer({
         <TextArea
           style={{ height: 200 }}
           // @ts-ignore
-          onChange={(e) => setInput(e.target.value)}
+          value={input}
+          onChange={(e) => {
+            setInput(e.target.value);
+          }}
         />
         <div
           style={{
@@ -125,7 +143,10 @@ export function Analyzer({
             alignContent: 'space-between',
           }}
         >
-          <Upload>
+          <Upload
+            beforeUpload={beforeFileUpload}
+            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+          >
             <Button icon={<UploadOutlined />}>Click to Upload</Button>
           </Upload>
           <Button type="primary" onClick={onRunButtonClick}>
