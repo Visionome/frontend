@@ -3,7 +3,7 @@ import { UploadOutlined } from '@ant-design/icons';
 import { Button, Table, Upload, Typography } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import React, { useState } from 'react';
-import { BlastAPI, BlastMatch } from '../BlastAPI';
+import { BlastAPI, BlastMatch, BlastSearchResponse } from '../BlastAPI';
 
 const { Text } = Typography;
 
@@ -19,7 +19,7 @@ export function Analyzer({
   setInitialSearch,
 }: AnalyzerProps): JSX.Element {
   const [input, setInput] = useState('');
-  const [output, setOutput] = useState<BlastMatch[]>([]);
+  const [output, setOutput] = useState<BlastSearchResponse>(null);
 
   const onRunButtonClick = async () => {
     console.log(input);
@@ -31,16 +31,13 @@ export function Analyzer({
      * gaps
      * expect
      */
-    const matches = await BlastAPI.search(input);
-    setOutput(matches);
+    const results = await BlastAPI.search(input);
+    setOutput(results);
   };
 
-  console.log(setInitialSearch);
-  console.log(setCurrentView);
   const moveToSearch = (text: string) => {
-    console.log('i hit it');
     setInitialSearch(text);
-    setCurrentView('analyzer');
+    setCurrentView('visualizer');
   };
 
   const tableColumns = [
@@ -101,21 +98,25 @@ export function Analyzer({
       >
         <h1 style={{ textAlign: 'left' }}>Sequence Analyzer</h1>
         <Text style={{ textAlign: 'left', fontSize: 14 }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          Sollicitudin tempor id eu nisl nunc. Mattis nunc sed blandit libero
-          volutpat sed cras ornare arcu. Elementum nisi quis eleifend quam
-          adipiscing vitae. Pellentesque pulvinar pellentesque habitant morbi
-          tristique senectus. Odio tempor orci dapibus ultrices. Proin fermentum
-          leo vel orci porta non. Vulputate sapien nec sagittis aliquam
-          malesuada bibendum. Id velit ut tortor pretium viverra. Nunc sed augue
-          lacus viverra vitae congue eu consequat ac. Semper feugiat nibh sed
-          pulvinar proin gravida. In aliquam sem fringilla ut morbi tincidunt
-          augue interdum velit. Sed lectus vestibulum mattis ullamcorper.
-          Dignissim diam quis enim lobortis scelerisque fermentum dui faucibus.
+          <a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi">Blast</a> is a tool
+          used by people in bioinformatics to align smaller sequences of genes
+          to larger ones. The reason this is interesting is it allows you to
+          take any sequence of A G C and Ts and find what gene it represents.
+          Below, you can enter any sequence and find what genes it aligns to in
+          order to learn what they are and what genes their assosciated with. If
+          this is your first time or your having a hard time deciding what to
+          search, feel free to take a look at this{' '}
+          <a href="https://www.darkdaily.com/2018/05/16/top-10-list-of-the-most-studied-genes-of-all-time-includes-several-used-in-clinical-laboratory-testing-for-cancers-other-diseases-516/">
+            list
+          </a>{' '}
+          of common gene sequences.
         </Text>
 
-        <TextArea style={{ height: 200 }} />
+        <TextArea
+          style={{ height: 200 }}
+          // @ts-ignore
+          onChange={(e) => setInput(e.target.value)}
+        />
         <div
           style={{
             width: '100%',
@@ -131,28 +132,43 @@ export function Analyzer({
             Run
           </Button>
         </div>
-        <h1 style={{ textAlign: 'left' }}>Results</h1>
+        {output != null ? (
+          <>
+            <h1 style={{ textAlign: 'left' }}>Results</h1>
 
-        <h1 style={{ textAlign: 'left' }}>Output Summary</h1>
-        <Text style={{ textAlign: 'left' }}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          Sollicitudin tempor id eu nisl nunc. Mattis nunc sed blandit libero
-          volutpat sed cras ornare arcu. Elementum nisi quis eleifend quam
-          adipiscing vitae. Pellentesque pulvinar pellentesque habitant morbi
-          tristique senectus. Odio tempor orci dapibus ultrices. Proin fermentum
-          leo vel orci porta non. Vulputate sapien nec sagittis aliquam
-          malesuada bibendum. Id velit ut tortor pretium viverra. Nunc sed augue
-          lacus viverra vitae congue eu consequat ac. Semper feugiat nibh sed
-          pulvinar proin gravida. In aliquam sem fringilla ut morbi tincidunt
-          augue interdum velit. Sed lectus vestibulum mattis ullamcorper.
-          Dignissim diam quis enim lobortis scelerisque fermentum dui faucibus.
-        </Text>
-        <Button type="primary">View Gene in Visualization</Button>
-        <Table dataSource={output} columns={tableColumns} />
+            <h1 style={{ textAlign: 'left' }}>Output Summary</h1>
+            <Text style={{ textAlign: 'left' }}>
+              The result of your query generated {output.metadata.total_hits}{' '}
+              number of hits on {output.matches.length} number of genes. These
+              hits represent parts of your query sequence that were aligned to
+              the gene sequences. The best scoring alignment was for x gene and
+              it produced {output.metadata.best_score} score. This score is
+              determined by how many gaps between the query sequence and the
+              gene sequence that had to be added in order to make them align.
+              The length of the longest alignment was{' '}
+              {output.metadata.longest_alignment} It has an e value of{' '}
+              {output.metadata.best_evalue} (e value is a way of describing how
+              likely it is that this is the best possible match for the
+              sequence). If you'd like to view the gene that was best aligned in
+              the visualizer, click here. You can also use the table on the left
+              to visualize any gene that was aligned to your sequence.
+            </Text>
+            <Button
+              type="primary"
+              onClick={() => {
+                moveToSearch(output.metadata.best_gene_symbol);
+              }}
+            >
+              View Gene in Visualization
+            </Button>
+            <Table dataSource={output.matches} columns={tableColumns} />
+
+            <div style={{ display: 'flex', alignItems: 'space-evenly' }}></div>
+          </>
+        ) : (
+          <div></div>
+        )}
       </div>
-
-      <div style={{ display: 'flex', alignItems: 'space-evenly' }}></div>
     </div>
   );
 }

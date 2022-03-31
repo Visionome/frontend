@@ -144,7 +144,6 @@ export function Visualizer({ initialSearch }: VisualizerProps): JSX.Element {
         selectedChromLocations={selectedChromLocations}
         selectedCytobandLocations={selectedCytobandLocations}
       />
-      <h5>Genome Info</h5>
       {/* eslint-disable-next-line*/}
       {/*genome.map((genomeStuff: any) => {
             // eslint-disable-next-line
@@ -159,7 +158,6 @@ export function Visualizer({ initialSearch }: VisualizerProps): JSX.Element {
               );
             });
           })*/}
-      <h5>VCF Info</h5>
       {/*vcf.map((vcfStuff: any) => {
             return Object.keys(vcfStuff).map((key, index: any) => {
               return (
