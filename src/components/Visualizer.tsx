@@ -188,7 +188,9 @@ function parseChrom(cytoband: string): string {
     chrom += cytoband[curIndex];
     curIndex++;
   }
-  console.log(cytoband);
-  console.log(chrom);
+
+  if (chrom === 'X') return '23';
+  else if (chrom === 'Y') return '24';
+
   return chrom;
 }
