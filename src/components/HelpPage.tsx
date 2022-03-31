@@ -53,6 +53,26 @@ export function HelpPage(): JSX.Element {
         making an easy to use bioinformatics website, and we all worked over the
         course of nine months to make it a reality.
       </p>
+
+      <h2>Attribution</h2>
+      <p>
+        We would like to thank NCBI, BioDBNet, NCI, MESH and OMIM for their work
+        on the biology and providing the public with high quality infomration
+        and keeping it open.
+      </p>
+      <p>
+        We would also like to thank the people cited below for their amazing
+        work on the molstar component. Because of the complexity of the work we
+        could not have included it in our project without their amazing work and
+        them open sourcing it.
+      </p>
+      <p>
+        David Sehnal, Sebastian Bittrich, Mandar Deshpande, Radka Svobodová,
+        Karel Berka, Václav Bazgier, Sameer Velankar, Stephen K Burley, Jaroslav
+        Koča, Alexander S Rose: Mol* Viewer: modern web app for 3D visualization
+        and analysis of large biomolecular structures, Nucleic Acids Research,
+        2021; https://doi.org/10.1093/nar/gkab314.
+      </p>
     </div>
   );
 }
