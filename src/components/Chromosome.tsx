@@ -67,13 +67,43 @@ function Chromosome({
   const re = 'https.*?(?=\\])';
   let foundUrl = '';
   let urlString = '';
-  console.log(selectedItem);
+  //console.log(selectedItem);
   if (bandSelected !== '' && selectedCytobandLocations.includes(bandSelected)) {
     foundUrl = selectedItem.diseaseInfo.match(re);
     if (foundUrl != null) {
       urlString = foundUrl[0].toString();
     }
   }
+
+  const getBandLocation = (name: string): string => {
+    if (selectedChrom > 22) {
+      return name;
+    } else if (selectedChrom > 9) {
+      return name.slice(0, 2) + name.slice(3);
+    }
+    return name.slice(0, 1) + name.slice(2);
+  };
+
+  const getGiemsa = (stainValue: string): string => {
+    switch (stainValue) {
+      case 'gneg':
+        return '#121413';
+      case 'gpos25':
+        return '#272b29';
+      case 'gpos50':
+        return '#383d3a';
+      case 'gpos75':
+        return '#545c57';
+      case 'gpos100':
+        return '#8c9690';
+      case 'gvar':
+        return '#a1a1e4';
+      case 'stalk':
+        return '#8584e5';
+      default:
+        return '#febab8';
+    }
+  };
 
   // Loop through cytobands and add them to the Canvas.
   return (
@@ -128,29 +158,11 @@ function Chromosome({
               prevYLen = yLen;
 
               // Create cytoband location from substring of chromosome name.
-              const bandLocation = band.name.slice(0, 1) + band.name.slice(2);
+              const bandLocation = getBandLocation(band.name);
               // Generating hue for a band
               let hue = 'orange';
-              switch (band.giemsaStains) {
-                case 'gneg':
-                  hue = '#121413';
-                  break;
-                case 'gpos25':
-                  hue = '#272b29';
-                  break;
-                case 'gpos50':
-                  hue = '#383d3a';
-                  break;
-                case 'gpos75':
-                  hue = '#545c57';
-                  break;
-                case 'gpos100':
-                  hue = '#8c9690';
-                  break;
-                default:
-                  hue = '#ffbebe';
-                  break;
-              }
+              hue = getGiemsa(band.giemsaStains);
+
               return (
                 <Cytoband
                   bandSelected={bandSelected}
