@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { useEffect, useState } from 'react';
-import { Input } from 'antd';
+import { Input, Card } from 'antd';
 import Window from './Window';
 import { API } from 'aws-amplify';
 import * as queries from '../graphql/queries';
