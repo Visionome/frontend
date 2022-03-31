@@ -67,7 +67,7 @@ export function Visualizer({ initialSearch }: VisualizerProps): JSX.Element {
 
       // const results = geneSearchResults.data.searchGFFRefs.items;
       const cytoArr = results.map((item: any) => item.cytobandlocation);
-      const chromArr = cytoArr.map((item: any) => item.substring(0, 1));
+      const chromArr = cytoArr.map((item: any) => parseChrom(item));
 
       // Set locations.
       setSelectedChromLocations(chromArr);
@@ -176,4 +176,19 @@ export function Visualizer({ initialSearch }: VisualizerProps): JSX.Element {
           })*/}
     </div>
   );
+}
+
+function parseChrom(cytoband: string): string {
+  let chrom = '';
+  let curIndex = 0;
+  while (curIndex <= cytoband.length - 1) {
+    if (cytoband[curIndex] === 'p' || cytoband[curIndex] === 'q') {
+      break;
+    }
+    chrom += cytoband[curIndex];
+    curIndex++;
+  }
+  console.log(cytoband);
+  console.log(chrom);
+  return chrom;
 }
