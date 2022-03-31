@@ -45,23 +45,27 @@ export function Visualizer({ initialSearch }: VisualizerProps): JSX.Element {
           },
         },
       });
+      //@ts-expect-error
+      const diseaseSearchQuery: Promise<any> = API.graphql({
+        query: queries.searchGFFRefs,
+        variables: {
+          filter: {
+            diseaseinfo: { matchPhrase: `${searchValue.toLowerCase()}*` },
+          },
+        },
+      });
 
-      // const diseaseSearchQuery: Promise<any> = API.graphql({
-      //   query: queries.searchGFFRefs,
-      //   variables: {
-      //     filter: {
-      //       diseaseinfo: { matchPhrase: `${searchValue.toLowerCase()}*` },
-      //     },
-      //   },
-      // });
+      const [geneSearchResults, diseaseSearchResults] = await Promise.all([
+        geneSearchQuery,
+        diseaseSearchQuery,
+      ]);
 
-      const [geneSearchResults] = await Promise.all([geneSearchQuery]);
+      const results =
+        geneSearchResults.data.searchGFFRefs.items.length === 0
+          ? diseaseSearchResults.data.searchGFFRefs.items
+          : geneSearchResults.data.searchGFFRefs.items;
 
-      // const results =
-      //   geneSearchResults.data.searchGFFRefs.items.length === 0
-      //     ? diseaseSearchResults.data.searchGFFRefs.items
-      //     : geneSearchResults.data.searchGFFRefs.items;
-      const results = geneSearchResults.data.searchGFFRefs.items;
+      // const results = geneSearchResults.data.searchGFFRefs.items;
       const cytoArr = results.map((item: any) => item.cytobandlocation);
       const chromArr = cytoArr.map((item: any) => item.substring(0, 1));
 
@@ -85,10 +89,9 @@ export function Visualizer({ initialSearch }: VisualizerProps): JSX.Element {
         );
         return obj;
       });
-      console.log(filteredData);
-      console.log(localStorage.getItem('1p36.33'));
+      // console.log('filtered data' + filteredData);
       // Set gene info card objects.
-      // setGeneCards(filteredData);
+      //setGeneCards(filteredData);
       // Set printable GFF data.
       setGenome(geneSearchResults.data.searchGFFRefs.items);
 
