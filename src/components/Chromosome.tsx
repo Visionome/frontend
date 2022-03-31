@@ -12,10 +12,10 @@ extend({ OrbitControls });
 
 export interface GeneProps {
   gene: string;
-  description: string;
-  ensemblId: string;
+  descriptions: string;
+  ensembl_id: string;
   diseaseInfo: any;
-  cytobandLocation: string;
+  cytoband_location: string;
 }
 
 interface ChromProps {
