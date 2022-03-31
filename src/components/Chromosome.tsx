@@ -5,6 +5,7 @@ import Cytoband from './Cytoband';
 import Data from '../scripts/cytoBand.json';
 import Sizes from '../scripts/chrom.json';
 import GeneInfoCard from './GeneInfoCard';
+import { Card, Row, Col, Statistic } from 'antd';
 import '../App';
 
 extend({ OrbitControls });
@@ -55,6 +56,7 @@ function Chromosome({
 
   // State for selected cytoband, used for info cards.
   const [bandSelected, setBandSelected] = useState('');
+  const [bandHovered, setBandHovered] = useState('None');
 
   const selectedItem: GeneProps = JSON.parse(
     localStorage.getItem(bandSelected),
@@ -76,6 +78,32 @@ function Chromosome({
   // Loop through cytobands and add them to the Canvas.
   return (
     <>
+      <div className="site-statistic-demo-card">
+        <Row gutter={16}>
+          <Col span={12}>
+            <Card>
+              <Statistic
+                title="Chromosome"
+                value={selectedChrom > -1 ? selectedChrom : 'None'}
+                precision={0}
+                valueStyle={{ color: '#3f8600' }}
+                prefix={selectedChrom > -1 ? 'Chr' : ''}
+              />
+            </Card>
+          </Col>
+          <Col span={12}>
+            <Card>
+              <Statistic
+                title="Cytoband"
+                value={bandHovered}
+                precision={0}
+                valueStyle={{ color: '#cf1322' }}
+              />
+            </Card>
+          </Col>
+        </Row>
+      </div>
+      ,
       <div className="flex-container">
         <div className="flex-vis">
           <Canvas camera={{ zoom: 1, position: [0, 0, 0] }}>
@@ -127,6 +155,8 @@ function Chromosome({
                 <Cytoband
                   bandSelected={bandSelected}
                   setBandSelected={setBandSelected}
+                  bandHovered={bandHovered}
+                  setBandHovered={setBandHovered}
                   key={band.id}
                   id={band.id}
                   xpos={0}

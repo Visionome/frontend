@@ -47,7 +47,8 @@ const TabsCard = ({
 }: TabsCardProps): JSX.Element => {
   const [activeTabKey1, setActiveTabKey1] = useState('tab1');
   //const [activeTabKey2, setActiveTabKey2] = useState('tab2');
-
+  console.log('in tabs card');
+  console.log('description: ' + description);
   //const [container, setContainer] = useState<HTMLDivElement | null>(null);
   const contentList: Record<string, JSX.Element> = {
     tab1: (
