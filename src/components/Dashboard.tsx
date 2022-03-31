@@ -17,30 +17,45 @@ import logoImage from '../assets/visionome-logo-alt.png';
 import logoText from '../assets/visionome-logo.png';
 import { Visualizer } from './Visualizer';
 import { Analyzer } from './Analyzer';
+import { HelpPage } from './HelpPage';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
-// type CardData = {
-//   gene: string;
-//   description: string;
-//   ensembl_id: string;
-//   disease_info: string;
-//   cytoband_location: string;
-// };
-
-// type CardList = {
-//   cardList: CardData[];
-// };
+const SelectedView = (props: {
+  currentView: string;
+  setCurrentView: React.Dispatch<
+    React.SetStateAction<'analyzer' | 'visualizer' | 'help'>
+  >;
+  setInitialSearch: React.Dispatch<React.SetStateAction<string>>;
+  initialSearch: string;
+}): JSX.Element => {
+  if (props.currentView === 'visualizer')
+    return <Visualizer initialSearch={props.initialSearch} />;
+  else if (props.currentView === 'analyzer')
+    return (
+      <Analyzer
+        setInitialSearch={props.setInitialSearch}
+        setCurrentView={props.setCurrentView}
+      />
+    );
+  else if (props.currentView === 'help') return <HelpPage />;
+};
 
 const Dashboard = (): JSX.Element => {
-  const [currentView, setCurrentView] = useState<'analyzer' | 'sequencer'>(
-    'analyzer',
-  );
+  const [initialSearch, setInitialSearch] = useState('');
+  const [currentView, setCurrentView] = useState<
+    'visualizer' | 'analyzer' | 'help'
+  >('visualizer');
 
   const onSelectView = (info: SelectInfo) => {
-    setCurrentView(info.key as 'analyzer' | 'sequencer');
+    setCurrentView(info.key as 'visualizer' | 'analyzer' | 'help');
   };
+
+  // const moveToSearch = (text: string) => {
+  //   setInitalSearch(text);
+  //   setCurrentView('analyzer');
+  // };
 
   useEffect(() => {
     // searchForGene();
@@ -61,7 +76,12 @@ const Dashboard = (): JSX.Element => {
           <img src={logoText} />
         </Header>
         <div className="site-layout-content">
-          {currentView === 'analyzer' ? <Visualizer /> : <Analyzer />}
+          <SelectedView
+            currentView={currentView}
+            setCurrentView={setCurrentView}
+            initialSearch={initialSearch}
+            setInitialSearch={setInitialSearch}
+          />
         </div>
       </Content>
       <Sider theme="light" style={{ display: 'flex', flexDirection: 'column' }}>
@@ -86,11 +106,14 @@ const Dashboard = (): JSX.Element => {
           mode="inline"
           onSelect={onSelectView}
         >
-          <Menu.Item key="analyzer" icon={<SlidersOutlined />}>
+          <Menu.Item key="visualizer" icon={<SlidersOutlined />}>
             Genome Visualizer
           </Menu.Item>
-          <Menu.Item key="visualizer" icon={<AppstoreFilled />}>
+          <Menu.Item key="analyzer" icon={<AppstoreFilled />}>
             Sequence Analyzer
+          </Menu.Item>
+          <Menu.Item key="help" icon={<AppstoreFilled />}>
+            Help
           </Menu.Item>
           <SubMenu key="3" title="More Info" icon={<InfoCircleFilled />} />
         </Menu>
