@@ -1,5 +1,3 @@
-import * as mockReponse from './mockBlast.json';
-
 export interface BlastMatch {
   align_length: number;
   gene_symbol: string;
