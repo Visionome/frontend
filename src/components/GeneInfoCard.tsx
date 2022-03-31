@@ -35,7 +35,8 @@ function GeneInfoCard({
     selectedProtein();
   }, []);
 
-  console.log('geneinfocard description ' + selectedItem.description);
+  console.log('full object ' + JSON.stringify(selectedItem));
+  console.log('geneinfocard description ' + selectedItem.descriptions);
   console.log('geneinfocard name ' + selectedItem.gene);
   console.log('geneinforcard diseaseinfo ' + selectedItem.diseaseInfo);
 
@@ -59,10 +60,10 @@ function GeneInfoCard({
       <TabsCard
         urlString={urlString}
         name={selectedItem.gene.toUpperCase()}
-        ensemblid={selectedItem.ensemblId}
-        description={selectedItem.description}
+        ensemblid={selectedItem.ensembl_id}
+        description={selectedItem.descriptions}
         diseaseinfo={selectedItem.diseaseInfo}
-        location={selectedItem.cytobandLocation}
+        location={selectedItem.cytoband_location}
       />
     </>
   );
