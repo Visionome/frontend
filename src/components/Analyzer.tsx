@@ -10,7 +10,7 @@ const { Text } = Typography;
 export interface AnalyzerProps {
   setInitialSearch: React.Dispatch<React.SetStateAction<string>>;
   setCurrentView: React.Dispatch<
-    React.SetStateAction<'analyzer' | 'sequencer'>
+    React.SetStateAction<'analyzer' | 'visualizer' | 'help'>
   >;
 }
 

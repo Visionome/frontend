@@ -1,17 +1,16 @@
-import './App.css';
 import React from 'react';
 
-function Help(): JSX.Element {
+export function HelpPage(): JSX.Element {
   return (
-    <div className="Help">
+    <div className="HelpPage">
       <h1 style={{ fontSize: 20, textAlign: 'center' }}>Help Page</h1>
-      <h2>What is VisonNome?</h2>
+      <h2>What is VisoNome?</h2>
       <p>
-        Welcome to VisonNome. This is a website developed by four UCF students
+        Welcome to VISONome. This is a website developed by four UCF students
         with info about the human genome. As everyone knows all humanbeings are
         composed of DNA. However, it can become a little complex to some folks
-        who are first introduced to theconcept. That is what VisionNome is for.
-        It is not an actually real world, but a combination of the words vision
+        who are first introduced to theconcept. That is what VISONome is for. It
+        is not an actually real word, but a combination of the words vision and
         and genome. This website was made to combine computer aspects of
         visualization with information on the human genome. Every person on this
         planet has a unique form of genome sequencing, and said sequencing can
@@ -22,7 +21,7 @@ function Help(): JSX.Element {
 
       <h2>Goal</h2>
       <p>
-        Being a bioinformatic website, the goal of Visionome is not to be the
+        Being a bioinformatic website, the goal of VISIONome is not to be the
         best of the bunch. What this website offers that other do not is the
         visualization aspect. The Human Genome is complex and can be a bit
         difficult to understand for anyone getting into the subject for the very
@@ -59,5 +58,3 @@ function Help(): JSX.Element {
     </div>
   );
 }
-
-export default Help;
