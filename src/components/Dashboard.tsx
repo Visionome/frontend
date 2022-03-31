@@ -6,8 +6,9 @@ import {
   HomeFilled,
   AppstoreFilled,
   InfoCircleFilled,
-  DeploymentUnitOutlined,
-  SlidersOutlined,
+  MenuOutlined,
+  SlidersFilled,
+  QuestionCircleFilled,
 } from '@ant-design/icons';
 import { API } from 'aws-amplify';
 const { Search } = Input;
@@ -95,9 +96,9 @@ const Dashboard = (): JSX.Element => {
             alignItems: 'center',
           }}
         >
-          <DeploymentUnitOutlined style={{ color: '#0070e8' }} />
+          <MenuOutlined style={{ color: '#0070e8' }} />
           <div style={{ flex: 1, textAlign: 'left', marginLeft: 10 }}>
-            <h2 style={{ marginBottom: 0 }}>Menu</h2>
+            <h2 style={{ marginLeft: 12, marginBottom: 0 }}>Menu</h2>
           </div>
         </div>
         <Menu
@@ -106,13 +107,13 @@ const Dashboard = (): JSX.Element => {
           mode="inline"
           onSelect={onSelectView}
         >
-          <Menu.Item key="visualizer" icon={<SlidersOutlined />}>
+          <Menu.Item key="visualizer" icon={<SlidersFilled />}>
             Genome Visualizer
           </Menu.Item>
           <Menu.Item key="analyzer" icon={<AppstoreFilled />}>
             Sequence Analyzer
           </Menu.Item>
-          <Menu.Item key="help" icon={<AppstoreFilled />}>
+          <Menu.Item key="help" icon={<QuestionCircleFilled />}>
             Help
           </Menu.Item>
           <SubMenu key="3" title="More Info" icon={<InfoCircleFilled />} />
