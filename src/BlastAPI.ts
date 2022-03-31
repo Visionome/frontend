@@ -29,7 +29,8 @@ export const BlastAPI = {
     const payload = { sequence };
 
     console.log(payload);
-    const host = 'http://localhost:5000';
+    const host =
+      'https://blast-backend.gbaobaok2t5qo.us-east-2.cs.amazonlightsail.com';
 
     // return mockReponse.matches;
     const results = await fetch(`${host}/blastsearch`, {
