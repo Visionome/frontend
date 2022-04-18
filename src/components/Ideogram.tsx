@@ -27,6 +27,15 @@ function Ideogram(props: IProps): JSX.Element {
   //console.log(props.selectedLocations);
   let size = new THREE.Vector3(10, 10, 10);
   let pos = new THREE.Vector3(0, 0, 0);
+
+  let val1 = hoveredChrom > -1 ? hoveredChrom : 'None';
+
+  if (val1 === 23) {
+    val1 = 'X';
+  } else if (val1 === 24) {
+    val1 = 'Y';
+  }
+
   return (
     <>
       <div className="site-statistic-demo-card">
@@ -35,7 +44,7 @@ function Ideogram(props: IProps): JSX.Element {
             <Card>
               <Statistic
                 title="Chromosome"
-                value={hoveredChrom > -1 ? hoveredChrom : 'None'}
+                value={val1}
                 precision={0}
                 valueStyle={{ color: '#3f8600' }}
                 prefix={hoveredChrom > -1 ? 'Chr' : ''}
