@@ -60,7 +60,7 @@ const TabsCard = ({
     ),
     tab2: (
       <>
-        <div>{parseDiseaseInfo(diseaseinfo)}</div>
+        <>{parseDiseaseInfo(diseaseinfo)}</>
       </>
     ),
   };
@@ -111,63 +111,96 @@ const TabsCard = ({
   );
 };
 
+// function parseDiseaseInfo(diseaseInfo: string) {
+//   const list = [];
+//   let temp = '';
+
+//   for (let i = 0; i < diseaseInfo.length; i++) {
+//     if (diseaseInfo[i] === '[') {
+//       continue;
+//     } else if (diseaseInfo[i] === ']') {
+//       list.push(temp);
+//       console.log('pushing ' + temp);
+//       temp = '';
+//       continue;
+//     } else if (diseaseInfo[i] === ',') {
+//       if (temp !== '') list.push(temp);
+//       temp = '';
+//       continue;
+//     }
+//     temp += diseaseInfo[i];
+//   }
+
+//   console.log('hi');
+//   console.log(list.join('\n'));
+//   const arr = diseaseInfo.replaceAll('[', '').replaceAll(']', '').split(',');
+
+//   const res = [];
+//   let tempList = [];
+//   for (let i = 0; i < arr.length; i++) {
+//     if (i % 3 !== 0) tempList.push(arr[i]);
+//     else {
+//       res.push(tempList);
+//       tempList = [];
+//     }
+//   }
+
+//   // console.log(diseaseInfo.replaceAll('[', '').replaceAll(']', '').split(','));
+//   console.log(res);
+//   // .map((val) => {
+//   //   return <p key={'yessir'}>{val}</p>;
+//   // })
+//   // .join('\n\n');
+//   res.splice(0, 1);
+//   return res.map(([one, two, three]) => {
+//     console.log([one, two, three]);
+//     return (
+//       <>
+//         <div>
+//           {/* {one}
+//           <br />
+//           {two}
+//           <br />
+//           {three}
+//           <br /> */}
+//           <a href={two}>{one}</a>
+//         </div>
+//       </>
+//     );
+//   });
+// }
+
 function parseDiseaseInfo(diseaseInfo: string) {
-  const list = [];
   let temp = '';
+  const list = [];
 
   for (let i = 0; i < diseaseInfo.length; i++) {
-    if (diseaseInfo[i] === '[') {
-      continue;
-    } else if (diseaseInfo[i] === ']') {
+    if (diseaseInfo[i] === '[') continue;
+    else if (diseaseInfo[i] === ']') {
       list.push(temp);
-      console.log('pushing ' + temp);
-      temp = '';
-      continue;
-    } else if (diseaseInfo[i] === ',') {
-      if (temp !== '') list.push(temp);
+      console.log('pushing ' + temp.trim());
       temp = '';
       continue;
     }
     temp += diseaseInfo[i];
   }
 
-  console.log('hi');
-  console.log(list.join('\n'));
-  const arr = diseaseInfo.replaceAll('[', '').replaceAll(']', '').split(',');
-
-  const res = [];
-  let tempList = [];
-  for (let i = 0; i < arr.length; i++) {
-    if (i % 3 !== 0) tempList.push(arr[i]);
-    else {
-      res.push(tempList);
-      tempList = [];
+  const diseaseList = [];
+  for (let i = 0; i < list.length; i++) {
+    const subList = list[i].split(', ');
+    for (let j = 0; j < subList.length; j++) {
+      subList[j].trim();
+      if (subList[j] === '') subList.slice(j, j + 1);
     }
+    diseaseList.push(subList);
   }
-
-  // console.log(diseaseInfo.replaceAll('[', '').replaceAll(']', '').split(','));
-  console.log(res);
-  // .map((val) => {
-  //   return <p key={'yessir'}>{val}</p>;
-  // })
-  // .join('\n\n');
-  res.splice(0, 1);
-  return res.map(([one, two, three]) => {
-    console.log([one, two, three]);
-    return (
-      <>
-        <div>
-          {/* {one}
-          <br />
-          {two}
-          <br />
-          {three}
-          <br /> */}
-          <a href={two}>{one}</a>
-        </div>
-      </>
-    );
-  });
+  console.log('disease list incoming');
+  console.log(diseaseList);
+  return (
+    <>
+      <p>hi</p>
+    </>
+  );
 }
 
 export default TabsCard;
