@@ -187,19 +187,39 @@ function parseDiseaseInfo(diseaseInfo: string) {
 
   const diseaseList = [];
   for (let i = 0; i < list.length; i++) {
-    const subList = list[i].split(', ');
+    const subList = list[i].trim().split(', ');
     for (let j = 0; j < subList.length; j++) {
-      subList[j].trim();
-      if (subList[j] === '') subList.slice(j, j + 1);
+      if (subList[j] === '') {
+        console.log('got here');
+        subList.splice(j, 1);
+        console.log(subList);
+      }
     }
-    diseaseList.push(subList);
+
+    if (subList.length >= 3) {
+      diseaseList.push(subList);
+    }
   }
-  console.log('disease list incoming');
+
   console.log(diseaseList);
+
   return (
-    <>
-      <p>hi</p>
-    </>
+    <div>
+      {diseaseList.map(([id, ...rest]) => {
+        return (
+          <div key={id}>
+            <p>
+              {id}
+              <br />
+              {rest.slice(0, rest.length - 1)}
+            </p>
+            <a href={rest.at(-1)}>Link</a>
+            <br />
+            <br />
+          </div>
+        );
+      })}
+    </div>
   );
 }
 
