@@ -116,7 +116,7 @@ const Dashboard = (): JSX.Element => {
           <Menu.Item key="help" icon={<QuestionCircleFilled />}>
             Help
           </Menu.Item>
-          {/* <SubMenu key="3" title="More Info" icon={<InfoCircleFilled />} /> */}
+          <SubMenu key="3" title="More Info" icon={<InfoCircleFilled />} />
         </Menu>
         <div style={{ display: 'flex', flexDirection: 'column' }} />
       </Sider>
