@@ -75,8 +75,8 @@ function Ideogram({
               scale={size}
               hue={
                 selectedChromLocations.includes(chrom.id.toString())
-                  ? 'blue'
-                  : 'orange'
+                  ? '#223441'
+                  : '#62C3E1'
               }
               viewMode={viewMode}
               setViewMode={setViewMode}

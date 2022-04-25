@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Ideogram from './Ideogram';
 import Chromosome from './Chromosome';
+import { Button } from 'antd';
 // CardList from './Dashboard';
 
 function Window({
@@ -46,7 +47,7 @@ function Window({
         selectedCytobandLocations={selectedCytobandLocations}
         selectedChrom={selectedChrom}
       />
-      <button onClick={() => handleReset()}>Go Back</button>
+      <Button onClick={() => handleReset()}>Go Back</Button>
     </>
   );
 }
