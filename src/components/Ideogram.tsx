@@ -5,6 +5,7 @@ import * as THREE from 'three';
 import Data from '../ideogram.json';
 import Model from './Model';
 import Chroms from '../scripts/chrom.json';
+import { Position } from '@react-three/drei/helpers/Position';
 
 interface IProps {
   selectedChromLocations: string[];
@@ -59,14 +60,14 @@ function Ideogram({
           </Col>
         </Row>
       </div>
-      ,
-      <Canvas camera={{ position: [0, 0, 20], fov: 40 }}>
+      ,{/* <Canvas camera={{ position: [0, 0, 20], fov: 35 }}> */}
+      <Canvas camera={{ zoom: 1, position: [0, 0, 10] }}>
         <ambientLight intensity={0.4} />
-        <pointLight position={[10, 10, 5]} />
+        <pointLight position={[5, 0, 5]} />
         {/* @ts-ignore */}
         {/* <Suspense fallback={null} r3f> */}
         {Data.map((chrom) => {
-          size = new THREE.Vector3(0.35, chrom.len / 40, 0.3);
+          size = new THREE.Vector3(0.6, chrom.len / 40, 0.6);
           pos = new THREE.Vector3(chrom.x, chrom.y, 0);
           return (
             <Model

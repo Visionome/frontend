@@ -31,13 +31,32 @@ export default function X({ hue, group, ...props }: XProps) {
   const col = hovered ? 'hotpink' : hue;
   const material = new THREE.MeshBasicMaterial({ color: col });
 
+  function activateHover() {
+    hover(true);
+    props.setHoveredChrom(props.info);
+    console.log('y ' + props.position.getComponent(1));
+  }
+
+  function deactivateHover() {
+    hover(false);
+    props.setHoveredChrom(-1);
+    console.log('deactivating hover');
+  }
+
+  function handleClick() {
+    props.setViewMode(1);
+    props.setSelectedChrom(props.info);
+    console.log(props.info);
+  }
+
   return (
     <group
       ref={group}
       {...props}
       dispose={null}
-      onPointerOver={() => hover(true)}
-      onPointerOut={() => hover(false)}
+      onPointerOver={() => activateHover()}
+      onPointerOut={() => deactivateHover()}
+      onClick={() => handleClick()}
     >
       <mesh geometry={nodes.Group36303.geometry} material={material} />
       <mesh geometry={nodes.Group44649.geometry} material={material} />
