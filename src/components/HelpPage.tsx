@@ -1,14 +1,10 @@
 import React from 'react';
 
-const headerStyle = {
-  textDecoration: 'underline',
-};
-
 export function HelpPage(): JSX.Element {
   return (
-    <div className="HelpPage" style={{ textAlign: 'left' }}>
-      <h1 style={{ fontSize: 52, fontWeight: 'bold' }}>Help</h1>
-      <h2 style={headerStyle}>What is VISIONome?</h2>
+    <div className="HelpPage">
+      <h1 style={{ textAlign: 'left' }}>Help</h1>
+      <h2>What is VISIONome?</h2>
       <p>
         Welcome to VISIONome. This is a website developed by five UCF students
         with info about the human genome. As many know, every human possesses a
@@ -27,7 +23,7 @@ export function HelpPage(): JSX.Element {
         specific to that difference.
       </p>
 
-      <h2 style={headerStyle}>Goal</h2>
+      <h2>Goal</h2>
       <p>
         Being a bioinformatics-centered website, the goal of VISIONome is not to
         be the best of the bunch. What this website offers that others do
@@ -42,7 +38,7 @@ export function HelpPage(): JSX.Element {
         genome.
       </p>
 
-      <h2 style={headerStyle}>How to Use</h2>
+      <h2>How to Use</h2>
       <p>
         To get started with VISIONome, you will be presented with an diagram of
         all twenty-four chromosomes, including the Y and X chromosomes. Each
@@ -62,7 +58,7 @@ export function HelpPage(): JSX.Element {
         showing where the disease information was found.
       </p>
 
-      <h2 style={headerStyle}>About the creators</h2>
+      <h2>About the creators</h2>
       <p>
         The project started as five UCF students who came together to make a
         project together for Senior Design. One of us came up with the idea of
@@ -70,7 +66,7 @@ export function HelpPage(): JSX.Element {
         course of nine months to make it a reality.
       </p>
 
-      <h2 style={headerStyle}>Attribution</h2>
+      <h2>Attribution</h2>
       <p>
         We would like to thank NCBI, BioDBNet, NCI, MESH and OMIM for their work
         on the biology and providing the public with high quality infomration
