@@ -54,7 +54,16 @@ const TabsCard = ({
     tab1: (
       <>
         <p>Description: {description}</p>
-        <p>EnsemblID: {ensemblid}</p>
+        <p>
+          EnsemblID:{' '}
+          <a
+            href={`http://useast.ensembl.org/Homo_sapiens/Gene/Summary?g=${ensemblid}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {ensemblid}
+          </a>
+        </p>
         <p>Cytoband Location: {location}</p>
       </>
     ),
