@@ -113,7 +113,7 @@ export function Analyzer({
       >
         <h1 style={{ textAlign: 'left' }}>Sequence Analyzer</h1>
         <Text style={{ textAlign: 'left', fontSize: 14 }}>
-          <a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi">Blast</a> is a tool
+          <a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi">BLAST</a> is a tool
           used by people in bioinformatics to align smaller sequences of genes
           to larger ones. The reason this is interesting is it allows you to
           take any sequence of A G C and Ts and find what gene it represents.
