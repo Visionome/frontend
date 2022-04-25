@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/frontend/static/css/main.f12a7bdf.chunk.css",
-    "main.js": "/frontend/static/js/main.807808c1.chunk.js",
-    "main.js.map": "/frontend/static/js/main.807808c1.chunk.js.map",
+    "main.js": "/frontend/static/js/main.ad41a04c.chunk.js",
+    "main.js.map": "/frontend/static/js/main.ad41a04c.chunk.js.map",
     "runtime-main.js": "/frontend/static/js/runtime-main.9cd52ea0.js",
     "runtime-main.js.map": "/frontend/static/js/runtime-main.9cd52ea0.js.map",
     "static/css/2.786ae0dd.chunk.css": "/frontend/static/css/2.786ae0dd.chunk.css",
-    "static/js/2.2052659c.chunk.js": "/frontend/static/js/2.2052659c.chunk.js",
-    "static/js/2.2052659c.chunk.js.map": "/frontend/static/js/2.2052659c.chunk.js.map",
+    "static/js/2.2a06c2ec.chunk.js": "/frontend/static/js/2.2a06c2ec.chunk.js",
+    "static/js/2.2a06c2ec.chunk.js.map": "/frontend/static/js/2.2a06c2ec.chunk.js.map",
     "index.html": "/frontend/index.html",
     "static/css/2.786ae0dd.chunk.css.map": "/frontend/static/css/2.786ae0dd.chunk.css.map",
     "static/css/main.f12a7bdf.chunk.css.map": "/frontend/static/css/main.f12a7bdf.chunk.css.map",
-    "static/js/2.2052659c.chunk.js.LICENSE.txt": "/frontend/static/js/2.2052659c.chunk.js.LICENSE.txt",
+    "static/js/2.2a06c2ec.chunk.js.LICENSE.txt": "/frontend/static/js/2.2a06c2ec.chunk.js.LICENSE.txt",
     "static/media/visionome-logo-alt.8c527be9.png": "/frontend/static/media/visionome-logo-alt.8c527be9.png",
     "static/media/visionome-logo.b4a2b92c.png": "/frontend/static/media/visionome-logo.b4a2b92c.png"
   },
   "entrypoints": [
     "static/js/runtime-main.9cd52ea0.js",
     "static/css/2.786ae0dd.chunk.css",
-    "static/js/2.2052659c.chunk.js",
+    "static/js/2.2a06c2ec.chunk.js",
     "static/css/main.f12a7bdf.chunk.css",
-    "static/js/main.807808c1.chunk.js"
+    "static/js/main.ad41a04c.chunk.js"
   ]
 }
