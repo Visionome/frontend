@@ -28,10 +28,8 @@ export default function Autosome({
   ...props
 }: AutoProps): JSX.Element {
   //const group = useRef()
-  // const text = fs.readFileSync("/Chrom1Centered.glb").toString('utf-8');
-  // console.log(text)
   /* prettier-ignore */
-  const { nodes } = useGLTF('https://glb-files.s3.us-east-1.amazonaws.com/Chrom1Centered.glb?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEM%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJIMEYCIQClA9EY%2B%2FagcqLmF366iD4nvXnDFMqfEhA9GoKNNbrtIAIhAMcxwhBqON1EnLjOEBihzwum2MJ%2Bg9H1blddLTysPymvKu0CCIj%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQARoMNTMzNDc4NTE3NTM2IgyPnQgJbkupBFSIJc8qwQK7fPjHlxEuL8v0HjEl%2FiThSwTGovVUjcLtfkNIRHDPaL%2BYr7QynMds90nm5sRR859RtEljPlaQVYDCHKAaNlgYm7UMY2NGKRmaUOC5BmJlBlDfw0122lbcEIjaqC7V8BFMeAWu2%2B7eV9HjcLKXMDnGfKT0bvBGttvhbSuAVxrYZJCmravztQ1QXDXQmWT7Zv3vJ6fvEtiOj3X58Zh0YikFZ3ekKl4DzOv1vkH9m33q%2BTcJZjcYtEoOCBUpamuyczUpdjDanjP8ARW7K1TyRvyiZS343FRFTLFB63sM6STfQ69PvC7%2BaMdI68LfpbDy0W1n3yCvd9LfgW8%2FlJg3v2I6xvOpT30Tw17pBWeLmKlmv%2BDy%2BPfvsqvsMC1R%2Bs087YiBYL3C7lvFbEujCgV%2BDuCzdomMRVzRx%2BEwRevpupeiPFkw6YGZkwY6sgKWLBNkdLXM9hfbkPRB7%2FhNh9ojXhUGJX7eMLRJzN7AHu3SfnueW8tuNEJ4JBzhqoO%2BhG0KthhZ3ebYmpzewFIB8mP1YjlZcwDYT9dxAj%2Fbx%2Bxcq5DLdCDgooRuntHxW0tXIALFqLFbb8n6MkYnpXVfNo7NbTl00URhANHE1pkpjoWbpm1DkxTB1w%2BMz95cTHXylRWWc%2FNLUuXPeaJ6Aq52ppsdhri1VhK3KgX3txnzhNudfinBmjXGLkp48vLMclnsx7%2FrjRpidmvkuEOkpgqkD%2BaRqRKfoP32Wcmw1T%2FjcXpWogaLCQfQvmaa%2F%2FoedLlUClAoF7b%2FY5JD0fIhdVKdVDEu4WZSg33tYutD0f3pfPt%2BrNMXEALtmqs2ZIFqBm%2FU71GtNpPVwubLS5CxIUF8O1I%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220425T064353Z&X-Amz-SignedHeaders=host&X-Amz-Expires=43200&X-Amz-Credential=ASIAXYNOMFMQCLWDSOPS%2F20220425%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=0cac20e8b6009dedacc299783baf3d202dad8e71d59eb20dfb4ca14391cf774f');
+  const { nodes } = useGLTF('https://glb-files.s3.amazonaws.com/Chrom1Centered.glb');
   //console.log('info ' + props.info);
   const [hovered, hover] = useState(false);
   const col = hovered ? 'hotpink' : hue;
