@@ -5,7 +5,6 @@ import * as THREE from 'three';
 import Data from '../ideogram.json';
 import Model from './Model';
 import Chroms from '../scripts/chrom.json';
-import { Position } from '@react-three/drei/helpers/Position';
 
 interface IProps {
   selectedChromLocations: string[];
@@ -22,7 +21,6 @@ function Ideogram({
   setViewMode,
   selectedChrom,
   setSelectedChrom,
-  ...props
 }: IProps): JSX.Element {
   // Render all chromosomes without cytobands
   const [hoveredChrom, setHoveredChrom] = useState(-1);

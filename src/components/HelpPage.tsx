@@ -69,6 +69,11 @@ export function HelpPage(): JSX.Element {
         making an easy to use bioinformatics website, and we all worked over the
         course of nine months to make it a reality.
       </p>
+      <p>
+        If the reader is curious about how this was created feel free to check
+        the source code at our <a href="https://github.com/Visionome">github</a>
+        .
+      </p>
 
       <h2 style={headerStyle}>Attribution</h2>
       <p>
@@ -81,6 +86,13 @@ export function HelpPage(): JSX.Element {
         work on the <a href="https://molstar.org/">molstar</a> component.
         Because of the complexity of the work we could not have included it in
         our project without their research and them open sourcing it.
+      </p>
+      <p>
+        Finally, the molstar component uses the protein renders created by
+        Alphafold. Alphafold is a machine learning model that creates 3D protein
+        renders and is created by the team at DeepMind. Thank you DeepMind team
+        for open sourcing the protein renders which allowed us to use them in
+        our education tool.
       </p>
       <p>
         David Sehnal, Sebastian Bittrich, Mandar Deshpande, Radka Svobodová,
