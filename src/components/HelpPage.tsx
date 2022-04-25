@@ -77,9 +77,9 @@ export function HelpPage(): JSX.Element {
 
       <h2 style={headerStyle}>Attribution</h2>
       <p>
-        We would like to thank NCBI, BioDBNet, NCI, MESH and OMIM for their work
-        on the biology and providing the public with high quality information
-        and keeping it open.
+        We would like to thank NCBI, BioDBNet, NCI, MESH, UniProt and OMIM for
+        their work on the biology and providing the public with high quality
+        information and keeping it open.
       </p>
       <p>
         We would also like to thank the people cited below for their amazing
@@ -100,6 +100,12 @@ export function HelpPage(): JSX.Element {
         Koča, Alexander S Rose: Mol* Viewer: modern web app for 3D visualization
         and analysis of large biomolecular structures, Nucleic Acids Research,
         2021; https://doi.org/10.1093/nar/gkab314.
+      </p>
+      <p>
+        The uniprot accession containing information on the searched gene in our
+        infocards helps our users explore the encoded proteins for each gene.
+        The UniProt Consortium UniProt: the universal protein knowledgebase in
+        2021 Nucleic Acids Res. 49:D1 (2021)
       </p>
     </div>
   );
