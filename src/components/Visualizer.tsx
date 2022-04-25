@@ -134,7 +134,7 @@ export function Visualizer({ initialSearch }: VisualizerProps): JSX.Element {
             Genome Visualization
           </h3>
           <Search
-            placeholder="Input gene name, disease name..."
+            placeholder="Input name, disease, function..."
             allowClear
             onSearch={searchForGene}
             style={{ width: '100%' }}
@@ -188,12 +188,7 @@ function parseChrom(cytoband: string): string {
     chrom += cytoband[curIndex];
     curIndex++;
   }
-
-  // TODO: this is a bandaid.
-  // The real solution is to rename the chromosomes to X and Y instead of
-  // 23 and 24.
-  if (chrom === 'X') return '23';
-  else if (chrom === 'Y') return '24';
-
+  console.log(cytoband);
+  console.log(chrom);
   return chrom;
 }
