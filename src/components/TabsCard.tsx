@@ -211,9 +211,8 @@ function parseDiseaseInfo(diseaseInfo: string) {
             <p>
               {id}
               <br />
-              {rest.slice(0, rest.length - 1)}
+              <a href={rest.at(-1)}>{rest.slice(0, rest.length - 1)}</a>
             </p>
-            <a href={rest.at(-1)}>Link</a>
             <br />
             <br />
           </div>
