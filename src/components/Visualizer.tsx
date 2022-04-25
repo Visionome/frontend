@@ -41,7 +41,7 @@ export function Visualizer({ initialSearch }: VisualizerProps): JSX.Element {
         query: queries.searchGFFRefs,
         variables: {
           filter: {
-            name: { eq: searchValue },
+            name: { eq: searchValue.toUpperCase() },
           },
         },
       });
