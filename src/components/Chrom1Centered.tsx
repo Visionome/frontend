@@ -38,6 +38,25 @@ export default function Autosome({
   const material = new THREE.MeshBasicMaterial({ color: col });
   //const [clicked, click] = useState(false);
   console.log('color:  ' + col);
+
+  function activateHover() {
+    hover(true);
+    props.setHoveredChrom(props.info);
+    console.log('y ' + props.position.getComponent(1));
+  }
+
+  function deactivateHover() {
+    hover(false);
+    props.setHoveredChrom(-1);
+    console.log('deactivating hover');
+  }
+
+  function handleClick() {
+    props.setViewMode(1);
+    props.setSelectedChrom(props.info);
+    console.log(props.info);
+  }
+
   return (
     // Autosomes
     // gmaterial={materials.DefaultMaterial}
@@ -45,8 +64,9 @@ export default function Autosome({
       ref={group}
       {...props}
       dispose={null}
-      onPointerOver={() => hover(true)}
-      onPointerOut={() => hover(false)}
+      onPointerOver={() => activateHover()}
+      onPointerOut={() => deactivateHover()}
+      onClick={() => handleClick()}
     >
       <mesh geometry={nodes.Group36303.geometry} material={material} />
       <mesh geometry={nodes.Group44649.geometry} material={material} />
