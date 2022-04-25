@@ -38,7 +38,6 @@ export interface TabsCardProps {
 }
 
 const TabsCard = ({
-  urlString,
   name,
   ensemblid,
   description,
@@ -89,7 +88,11 @@ const TabsCard = ({
         tabList={tabListNoTitle}
         activeTabKey={activeTabKey1}
         tabBarExtraContent={
-          <a href={urlString} target="_blank" rel="noreferrer">
+          <a
+            href={`https://www.uniprot.org/uniprot/?query=gene%3A${name}&sort=score`}
+            target="_blank"
+            rel="noreferrer"
+          >
             More
           </a>
         }
@@ -217,13 +220,15 @@ function parseDiseaseInfo(diseaseInfo: string) {
       {diseaseList.map(([id, ...rest]) => {
         return (
           <div key={id}>
-            <p>
-              {id}
-              <br />
-              <a href={rest.at(-1)}>{rest.slice(0, rest.length - 1)}</a>
-            </p>
-            <br />
-            <br />
+            <Card>
+              <p>
+                {id}
+                <br />
+                <a href={rest.at(-1)} target="_blank" rel="noreferrer">
+                  {rest.slice(0, rest.length - 1)}
+                </a>
+              </p>
+            </Card>
           </div>
         );
       })}

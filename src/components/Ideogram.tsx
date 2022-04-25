@@ -1,4 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
 import { Canvas } from '@react-three/fiber';
 import React, { useState } from 'react';
 import { Card, Row, Col, Statistic } from 'antd';

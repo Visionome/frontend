@@ -134,7 +134,7 @@ export function Visualizer({ initialSearch }: VisualizerProps): JSX.Element {
             Genome Visualization
           </h3>
           <Search
-            placeholder="Input name, disease, function..."
+            placeholder="Input gene name, disease..."
             allowClear
             onSearch={searchForGene}
             style={{ width: '100%' }}
