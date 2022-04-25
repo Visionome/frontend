@@ -1,11 +1,12 @@
 import { Canvas } from '@react-three/fiber';
 import React, { useState } from 'react';
 import { Card, Row, Col, Statistic } from 'antd';
+// import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
+
 import * as THREE from 'three';
 import Data from '../ideogram.json';
-import Model from './Model';
+import Cylinder from './Cylinder';
 import Chroms from '../scripts/chrom.json';
-import { Position } from '@react-three/drei/helpers/Position';
 
 interface IProps {
   selectedChromLocations: string[];
@@ -16,23 +17,25 @@ interface IProps {
 }
 
 // Meshes for canvas displaying all chromosomes together.
-function Ideogram({
-  viewMode,
-  selectedChromLocations,
-  setViewMode,
-  selectedChrom,
-  setSelectedChrom,
-  ...props
-}: IProps): JSX.Element {
+function Ideogram(props: IProps): JSX.Element {
   // Render all chromosomes without cytobands
   const [hoveredChrom, setHoveredChrom] = useState(-1);
   let length = 0; // nucleotide length
   if (hoveredChrom > -1) {
     length = Chroms[hoveredChrom - 1].assembly_len;
   }
-  //console.log(selectedLocations);
+  //console.log(props.selectedLocations);
   let size = new THREE.Vector3(10, 10, 10);
   let pos = new THREE.Vector3(0, 0, 0);
+
+  let val1 = hoveredChrom > -1 ? hoveredChrom : 'None';
+
+  if (val1 === 23) {
+    val1 = 'X';
+  } else if (val1 === 24) {
+    val1 = 'Y';
+  }
+
   return (
     <>
       <div className="site-statistic-demo-card">
@@ -41,7 +44,7 @@ function Ideogram({
             <Card>
               <Statistic
                 title="Chromosome"
-                value={hoveredChrom > -1 ? hoveredChrom : 'None'}
+                value={val1}
                 precision={0}
                 valueStyle={{ color: '#3f8600' }}
                 prefix={hoveredChrom > -1 ? 'Chr' : ''}
@@ -60,36 +63,33 @@ function Ideogram({
           </Col>
         </Row>
       </div>
-      ,{/* <Canvas camera={{ position: [0, 0, 20], fov: 35 }}> */}
-      <Canvas camera={{ zoom: 1, position: [0, 0, 10] }}>
-        <ambientLight intensity={0.4} />
-        <pointLight position={[5, 0, 5]} />
-        {/* @ts-ignore */}
-        {/* <Suspense fallback={null} r3f> */}
+      ,
+      <Canvas>
+        <ambientLight />
+        <pointLight position={[10, 10, 10]} />
         {Data.map((chrom) => {
-          size = new THREE.Vector3(0.6, chrom.len / 40, 0.6);
+          size = new THREE.Vector3(0.3, chrom.len / 15, 0.3);
           pos = new THREE.Vector3(chrom.x, chrom.y, 0);
           return (
-            <Model
+            <Cylinder
               key={chrom.id}
               info={chrom.id}
               position={pos}
               scale={size}
               hue={
-                selectedChromLocations.includes(chrom.id.toString())
+                props.selectedChromLocations.includes(chrom.id.toString())
                   ? 'blue'
                   : 'orange'
               }
-              viewMode={viewMode}
-              setViewMode={setViewMode}
-              selectedChrom={selectedChrom}
-              setSelectedChrom={setSelectedChrom}
+              viewMode={props.viewMode}
+              setViewMode={props.setViewMode}
+              selectedChrom={props.selectedChrom}
+              setSelectedChrom={props.setSelectedChrom}
               hoveredChrom={hoveredChrom}
               setHoveredChrom={setHoveredChrom}
             />
           );
         })}
-        {/* </Suspense> */}
       </Canvas>
     </>
   );
