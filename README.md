@@ -8,6 +8,8 @@ Visionome is a play on Vision and genome. It it our teams hope to advance intere
 - Michael Tsang
 
 
-We are all final year Computer Science students at the University of Central Florida. Our project mentor is Dr. Shibu Yooseph. We're using React on the frontend as well as AWS Amplify on the backend. This project is under active development and we plan to finish by April 2022.
+We are all final year Computer Science students at the University of Central Florida. Our project mentor is Dr. Shibu Yooseph. We're using React on the frontend as well as AWS Amplify on the backend.
+
+You can check this project out [here](https://visionome.github.io/frontend/).
 
 Thank you and have an excellent day!
