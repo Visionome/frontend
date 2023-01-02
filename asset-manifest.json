@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/frontend/static/css/main.d5022722.css",
-    "main.js": "/frontend/static/js/main.7e366309.js",
+    "main.js": "/frontend/static/js/main.320db490.js",
     "static/media/visionome-logo-alt.png": "/frontend/static/media/visionome-logo-alt.8c527be9c54aa3ee5237.png",
     "static/media/visionome-logo.png": "/frontend/static/media/visionome-logo.b4a2b92cbdf5d84d7ebb.png",
     "index.html": "/frontend/index.html",
     "main.d5022722.css.map": "/frontend/static/css/main.d5022722.css.map",
-    "main.7e366309.js.map": "/frontend/static/js/main.7e366309.js.map"
+    "main.320db490.js.map": "/frontend/static/js/main.320db490.js.map"
   },
   "entrypoints": [
     "static/css/main.d5022722.css",
-    "static/js/main.7e366309.js"
+    "static/js/main.320db490.js"
   ]
 }
