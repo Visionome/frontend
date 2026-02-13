@@ -3,8 +3,7 @@
  * Downloads human gene data from NCBI and builds a JSON file for the frontend.
  *
  * Sources:
- *   - Homo_sapiens.gene_info.gz  (gene metadata, cytoband locations)
- *   - gene2ensembl.gz            (Ensembl ID mappings)
+ *   - Homo_sapiens.gene_info.gz  (gene metadata, cytoband locations, Ensembl IDs)
  *   - mim2gene_medgen            (OMIM disease → gene associations)
  *
  * Output: src/data/genes.json
@@ -23,8 +22,6 @@ const OUT_PATH = join(__dirname, '..', 'src', 'data', 'genes.json');
 
 const GENE_INFO_URL =
   'https://ftp.ncbi.nlm.nih.gov/gene/DATA/GENE_INFO/Mammalia/Homo_sapiens.gene_info.gz';
-const GENE2ENSEMBL_URL =
-  'https://ftp.ncbi.nlm.nih.gov/gene/DATA/gene2ensembl.gz';
 const MIM2GENE_URL =
   'https://ftp.ncbi.nlm.nih.gov/gene/DATA/mim2gene_medgen';
 
@@ -48,7 +45,7 @@ async function download(url) {
 
 function parseTsv(text) {
   const lines = text.split('\n');
-  let headerLine = lines.find((l) => l.startsWith('#'));
+  const headerLine = lines.find((l) => l.startsWith('#'));
   if (!headerLine) return [];
   const headers = headerLine.replace(/^#/, '').split('\t').map((h) => h.trim());
   return lines
@@ -63,7 +60,6 @@ function parseTsv(text) {
 
 function approximateCytoband(mapLoc) {
   if (!mapLoc || mapLoc === '-') return '';
-  // "17q21.31" → "17q21", "Xp21.2-p21.1" → "Xp21"
   const m = mapLoc.match(/^(\d+|X|Y)([pq]\d+)/i);
   return m ? `${m[1]}${m[2]}` : mapLoc;
 }
@@ -75,9 +71,8 @@ function approximateCytoband(mapLoc) {
 async function main() {
   console.log('Fetching NCBI gene data...\n');
 
-  const [geneInfoText, gene2ensemblText, mim2geneText] = await Promise.all([
+  const [geneInfoText, mim2geneText] = await Promise.all([
     download(GENE_INFO_URL),
-    download(GENE2ENSEMBL_URL),
     download(MIM2GENE_URL),
   ]);
 
@@ -94,21 +89,10 @@ async function main() {
   );
   console.log(`    ${proteinCoding.length} protein-coding genes`);
 
-  // 2. Build Ensembl ID map (GeneID → Ensembl gene ID)
-  console.log('  Parsing gene2ensembl...');
-  const ensemblRows = parseTsv(gene2ensemblText);
-  const ensemblMap = new Map();
-  for (const row of ensemblRows) {
-    if (row.tax_id === '9606' && row.Ensembl_gene_identifier && row.Ensembl_gene_identifier !== '-') {
-      ensemblMap.set(row.GeneID, row.Ensembl_gene_identifier);
-    }
-  }
-  console.log(`    ${ensemblMap.size} human Ensembl mappings`);
-
-  // 3. Build disease map (GeneID → disease names)
+  // 2. Build disease map (GeneID → disease names)
   console.log('  Parsing mim2gene_medgen...');
   const mimRows = parseTsv(mim2geneText);
-  const diseaseMap = new Map(); // GeneID → Set<diseaseName>
+  const diseaseMap = new Map();
   for (const row of mimRows) {
     const geneId = row.GeneID;
     const diseaseName = row.DiseaseName;
@@ -123,7 +107,7 @@ async function main() {
   }
   console.log(`    ${diseaseMap.size} genes with disease associations`);
 
-  // 4. Build GFFRef array
+  // 3. Build GFFRef array
   console.log('  Building gene records...');
   const genes = proteinCoding.map((g) => {
     const geneId = g.GeneID;
@@ -131,12 +115,9 @@ async function main() {
       ? Array.from(diseaseMap.get(geneId).values())
       : [];
 
-    // Extract Ensembl ID from dbXrefs column (format: "Ensembl:ENSG...")
-    let ensemblId = ensemblMap.get(geneId) ?? '';
-    if (!ensemblId) {
-      const dbxMatch = (g.dbXrefs || '').match(/Ensembl:(ENSG\d+)/);
-      if (dbxMatch) ensemblId = dbxMatch[1];
-    }
+    // Extract Ensembl ID from dbXrefs column (format: "...Ensembl:ENSG00000012048...")
+    const dbxMatch = (g.dbXrefs || '').match(/Ensembl:(ENSG\d+)/);
+    const ensemblId = dbxMatch ? dbxMatch[1] : '';
 
     return {
       id: `ncbi-${geneId}`,
@@ -158,8 +139,8 @@ async function main() {
     };
   });
 
-  // 5. Write output
-  const json = JSON.stringify(genes, null, 0); // compact
+  // 4. Write output
+  const json = JSON.stringify(genes);
   await writeFile(OUT_PATH, json, 'utf-8');
   const sizeMb = (Buffer.byteLength(json) / 1e6).toFixed(1);
   console.log(`\nDone! Wrote ${genes.length} genes to src/data/genes.json (${sizeMb} MB)`);
