@@ -14,5 +14,5 @@ export async function fetchProteinId(geneSymbol: string): Promise<string | null>
 }
 
 export function getAlphaFoldUrl(proteinId: string): string {
-  return `https://alphafold.ebi.ac.uk/files/AF-${proteinId}-F1-model_v2.cif`;
+  return `https://alphafold.ebi.ac.uk/files/AF-${proteinId}-F1-model_v4.cif`;
 }
