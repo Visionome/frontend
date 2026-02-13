@@ -19,7 +19,7 @@ export function CytobandBar({ band, height, selected, highlighted, onClick }: Cy
       className={cn(
         'group flex items-center gap-2 cursor-pointer transition-colors',
         selected && 'bg-primary/10 rounded',
-        highlighted && !selected && 'bg-primary/5 rounded',
+        highlighted && !selected && 'bg-primary/15 rounded border-l-2 border-l-primary',
       )}
       onClick={onClick}
     >
@@ -29,7 +29,9 @@ export function CytobandBar({ band, height, selected, highlighted, onClick }: Cy
           'shrink-0 rounded-sm border transition-all',
           selected
             ? 'border-primary ring-1 ring-primary/50'
-            : 'border-transparent group-hover:border-primary/50',
+            : highlighted
+              ? 'border-primary/60 ring-1 ring-primary/30'
+              : 'border-transparent group-hover:border-primary/50',
         )}
         style={{
           width: isCentromere ? 20 : 28,
@@ -42,7 +44,11 @@ export function CytobandBar({ band, height, selected, highlighted, onClick }: Cy
       <span
         className={cn(
           'text-[11px] whitespace-nowrap',
-          selected ? 'text-foreground font-medium' : 'text-muted-foreground group-hover:text-foreground',
+          selected
+            ? 'text-foreground font-medium'
+            : highlighted
+              ? 'text-primary font-medium'
+              : 'text-muted-foreground group-hover:text-foreground',
         )}
       >
         {bandLabel}
