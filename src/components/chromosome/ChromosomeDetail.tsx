@@ -70,8 +70,9 @@ export function ChromosomeDetail({
         <div className="flex w-48 shrink-0 flex-col gap-0.5 overflow-y-auto">
           {cytobands.map((band) => {
             const height = Math.max((band.end - band.start) * scale, 4);
+            const normalizedBandName = band.name.replace(/^(\d+|X|Y)\./i, '$1');
             const isHighlighted = highlightedBands.some((hb) =>
-              band.name.toLowerCase().includes(hb.toLowerCase()),
+              hb.toLowerCase().includes(normalizedBandName.toLowerCase()),
             );
             return (
               <CytobandBar
