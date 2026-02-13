@@ -62,7 +62,7 @@ export function GeneInfoCard({ gene }: GeneInfoCardProps) {
               </a>
             </div>
             <div
-              style={{ height: 280 }}
+              style={{ height: 280, position: 'relative', overflow: 'hidden' }}
               ref={(el) => {
                 if (!el) return;
                 el.innerHTML = '';
@@ -73,6 +73,8 @@ export function GeneInfoCard({ gene }: GeneInfoCardProps) {
                 );
                 viewer.setAttribute('custom-data-format', 'cif');
                 viewer.setAttribute('hide-controls', 'true');
+                viewer.setAttribute('expanded', 'false');
+                viewer.setAttribute('landscape', 'false');
                 viewer.setAttribute('bg-color-r', '255');
                 viewer.setAttribute('bg-color-g', '255');
                 viewer.setAttribute('bg-color-b', '255');
