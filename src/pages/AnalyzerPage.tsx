@@ -1,11 +1,14 @@
 import { BlastInput } from '@/components/blast/BlastInput';
 import { BlastResults } from '@/components/blast/BlastResults';
+import { BlastHistory } from '@/components/blast/BlastHistory';
 import { useBlastSearch } from '@/hooks/useBlastSearch';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 export function AnalyzerPage() {
-  const { sequence, setSequence, matches, metadata, isLoading, error, runSearch, clear } =
-    useBlastSearch();
+  const {
+    sequence, setSequence, matches, metadata, isLoading, error,
+    runSearch, clear, cachedSearches, loadCached, removeFromCache,
+  } = useBlastSearch();
 
   return (
     <div className="mx-auto max-w-4xl space-y-6 p-6">
@@ -41,6 +44,12 @@ export function AnalyzerPage() {
       )}
 
       <BlastResults matches={matches} metadata={metadata} />
+
+      <BlastHistory
+        searches={cachedSearches}
+        onSelect={loadCached}
+        onDelete={removeFromCache}
+      />
     </div>
   );
 }
