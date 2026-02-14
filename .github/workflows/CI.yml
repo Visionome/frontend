@@ -26,16 +26,15 @@ jobs:
             ${{ runner.os }}-
       - uses: actions/setup-node@v4
         with:
-          node-version: '14'
-      - run: bash src/scripts/generateAwsExports.sh ${{ secrets.ENDPOINT }} ${{ secrets.API_KEY }} > src/aws-exports.js
+          node-version: '22'
       - run: npm ci
       - run: npm run build
-      
+
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.2.2
         with:
           branch: gh-pages # The branch the action should deploy to.
-          folder: ./build # The folder the action should deploy.
+          folder: ./dist # The folder the action should deploy.
   Test:
     runs-on: ubuntu-latest
     steps:
@@ -52,8 +51,7 @@ jobs:
             ${{ runner.os }}-
       - uses: actions/setup-node@v4
         with:
-          node-version: '14'
-      - run: touch src/aws-exports.js
+          node-version: '22'
       - run: npm ci
       - run: npm test
   Lint:
