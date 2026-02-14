@@ -24,6 +24,10 @@ const GENE_INFO_URL =
   'https://ftp.ncbi.nlm.nih.gov/gene/DATA/GENE_INFO/Mammalia/Homo_sapiens.gene_info.gz';
 const MIM2GENE_URL =
   'https://ftp.ncbi.nlm.nih.gov/gene/DATA/mim2gene_medgen';
+const ESUMMARY_URL =
+  'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi';
+const ESUMMARY_BATCH_SIZE = 400;
+const ESUMMARY_RATE_LIMIT_MS = 350; // ~3 requests/second (NCBI limit without API key)
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -56,6 +60,49 @@ function parseTsv(text) {
       headers.forEach((h, i) => (row[h] = cols[i] ?? ''));
       return row;
     });
+}
+
+async function fetchSummariesBatch(geneIds) {
+  const summaryMap = new Map();
+  const batches = [];
+  for (let i = 0; i < geneIds.length; i += ESUMMARY_BATCH_SIZE) {
+    batches.push(geneIds.slice(i, i + ESUMMARY_BATCH_SIZE));
+  }
+
+  console.log(`    ${batches.length} batches of ${ESUMMARY_BATCH_SIZE}...`);
+
+  for (let i = 0; i < batches.length; i++) {
+    const batch = batches[i];
+    const ids = batch.join(',');
+    const url = `${ESUMMARY_URL}?db=gene&id=${ids}&retmode=json`;
+
+    try {
+      const res = await fetch(url);
+      if (!res.ok) {
+        console.warn(`    Batch ${i + 1} failed: HTTP ${res.status}`);
+        continue;
+      }
+      const data = await res.json();
+      const result = data.result || {};
+      for (const id of batch) {
+        const entry = result[id];
+        if (entry && entry.summary) {
+          summaryMap.set(id, entry.summary);
+        }
+      }
+    } catch (err) {
+      console.warn(`    Batch ${i + 1} error: ${err.message}`);
+    }
+
+    if (i < batches.length - 1) {
+      await new Promise((r) => setTimeout(r, ESUMMARY_RATE_LIMIT_MS));
+    }
+    if ((i + 1) % 10 === 0 || i === batches.length - 1) {
+      console.log(`    ${i + 1}/${batches.length} batches complete (${summaryMap.size} summaries)`);
+    }
+  }
+
+  return summaryMap;
 }
 
 function approximateCytoband(mapLoc) {
@@ -136,16 +183,28 @@ async function main() {
       approximatecytoband: approximateCytoband(g.map_location),
       diseaseinfo: diseases.length > 0 ? JSON.stringify(diseases) : '',
       sequence: '',
+      summary: '',
+      expression: '',
     };
   });
 
-  // 4. Write output
+  // 4. Fetch gene summaries from NCBI E-utilities
+  console.log('  Fetching gene summaries from NCBI E-utilities...');
+  const geneIds = genes.map((g) => g.geneid);
+  const summaryMap = await fetchSummariesBatch(geneIds);
+  for (const gene of genes) {
+    gene.summary = summaryMap.get(gene.geneid) || '';
+  }
+  console.log(`    ${summaryMap.size} genes with summaries`);
+
+  // 5. Write output
   const json = JSON.stringify(genes);
   await writeFile(OUT_PATH, json, 'utf-8');
   const sizeMb = (Buffer.byteLength(json) / 1e6).toFixed(1);
   console.log(`\nDone! Wrote ${genes.length} genes to src/data/genes.json (${sizeMb} MB)`);
   console.log(`  Genes with Ensembl IDs: ${genes.filter((g) => g.ensembleid).length}`);
   console.log(`  Genes with diseases:    ${genes.filter((g) => g.diseaseinfo).length}`);
+  console.log(`  Genes with summaries:   ${genes.filter((g) => g.summary).length}`);
 }
 
 main().catch((err) => {

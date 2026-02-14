@@ -15,6 +15,8 @@ export interface GFFRef {
   approximatecytoband: string;
   diseaseinfo: string;
   sequence: string;
+  summary: string;
+  expression: string;
 }
 
 export interface VCFRef {

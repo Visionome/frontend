@@ -57,6 +57,18 @@ export function GeneInfoTabs({ gene }: GeneInfoTabsProps) {
       <div className="pt-4">
         {activeTab === 'info' && (
           <div className="space-y-3 text-sm">
+            {gene.summary && (
+              <div>
+                <span className="font-medium text-muted-foreground">Summary</span>
+                <p className="mt-1 leading-relaxed">{gene.summary}</p>
+              </div>
+            )}
+            {gene.expression && (
+              <div>
+                <span className="font-medium text-muted-foreground">Expression</span>
+                <p className="mt-1">{gene.expression}</p>
+              </div>
+            )}
             <div>
               <span className="font-medium text-muted-foreground">Description</span>
               <p>{gene.description}</p>

@@ -76,6 +76,8 @@ export async function searchGenes(query: string): Promise<GFFRef[]> {
   return genes.filter((gene) => {
     const nameMatch = gene.name.toLowerCase().includes(q);
     const descMatch = gene.description.toLowerCase().includes(q);
+    const summaryMatch = gene.summary?.toLowerCase().includes(q) ?? false;
+    const expressionMatch = gene.expression?.toLowerCase().includes(q) ?? false;
     const diseaseNames = parseDiseaseNames(gene.diseaseinfo);
     const directDiseaseMatch = diseaseNames.some((d) => d.includes(q));
     const aliasMatch =
@@ -83,7 +85,7 @@ export async function searchGenes(query: string): Promise<GFFRef[]> {
       diseaseNames.some((d) =>
         aliasTargets.some((a) => d.includes(a) || a.includes(d)),
       );
-    return nameMatch || descMatch || directDiseaseMatch || aliasMatch;
+    return nameMatch || descMatch || summaryMatch || expressionMatch || directDiseaseMatch || aliasMatch;
   });
 }
 
