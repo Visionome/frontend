@@ -72,20 +72,32 @@ export async function searchGenes(query: string): Promise<GFFRef[]> {
   const q = query.trim().toLowerCase();
   const aliasTargets = resolveAliases(q);
   const genes = await loadGenes();
+  const words = q.split(/\s+/).filter(Boolean);
 
   return genes.filter((gene) => {
-    const nameMatch = gene.name.toLowerCase().includes(q);
-    const descMatch = gene.description.toLowerCase().includes(q);
-    const summaryMatch = gene.summary?.toLowerCase().includes(q) ?? false;
-    const expressionMatch = gene.expression?.toLowerCase().includes(q) ?? false;
+    const nameLc = gene.name.toLowerCase();
+    const descLc = gene.description.toLowerCase();
+    const summaryLc = (gene.summary ?? '').toLowerCase();
+    const expressionLc = (gene.expression ?? '').toLowerCase();
     const diseaseNames = parseDiseaseNames(gene.diseaseinfo);
-    const directDiseaseMatch = diseaseNames.some((d) => d.includes(q));
+
+    // Combine all searchable text for multi-word matching
+    const allText = [nameLc, descLc, summaryLc, expressionLc, ...diseaseNames].join(' ');
+
+    // Single-word: substring match on any field (original behavior)
+    // Multi-word: every word must appear somewhere across the gene's fields
+    const textMatch = words.length === 1
+      ? allText.includes(q)
+      : words.every((w) => allText.includes(w));
+
+    // Alias matching: resolve common names (e.g. "breast cancer" → "Breast Neoplasms")
     const aliasMatch =
       aliasTargets.length > 0 &&
       diseaseNames.some((d) =>
         aliasTargets.some((a) => d.includes(a) || a.includes(d)),
       );
-    return nameMatch || descMatch || summaryMatch || expressionMatch || directDiseaseMatch || aliasMatch;
+
+    return textMatch || aliasMatch;
   });
 }
 

@@ -1,30 +1,30 @@
 /**
- * Maps common search terms (lowercased) to formal MESH/OMIM disease names
- * used in the mock gene data. This lets users search "breast cancer" and
- * find genes tagged with "Breast Neoplasms", etc.
+ * Maps common search terms (lowercased) to formal disease names used in gene
+ * data. Includes both MeSH-style and ClinVar-style names so aliases resolve
+ * regardless of which naming convention the underlying dataset uses.
  */
 export const diseaseAliases: Record<string, string[]> = {
-  'breast cancer': ['Breast Neoplasms'],
-  'ovarian cancer': ['Ovarian Neoplasms'],
-  'pancreatic cancer': ['Pancreatic Neoplasms'],
-  'lung cancer': ['Non-small cell lung carcinoma'],
-  'colorectal cancer': ['Colorectal Neoplasms'],
-  'colon cancer': ['Colorectal Neoplasms'],
-  'cancer': ['Neoplasms', 'Breast Neoplasms', 'Ovarian Neoplasms', 'Pancreatic Neoplasms', 'Non-small cell lung carcinoma', 'Colorectal Neoplasms'],
-  'sickle cell': ['Anemia, Sickle Cell'],
-  'sickle cell anemia': ['Anemia, Sickle Cell'],
-  "alzheimer's": ['Alzheimer Disease'],
-  'alzheimers': ['Alzheimer Disease'],
-  'muscular dystrophy': ['Muscular Dystrophy, Duchenne'],
-  'duchenne': ['Muscular Dystrophy, Duchenne'],
-  'cystic fibrosis': ['Cystic Fibrosis'],
-  'marfan': ['Marfan Syndrome'],
-  'thalassemia': ['beta-Thalassemia'],
-  'polycythemia': ['Polycythemia Vera'],
-  'lymphoma': ['Burkitt Lymphoma'],
+  'breast cancer': ['Breast Neoplasms', 'Breast cancer', 'Familial breast cancer'],
+  'ovarian cancer': ['Ovarian Neoplasms', 'Ovarian cancer', 'Familial ovarian cancer'],
+  'pancreatic cancer': ['Pancreatic Neoplasms', 'Pancreatic cancer'],
+  'lung cancer': ['Non-small cell lung carcinoma', 'Lung cancer'],
+  'colorectal cancer': ['Colorectal Neoplasms', 'Colorectal cancer'],
+  'colon cancer': ['Colorectal Neoplasms', 'Colorectal cancer', 'Colon cancer'],
+  'cancer': ['Neoplasms', 'cancer', 'carcinoma'],
+  'sickle cell': ['Anemia, Sickle Cell', 'Sickle cell anemia', 'Sickle cell disease'],
+  'sickle cell anemia': ['Anemia, Sickle Cell', 'Sickle cell anemia', 'Sickle cell disease'],
+  "alzheimer's": ['Alzheimer Disease', "Alzheimer's disease"],
+  'alzheimers': ['Alzheimer Disease', "Alzheimer's disease"],
+  'muscular dystrophy': ['Muscular Dystrophy, Duchenne', 'Duchenne muscular dystrophy'],
+  'duchenne': ['Muscular Dystrophy, Duchenne', 'Duchenne muscular dystrophy'],
+  'cystic fibrosis': ['Cystic Fibrosis', 'Cystic fibrosis'],
+  'marfan': ['Marfan Syndrome', 'Marfan syndrome'],
+  'thalassemia': ['beta-Thalassemia', 'Thalassemia'],
+  'polycythemia': ['Polycythemia Vera', 'Polycythemia vera'],
+  'lymphoma': ['Burkitt Lymphoma', 'Lymphoma'],
   'li-fraumeni': ['Li-Fraumeni syndrome'],
   'polyposis': ['Familial adenomatous polyposis'],
   'fap': ['Familial adenomatous polyposis'],
-  'hemochromatosis': ['Hemochromatosis'],
+  'hemochromatosis': ['Hemochromatosis', 'Hereditary hemochromatosis'],
   'retinoblastoma': ['Retinoblastoma'],
 };

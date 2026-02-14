@@ -3,8 +3,8 @@
  * Downloads human gene data from NCBI and builds a JSON file for the frontend.
  *
  * Sources:
- *   - Homo_sapiens.gene_info.gz  (gene metadata, cytoband locations, Ensembl IDs)
- *   - mim2gene_medgen            (OMIM disease → gene associations)
+ *   - Homo_sapiens.gene_info.gz        (gene metadata, cytoband locations, Ensembl IDs)
+ *   - gene_condition_source_id (ClinVar) (gene → disease name associations)
  *
  * Output: src/data/genes.json
  *
@@ -22,8 +22,8 @@ const OUT_PATH = join(__dirname, '..', 'src', 'data', 'genes.json');
 
 const GENE_INFO_URL =
   'https://ftp.ncbi.nlm.nih.gov/gene/DATA/GENE_INFO/Mammalia/Homo_sapiens.gene_info.gz';
-const MIM2GENE_URL =
-  'https://ftp.ncbi.nlm.nih.gov/gene/DATA/mim2gene_medgen';
+const GENE_CONDITION_URL =
+  'https://ftp.ncbi.nlm.nih.gov/pub/clinvar/gene_condition_source_id';
 const ESUMMARY_URL =
   'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi';
 const ESUMMARY_BATCH_SIZE = 400;
@@ -118,9 +118,9 @@ function approximateCytoband(mapLoc) {
 async function main() {
   console.log('Fetching NCBI gene data...\n');
 
-  const [geneInfoText, mim2geneText] = await Promise.all([
+  const [geneInfoText, conditionText] = await Promise.all([
     download(GENE_INFO_URL),
-    download(MIM2GENE_URL),
+    download(GENE_CONDITION_URL),
   ]);
 
   // 1. Parse gene_info → keep protein-coding genes with a map_location
@@ -136,20 +136,28 @@ async function main() {
   );
   console.log(`    ${proteinCoding.length} protein-coding genes`);
 
-  // 2. Build disease map (GeneID → disease names)
-  console.log('  Parsing mim2gene_medgen...');
-  const mimRows = parseTsv(mim2geneText);
+  // 2. Build disease map from ClinVar gene_condition_source_id
+  //    Columns: GeneID, AssociatedGenes, RelatedGenes, ConceptID,
+  //             DiseaseName, SourceName, SourceID, DiseaseMIM, LastUpdated
+  console.log('  Parsing gene_condition_source_id...');
+  const conditionRows = parseTsv(conditionText);
   const diseaseMap = new Map();
-  for (const row of mimRows) {
+  for (const row of conditionRows) {
     const geneId = row.GeneID;
     const diseaseName = row.DiseaseName;
-    const mimNumber = row.MIM_number;
+    const diseaseMim = row.DiseaseMIM;
+    const conceptId = row.ConceptID;
     if (!geneId || geneId === '-' || !diseaseName || diseaseName === '-') continue;
     if (!diseaseMap.has(geneId)) diseaseMap.set(geneId, new Map());
+    // Prefer OMIM xref when available, fall back to MedGen
+    const xrefId = diseaseMim ? `OMIM:${diseaseMim}` : `MedGen:${conceptId}`;
+    const xrefUrl = diseaseMim
+      ? `https://www.omim.org/entry/${diseaseMim}`
+      : `https://www.ncbi.nlm.nih.gov/medgen/${conceptId}`;
     diseaseMap.get(geneId).set(diseaseName, {
-      xref_id: `OMIM:${mimNumber}`,
+      xref_id: xrefId,
       name: diseaseName,
-      xref_url: `https://www.omim.org/entry/${mimNumber}`,
+      xref_url: xrefUrl,
     });
   }
   console.log(`    ${diseaseMap.size} genes with disease associations`);
