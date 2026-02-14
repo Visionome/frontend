@@ -5,6 +5,7 @@ import { Ideogram } from '@/components/ideogram/Ideogram';
 import { ChromosomeDetail } from '@/components/chromosome/ChromosomeDetail';
 import { useGenomeSearch } from '@/hooks/useGenomeSearch';
 import { Badge } from '@/components/ui/badge';
+import { parseChromFromCytoband } from '@/lib/chromosome-utils';
 
 export function VisualizerPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -50,8 +51,8 @@ export function VisualizerPage() {
                 variant="outline"
                 className="cursor-pointer hover:bg-accent"
                 onClick={() => {
-                  const chrom = g.cytobandlocation?.match(/^(\d+|X|Y)/i)?.[1];
-                  if (chrom) setSelectedChrom(chrom.toUpperCase());
+                  const chrom = parseChromFromCytoband(g.cytobandlocation ?? '');
+                  if (chrom) setSelectedChrom(chrom);
                 }}
               >
                 {g.name} &middot; {g.cytobandlocation}
