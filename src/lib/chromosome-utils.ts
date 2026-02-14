@@ -8,6 +8,7 @@
  * parseChromFromCytoband("19q13.43") // returns "19"
  * parseChromFromCytoband("chr12p13.31") // returns "12"
  * parseChromFromCytoband("Xp22.3") // returns "X"
+ * parseChromFromCytoband("19") // returns "19" (bare chromosome number)
  * parseChromFromCytoband("invalid") // returns null
  */
 export function parseChromFromCytoband(cytobandLocation: string): string | null {
@@ -17,8 +18,8 @@ export function parseChromFromCytoband(cytobandLocation: string): string | null 
   const normalized = cytobandLocation.replace(/^chr/i, '');
   
   // Match valid human chromosome: 1-22, X, or Y
-  // Followed by valid cytoband notation (arm p/q, region, possibly with ranges/alternatives)
-  // Examples: 19q13.43, Xp22, 17q11.2-q12, 11p11.2|11p12-p11
+  // Optionally followed by cytoband arm (p/q) and region
+  // Examples: 19q13.43, Xp22, 17q11.2-q12, 19, X
   const match = normalized.match(/^([1-9]|1\d|2[0-2]|X|Y)([pq]|$)/i);
   
   return match ? match[1].toUpperCase() : null;
