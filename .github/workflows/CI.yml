@@ -13,8 +13,8 @@ jobs:
   Build-and-Deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
         env:
           cache-name: cache-node-modules
         with:
@@ -24,7 +24,7 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v4
         with:
           node-version: '14'
       - run: bash src/scripts/generateAwsExports.sh ${{ secrets.ENDPOINT }} ${{ secrets.API_KEY }} > src/aws-exports.js
@@ -39,8 +39,8 @@ jobs:
   Test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
         env:
           cache-name: cache-node-modules
         with:
@@ -50,7 +50,7 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v4
         with:
           node-version: '14'
       - run: touch src/aws-exports.js
@@ -59,8 +59,8 @@ jobs:
   Lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
         env:
           cache-name: cache-node-modules
         with:
