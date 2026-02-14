@@ -4,7 +4,9 @@ An interactive human genome visualization platform for bioinformatics education.
 
 ## About
 
-VISIONome (a play on "vision" and "genome") is a stable genome browsing education tool designed to advance interest in bioinformatics among students and educators. Originally developed as a university project by Computer Science students at the University of Central Florida under the mentorship of Dr. Shibu Yooseph, the project has been revamped and is now maintained as an open-source educational resource.
+VISIONome (a play on "vision" and "genome") is a stable genome browsing education tool designed to advance interest in bioinformatics among students and educators. 
+
+Originally developed as a university project by Computer Science students at the University of Central Florida under the mentorship of Dr. Shibu Yooseph, the project has been revamped. It is now maintained as an open-source educational resource.
 
 Our mission is to make genome visualization accessible and engaging, helping students understand complex genomic concepts through interactive exploration.
 
@@ -39,6 +41,14 @@ The application will be available at `http://localhost:5173/frontend/`
 ## Contributing
 
 We welcome contributions from the community! Whether you're fixing bugs, improving documentation, or adding new features, your help is appreciated.
+
+To contribute:
+1. Fork the repository
+2. Create a new branch for your feature or bugfix
+3. Make your changes and test them locally
+4. Submit a pull request with a clear description of your changes
+
+For bug reports or feature requests, please open an issue on GitHub.
 
 ## Original Team
 
