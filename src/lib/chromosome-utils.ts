@@ -20,7 +20,7 @@ export function parseChromFromCytoband(cytobandLocation: string): string | null 
   // Match valid human chromosome: 1-22, X, or Y
   // Optionally followed by cytoband arm (p/q) and region
   // Examples: 19q13.43, Xp22, 17q11.2-q12, 19, X
-  const match = normalized.match(/^([1-9]|1\d|2[0-2]|X|Y)([pq]|$)/i);
+  const match = normalized.match(/^([1-9]|1\d|2[0-2]|X|Y)(?:[pq]|$)/i);
   
   return match ? match[1].toUpperCase() : null;
 }
