@@ -10,11 +10,9 @@
 
 # production
 /build
-/.next
 
 # misc
 .DS_Store
-tsconfig.tsbuildinfo
 .env.local
 .env.development.local
 .env.test.local

@@ -1,0 +1,19 @@
+.App {
+  text-align: center;
+}
+
+#root {
+  height: 100%;
+}
+
+canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  touch-action: none;
+}
+
+.ant-layout.ant-layout-has-sider {
+  flex-direction: row;
+  height: 100%;
+}

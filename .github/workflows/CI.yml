@@ -13,8 +13,8 @@ jobs:
   Build-and-Deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/cache@v4
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
         env:
           cache-name: cache-node-modules
         with:
@@ -24,14 +24,53 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v2
         with:
-          node-version: '22'
+          node-version: '14'
+      - run: bash src/scripts/generateAwsExports.sh ${{ secrets.ENDPOINT }} ${{ secrets.API_KEY }} > src/aws-exports.js
       - run: npm ci
       - run: npm run build
-
+      
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.2.2
         with:
           branch: gh-pages # The branch the action should deploy to.
-          folder: ./dist # The folder the action should deploy.
+          folder: ./build # The folder the action should deploy.
+  Test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - run: touch src/aws-exports.js
+      - run: npm ci
+      - run: npm test
+  Lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Install Dependencies
+        run: npm ci
+      - name: Run Linter
+        run: npm run lint
